@@ -43,7 +43,7 @@
             this.webBrowserMain.Location = new System.Drawing.Point(0, 0);
             this.webBrowserMain.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowserMain.Name = "webBrowserMain";
-            this.webBrowserMain.Size = new System.Drawing.Size(710, 325);
+            this.webBrowserMain.Size = new System.Drawing.Size(709, 321);
             this.webBrowserMain.TabIndex = 0;
             this.webBrowserMain.Url = new System.Uri("", System.UriKind.Relative);
             // 
@@ -64,8 +64,8 @@
             this.xtraTabPage1.Controls.Add(this.webBrowserMain);
             this.xtraTabPage1.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPage1.Image")));
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(710, 325);
-            this.xtraTabPage1.Text = "Home";
+            this.xtraTabPage1.Size = new System.Drawing.Size(709, 321);
+            this.xtraTabPage1.Text = "Đang chuyển tiếp...";
             // 
             // UC_WebBrowser
             // 

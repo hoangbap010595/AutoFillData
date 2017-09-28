@@ -39,6 +39,9 @@
     <Reference Include="DevExpress.Sparkline.v17.1.Core" />
     <Reference Include="DevExpress.XtraEditors.v17.1" />
     <Reference Include="DevExpress.Printing.v17.1.Core" />
+    <Reference Include="DevExpress.XtraGrid.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="ExcelDataReader, Version=3.2.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelDataReader.3.2.0\lib\net45\ExcelDataReader.dll</HintPath>
       <Private>True</Private>
@@ -66,6 +69,13 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmShowWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmShowWindow.Designer.cs">
+      <DependentUpon>frmShowWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OpenFileExcel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UControls\UC_Main.cs">
@@ -74,14 +84,24 @@
     <Compile Include="UControls\UC_Main.Designer.cs">
       <DependentUpon>UC_Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="UControls\UC_ViewData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UControls\UC_ViewData.Designer.cs">
+      <DependentUpon>UC_ViewData.cs</DependentUpon>
+    </Compile>
     <Compile Include="UControls\UC_WebBrowser.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UControls\UC_WebBrowser.Designer.cs">
       <DependentUpon>UC_WebBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserConfig.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmShowWindow.resx">
+      <DependentUpon>frmShowWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -96,9 +116,13 @@
     <EmbeddedResource Include="UControls\UC_Main.resx">
       <DependentUpon>UC_Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UControls\UC_ViewData.resx">
+      <DependentUpon>UC_ViewData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UControls\UC_WebBrowser.resx">
       <DependentUpon>UC_WebBrowser.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

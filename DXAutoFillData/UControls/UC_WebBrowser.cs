@@ -25,27 +25,41 @@ namespace DXAutoFillData.UControls
         private void loadWebBrowser()
         {
             webBrowserMain.Visible = true;
+
             webBrowserMain.ScriptErrorsSuppressed = true;
-            webBrowserMain.Navigate("https://laodongkynghi.info/mau-dang-ky-thu-gioi-thieu/");
+            webBrowserMain.Navigate(UserConfig.getUTargetUrl());
+            //webBrowserMain.Url = new System.Uri(UserConfig.getUTargetUrl(), System.UriKind.Relative);
             webBrowserMain.DocumentCompleted += WebBrowserMain_DocumentCompleted;
         }
 
         private void WebBrowserMain_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            xtraTabControlMain.TabPages[0].Text = webBrowserMain.DocumentTitle;
-            //XtraMessageBox.Show("Load OK");
-            webBrowserMain.Document.GetElementById("pwbox-697").InnerText = "CMXNrczjIJelgcv*)2%zZjGs";
-            
-            //webBrowserMain.Document.Forms[0].InvokeMember("submit");
-
-            HtmlElementCollection links = webBrowserMain.Document.GetElementsByTagName("input");
-
-            foreach (HtmlElement link in links)
+            try
             {
-                if (link.InnerText.Equals("Enter"))
-                    link.InvokeMember("Click");
-            }
+                xtraTabControlMain.TabPages[0].Text = webBrowserMain.DocumentTitle;
 
+                //Tự động đăng nhập
+                if (UserConfig.getUAutoLogin())
+                {
+                    if (webBrowserMain.Document.GetElementById("pwbox-697") != null)
+                    {
+                        webBrowserMain.Document.GetElementById("pwbox-697").InnerText = UserConfig.getUPassword();
+                        HtmlElementCollection links = webBrowserMain.Document.GetElementsByTagName("input");
+
+                        foreach (HtmlElement link in links)
+                        {
+                            if (link != null && link.Name == "Submit")
+                            {
+                                //link.InnerText.Equals("Enter");
+                                link.InvokeMember("Click");
+                            }
+                        }
+                    }
+                }
+            }catch(Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message + "\nVui lòng liên hệ IT hỗ trợ.", "Xảy ra lỗi");
+            }
         }
 
         private void SubmitForm(String formName)
