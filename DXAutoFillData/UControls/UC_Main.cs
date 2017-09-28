@@ -16,7 +16,6 @@ namespace DXAutoFillData.UControls
     public partial class UC_Main : XtraUserControl
     {
         private System.Windows.Forms.Timer _timer;
-        private bool isStart = false;
         private int timeRight = 0;
         public UC_Main()
         {
@@ -33,10 +32,12 @@ namespace DXAutoFillData.UControls
             ckAutoCloseForm.Checked = UserConfig.getSAutoCloseForm();
             ckAutoClickSubmit.Checked = UserConfig.getSAutoSubmit();
             ckAutoChooseOptions.Checked = UserConfig.getSAutoChooseOptions();
+            ckClearCache.Checked = UserConfig.getSAutoClearCache();
 
             _timer = new System.Windows.Forms.Timer();
             _timer.Interval = 1000;
             _timer.Tick += _timer_Tick;
+
         }
 
         private void _timer_Tick(object sender, EventArgs e)
@@ -71,10 +72,12 @@ namespace DXAutoFillData.UControls
                 var ckClose = ckAutoCloseForm.Checked;
                 var ckClick = ckAutoClickSubmit.Checked;
                 var ckChoose = ckAutoChooseOptions.Checked;
+                var ckClear = ckClearCache.Checked;
 
                 UserConfig.setSAutoCloseForm(ckClose);
                 UserConfig.setSAutoSubmit(ckClick);
                 UserConfig.setSAutoChooseOptions(ckChoose);
+                UserConfig.setSAutoClearCache(ckClear);
 
                 XtraMessageBox.Show("Cập nhật thành công");
             }
@@ -192,6 +195,14 @@ namespace DXAutoFillData.UControls
             btnStop.Enabled = false;
         }
 
-
+        private void btnInfomation_Click(object sender, EventArgs e)
+        {
+            string message = "Phần mềm Auto Fill Data V1.0.0";
+            message += "\nDate: \t\t\t\t29.09.2017 01:30 AM";
+            message += "\nDescription:\t\t...";
+            message += "\nDesign by:\t\t HoangLC";
+            message += "\nEmail:\t\t\t\t ...@gmail.com";
+            XtraMessageBox.Show(message, "Thông tin");
+        }
     }
 }

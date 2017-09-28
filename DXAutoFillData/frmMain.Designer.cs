@@ -51,6 +51,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Auto Fill Data 1.0.0";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.frmMain_MouseClick);
             this.ResumeLayout(false);
 
         }

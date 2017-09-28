@@ -87,7 +87,7 @@ namespace DXAutoFillData
                 File.Copy(fileSource, fileTarget);
                 return fileTarget;
             }
-            catch (Exception e)
+            catch
             {
                 return null;
             }

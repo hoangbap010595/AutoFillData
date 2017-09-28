@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using System.Net;
 
 namespace DXAutoFillData.UControls
 {
@@ -24,10 +19,26 @@ namespace DXAutoFillData.UControls
         }
         private void loadWebBrowser()
         {
-            webBrowserMain.Visible = true;
+            if (UserConfig.getSAutoClearCache())
+            {
+                bool b =  WebBrowserHelper.InternetSetOption(IntPtr.Zero, 42, IntPtr.Zero, 0);
+                webBrowserMain.Document.ExecCommand("ClearAuthenticationCache", true, null);
+                string[] theCookies = System.IO.Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Cookies));
+                foreach (string currentFile in theCookies)
+                {
+                    try
+                    {
+                        System.IO.File.Delete(currentFile);
+                    }
+                    catch
+                    {
+                    }
+                }
 
-            webBrowserMain.ScriptErrorsSuppressed = true;
-            webBrowserMain.Navigate(UserConfig.getUTargetUrl());
+            }
+            webBrowserMain.Visible = true;
+            webBrowserMain.ScriptErrorsSuppressed = true;             
+            webBrowserMain.Document.Window.Navigate(UserConfig.getUTargetUrl());
             //webBrowserMain.Url = new System.Uri(UserConfig.getUTargetUrl(), System.UriKind.Relative);
             webBrowserMain.DocumentCompleted += WebBrowserMain_DocumentCompleted;
         }

@@ -42,13 +42,6 @@
             this.btnGetForm = new DevExpress.XtraEditors.SimpleButton();
             this.btnOpenFile = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.ckAutoCloseForm = new DevExpress.XtraEditors.CheckEdit();
-            this.ckAutoChooseOptions = new DevExpress.XtraEditors.CheckEdit();
-            this.ckAutoClickSubmit = new DevExpress.XtraEditors.CheckEdit();
-            this.btnExit = new DevExpress.XtraEditors.SimpleButton();
-            this.btnUpdateSystem = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.lblSubmitSuccess = new DevExpress.XtraEditors.LabelControl();
             this.lblTimeExecute = new DevExpress.XtraEditors.LabelControl();
@@ -56,6 +49,14 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.btnStop = new DevExpress.XtraEditors.SimpleButton();
             this.btnStart = new DevExpress.XtraEditors.SimpleButton();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.ckAutoCloseForm = new DevExpress.XtraEditors.CheckEdit();
+            this.ckAutoChooseOptions = new DevExpress.XtraEditors.CheckEdit();
+            this.ckAutoClickSubmit = new DevExpress.XtraEditors.CheckEdit();
+            this.btnExit = new DevExpress.XtraEditors.SimpleButton();
+            this.btnUpdateSystem = new DevExpress.XtraEditors.SimpleButton();
+            this.ckClearCache = new DevExpress.XtraEditors.CheckEdit();
+            this.btnInfomation = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
@@ -65,14 +66,14 @@
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilePath.Properties)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
+            this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoCloseForm.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoChooseOptions.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoClickSubmit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
-            this.groupControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ckClearCache.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -86,13 +87,13 @@
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(3, 3);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(394, 129);
+            this.groupControl1.Size = new System.Drawing.Size(394, 142);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Cấu hình url";
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(8, 65);
+            this.labelControl2.Location = new System.Drawing.Point(8, 68);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(50, 13);
             this.labelControl2.TabIndex = 0;
@@ -100,7 +101,7 @@
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(7, 33);
+            this.labelControl1.Location = new System.Drawing.Point(7, 36);
             this.labelControl1.Name = "labelControl1";
             this.labelControl1.Size = new System.Drawing.Size(58, 13);
             this.labelControl1.TabIndex = 0;
@@ -110,7 +111,7 @@
             // 
             this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPassword.Location = new System.Drawing.Point(83, 57);
+            this.txtPassword.Location = new System.Drawing.Point(83, 60);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtPassword.Properties.Appearance.Options.UseFont = true;
@@ -121,7 +122,7 @@
             // 
             this.txtTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTarget.Location = new System.Drawing.Point(83, 25);
+            this.txtTarget.Location = new System.Drawing.Point(83, 28);
             this.txtTarget.Name = "txtTarget";
             this.txtTarget.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F);
             this.txtTarget.Properties.Appearance.Options.UseFont = true;
@@ -131,7 +132,7 @@
             // btnUpdateHeThong
             // 
             this.btnUpdateHeThong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdateHeThong.Location = new System.Drawing.Point(265, 97);
+            this.btnUpdateHeThong.Location = new System.Drawing.Point(265, 110);
             this.btnUpdateHeThong.Name = "btnUpdateHeThong";
             this.btnUpdateHeThong.Size = new System.Drawing.Size(124, 23);
             this.btnUpdateHeThong.TabIndex = 4;
@@ -141,7 +142,7 @@
             // ckAutoLogin
             // 
             this.ckAutoLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ckAutoLogin.Location = new System.Drawing.Point(8, 99);
+            this.ckAutoLogin.Location = new System.Drawing.Point(8, 112);
             this.ckAutoLogin.Name = "ckAutoLogin";
             this.ckAutoLogin.Properties.Caption = "Tự động đăng nhập";
             this.ckAutoLogin.Size = new System.Drawing.Size(165, 19);
@@ -157,7 +158,7 @@
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(403, 3);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(394, 129);
+            this.groupControl2.Size = new System.Drawing.Size(394, 142);
             this.groupControl2.TabIndex = 0;
             this.groupControl2.Text = "Cấu hình dữ liệu";
             // 
@@ -184,7 +185,7 @@
             // btnViewData
             // 
             this.btnViewData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnViewData.Location = new System.Drawing.Point(299, 97);
+            this.btnViewData.Location = new System.Drawing.Point(299, 110);
             this.btnViewData.Name = "btnViewData";
             this.btnViewData.Size = new System.Drawing.Size(90, 23);
             this.btnViewData.TabIndex = 4;
@@ -194,7 +195,7 @@
             // btnGetForm
             // 
             this.btnGetForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGetForm.Location = new System.Drawing.Point(154, 97);
+            this.btnGetForm.Location = new System.Drawing.Point(154, 110);
             this.btnGetForm.Name = "btnGetForm";
             this.btnGetForm.Size = new System.Drawing.Size(141, 23);
             this.btnGetForm.TabIndex = 3;
@@ -218,94 +219,18 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.groupControl4, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.groupControl3, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupControl1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupControl2, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 135F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 135);
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 370);
             this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.groupControl3, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.groupControl4, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 135);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(800, 235);
-            this.tableLayoutPanel2.TabIndex = 2;
-            // 
-            // groupControl3
-            // 
-            this.groupControl3.Controls.Add(this.ckAutoCloseForm);
-            this.groupControl3.Controls.Add(this.ckAutoChooseOptions);
-            this.groupControl3.Controls.Add(this.ckAutoClickSubmit);
-            this.groupControl3.Controls.Add(this.btnExit);
-            this.groupControl3.Controls.Add(this.btnUpdateSystem);
-            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl3.Location = new System.Drawing.Point(3, 3);
-            this.groupControl3.Name = "groupControl3";
-            this.groupControl3.Size = new System.Drawing.Size(394, 229);
-            this.groupControl3.TabIndex = 0;
-            this.groupControl3.Text = "Cấu hình hệ thống";
-            // 
-            // ckAutoCloseForm
-            // 
-            this.ckAutoCloseForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ckAutoCloseForm.Location = new System.Drawing.Point(8, 90);
-            this.ckAutoCloseForm.Name = "ckAutoCloseForm";
-            this.ckAutoCloseForm.Properties.Caption = "Đóng form khi submit hoàn tất";
-            this.ckAutoCloseForm.Size = new System.Drawing.Size(165, 19);
-            this.ckAutoCloseForm.TabIndex = 3;
-            // 
-            // ckAutoChooseOptions
-            // 
-            this.ckAutoChooseOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ckAutoChooseOptions.Location = new System.Drawing.Point(8, 53);
-            this.ckAutoChooseOptions.Name = "ckAutoChooseOptions";
-            this.ckAutoChooseOptions.Properties.Caption = "Tự động chọn options";
-            this.ckAutoChooseOptions.Size = new System.Drawing.Size(165, 19);
-            this.ckAutoChooseOptions.TabIndex = 2;
-            // 
-            // ckAutoClickSubmit
-            // 
-            this.ckAutoClickSubmit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ckAutoClickSubmit.Location = new System.Drawing.Point(224, 53);
-            this.ckAutoClickSubmit.Name = "ckAutoClickSubmit";
-            this.ckAutoClickSubmit.Properties.Caption = "Tự động nhấn submit";
-            this.ckAutoClickSubmit.Size = new System.Drawing.Size(165, 19);
-            this.ckAutoClickSubmit.TabIndex = 1;
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnExit.Appearance.Font = new System.Drawing.Font("Tahoma", 14F);
-            this.btnExit.Appearance.Options.UseFont = true;
-            this.btnExit.Location = new System.Drawing.Point(250, 139);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(139, 75);
-            this.btnExit.TabIndex = 4;
-            this.btnExit.Text = "Thoát";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnUpdateSystem
-            // 
-            this.btnUpdateSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnUpdateSystem.Location = new System.Drawing.Point(8, 191);
-            this.btnUpdateSystem.Name = "btnUpdateSystem";
-            this.btnUpdateSystem.Size = new System.Drawing.Size(124, 23);
-            this.btnUpdateSystem.TabIndex = 4;
-            this.btnUpdateSystem.Text = "Cập nhật";
-            this.btnUpdateSystem.Click += new System.EventHandler(this.btnUpdateSystem_Click);
             // 
             // groupControl4
             // 
@@ -316,9 +241,9 @@
             this.groupControl4.Controls.Add(this.btnStop);
             this.groupControl4.Controls.Add(this.btnStart);
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControl4.Location = new System.Drawing.Point(403, 3);
+            this.groupControl4.Location = new System.Drawing.Point(403, 151);
             this.groupControl4.Name = "groupControl4";
-            this.groupControl4.Size = new System.Drawing.Size(394, 229);
+            this.groupControl4.Size = new System.Drawing.Size(394, 216);
             this.groupControl4.TabIndex = 1;
             // 
             // lblSubmitSuccess
@@ -328,7 +253,7 @@
             this.lblSubmitSuccess.Appearance.ForeColor = System.Drawing.Color.Black;
             this.lblSubmitSuccess.Appearance.Options.UseFont = true;
             this.lblSubmitSuccess.Appearance.Options.UseForeColor = true;
-            this.lblSubmitSuccess.Location = new System.Drawing.Point(261, 171);
+            this.lblSubmitSuccess.Location = new System.Drawing.Point(261, 165);
             this.lblSubmitSuccess.Name = "lblSubmitSuccess";
             this.lblSubmitSuccess.Size = new System.Drawing.Size(15, 33);
             this.lblSubmitSuccess.TabIndex = 0;
@@ -341,7 +266,7 @@
             this.lblTimeExecute.Appearance.ForeColor = System.Drawing.Color.Black;
             this.lblTimeExecute.Appearance.Options.UseFont = true;
             this.lblTimeExecute.Appearance.Options.UseForeColor = true;
-            this.lblTimeExecute.Location = new System.Drawing.Point(261, 66);
+            this.lblTimeExecute.Location = new System.Drawing.Point(261, 60);
             this.lblTimeExecute.Name = "lblTimeExecute";
             this.lblTimeExecute.Size = new System.Drawing.Size(27, 33);
             this.lblTimeExecute.TabIndex = 0;
@@ -354,7 +279,7 @@
             this.labelControl6.Appearance.ForeColor = System.Drawing.Color.Maroon;
             this.labelControl6.Appearance.Options.UseFont = true;
             this.labelControl6.Appearance.Options.UseForeColor = true;
-            this.labelControl6.Location = new System.Drawing.Point(180, 140);
+            this.labelControl6.Location = new System.Drawing.Point(180, 134);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(179, 25);
             this.labelControl6.TabIndex = 0;
@@ -367,7 +292,7 @@
             this.labelControl3.Appearance.ForeColor = System.Drawing.Color.Maroon;
             this.labelControl3.Appearance.Options.UseFont = true;
             this.labelControl3.Appearance.Options.UseForeColor = true;
-            this.labelControl3.Location = new System.Drawing.Point(180, 37);
+            this.labelControl3.Location = new System.Drawing.Point(180, 31);
             this.labelControl3.Name = "labelControl3";
             this.labelControl3.Size = new System.Drawing.Size(184, 25);
             this.labelControl3.TabIndex = 0;
@@ -379,7 +304,7 @@
             this.btnStop.Appearance.Font = new System.Drawing.Font("Tahoma", 14F);
             this.btnStop.Appearance.Options.UseFont = true;
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(10, 139);
+            this.btnStop.Location = new System.Drawing.Point(10, 133);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(139, 75);
             this.btnStop.TabIndex = 2;
@@ -388,21 +313,99 @@
             // 
             // btnStart
             // 
-            this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStart.Appearance.Font = new System.Drawing.Font("Tahoma", 14F);
             this.btnStart.Appearance.Options.UseFont = true;
-            this.btnStart.Location = new System.Drawing.Point(10, 45);
+            this.btnStart.Location = new System.Drawing.Point(10, 42);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(139, 75);
             this.btnStart.TabIndex = 1;
             this.btnStart.Text = "Bắt đầu";
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
+            // groupControl3
+            // 
+            this.groupControl3.Controls.Add(this.ckAutoCloseForm);
+            this.groupControl3.Controls.Add(this.ckAutoChooseOptions);
+            this.groupControl3.Controls.Add(this.ckClearCache);
+            this.groupControl3.Controls.Add(this.ckAutoClickSubmit);
+            this.groupControl3.Controls.Add(this.btnExit);
+            this.groupControl3.Controls.Add(this.btnInfomation);
+            this.groupControl3.Controls.Add(this.btnUpdateSystem);
+            this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControl3.Location = new System.Drawing.Point(3, 151);
+            this.groupControl3.Name = "groupControl3";
+            this.groupControl3.Size = new System.Drawing.Size(394, 216);
+            this.groupControl3.TabIndex = 0;
+            this.groupControl3.Text = "Cấu hình hệ thống";
+            // 
+            // ckAutoCloseForm
+            // 
+            this.ckAutoCloseForm.Location = new System.Drawing.Point(8, 172);
+            this.ckAutoCloseForm.Name = "ckAutoCloseForm";
+            this.ckAutoCloseForm.Properties.Caption = "Đóng form khi submit hoàn tất";
+            this.ckAutoCloseForm.Size = new System.Drawing.Size(165, 19);
+            this.ckAutoCloseForm.TabIndex = 4;
+            // 
+            // ckAutoChooseOptions
+            // 
+            this.ckAutoChooseOptions.Location = new System.Drawing.Point(8, 129);
+            this.ckAutoChooseOptions.Name = "ckAutoChooseOptions";
+            this.ckAutoChooseOptions.Properties.Caption = "Tự động chọn options";
+            this.ckAutoChooseOptions.Size = new System.Drawing.Size(165, 19);
+            this.ckAutoChooseOptions.TabIndex = 3;
+            // 
+            // ckAutoClickSubmit
+            // 
+            this.ckAutoClickSubmit.Location = new System.Drawing.Point(8, 48);
+            this.ckAutoClickSubmit.Name = "ckAutoClickSubmit";
+            this.ckAutoClickSubmit.Properties.Caption = "Tự động nhấn submit";
+            this.ckAutoClickSubmit.Size = new System.Drawing.Size(151, 19);
+            this.ckAutoClickSubmit.TabIndex = 1;
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnExit.Appearance.Font = new System.Drawing.Font("Tahoma", 14F);
+            this.btnExit.Appearance.Options.UseFont = true;
+            this.btnExit.Location = new System.Drawing.Point(265, 133);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(124, 75);
+            this.btnExit.TabIndex = 7;
+            this.btnExit.Text = "Thoát";
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnUpdateSystem
+            // 
+            this.btnUpdateSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateSystem.Location = new System.Drawing.Point(265, 36);
+            this.btnUpdateSystem.Name = "btnUpdateSystem";
+            this.btnUpdateSystem.Size = new System.Drawing.Size(124, 23);
+            this.btnUpdateSystem.TabIndex = 5;
+            this.btnUpdateSystem.Text = "Cập nhật";
+            this.btnUpdateSystem.Click += new System.EventHandler(this.btnUpdateSystem_Click);
+            // 
+            // ckClearCache
+            // 
+            this.ckClearCache.Location = new System.Drawing.Point(8, 88);
+            this.ckClearCache.Name = "ckClearCache";
+            this.ckClearCache.Properties.Caption = "Xóa Cache, Cookies";
+            this.ckClearCache.Size = new System.Drawing.Size(165, 19);
+            this.ckClearCache.TabIndex = 2;
+            // 
+            // btnInfomation
+            // 
+            this.btnInfomation.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnInfomation.Location = new System.Drawing.Point(265, 104);
+            this.btnInfomation.Name = "btnInfomation";
+            this.btnInfomation.Size = new System.Drawing.Size(124, 23);
+            this.btnInfomation.TabIndex = 6;
+            this.btnInfomation.Text = "Thông tin";
+            this.btnInfomation.Click += new System.EventHandler(this.btnInfomation_Click);
+            // 
             // UC_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UC_Main";
             this.Size = new System.Drawing.Size(800, 370);
@@ -417,15 +420,15 @@
             this.groupControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtFilePath.Properties)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
+            this.groupControl4.ResumeLayout(false);
+            this.groupControl4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoCloseForm.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoChooseOptions.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoClickSubmit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
-            this.groupControl4.ResumeLayout(false);
-            this.groupControl4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ckClearCache.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -446,7 +449,6 @@
         private DevExpress.XtraEditors.SimpleButton btnOpenFile;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private DevExpress.XtraEditors.SimpleButton btnViewData;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraEditors.GroupControl groupControl4;
         private DevExpress.XtraEditors.CheckEdit ckAutoCloseForm;
@@ -460,5 +462,7 @@
         private DevExpress.XtraEditors.SimpleButton btnStop;
         private DevExpress.XtraEditors.SimpleButton btnStart;
         private DevExpress.XtraEditors.SimpleButton btnUpdateSystem;
+        private DevExpress.XtraEditors.CheckEdit ckClearCache;
+        private DevExpress.XtraEditors.SimpleButton btnInfomation;
     }
 }

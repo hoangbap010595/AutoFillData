@@ -39,7 +39,25 @@ namespace DXAutoFillData
             Properties.Settings.Default.SAutoChooseOptions = b;
             Properties.Settings.Default.Save();
         }
-
+        public static void setSAutoClearCache(bool b)
+        {
+            Properties.Settings.Default.SAutoClearCache = b;
+            Properties.Settings.Default.Save();
+        }
+        public static void setTimeLeft(int time)
+        {
+            Properties.Settings.Default.TimeLeft = time;
+            Properties.Settings.Default.Save();
+        }
+        public static void setIsActive(bool b)
+        {
+            Properties.Settings.Default.IsActive = b;
+            Properties.Settings.Default.Save();
+        }
+        public static bool getSAutoSubmit()
+        {
+            return Properties.Settings.Default.SAutoSubmit;
+        }
         public static string getUTargetUrl()
         {
             return Properties.Settings.Default.UTargetUrl;
@@ -52,12 +70,8 @@ namespace DXAutoFillData
         {
             return Properties.Settings.Default.UAutoLogin;
         }
-
-
-        public static bool getSAutoSubmit()
-        {
-            return Properties.Settings.Default.SAutoSubmit;
-        }
+       
+       
         public static bool getSAutoCloseForm()
         {
             return Properties.Settings.Default.SAutoCloseForm;
@@ -66,7 +80,17 @@ namespace DXAutoFillData
         {
             return Properties.Settings.Default.SAutoChooseOptions;
         }
-
-
+        public static bool getSAutoClearCache()
+        {
+            return Properties.Settings.Default.SAutoClearCache;
+        }
+        public static bool getIsActive()
+        {
+            return Properties.Settings.Default.IsActive;
+        }
+        public static int getTimeLeft()
+        {
+            return Properties.Settings.Default.TimeLeft;
+        }
     }
 }

@@ -94,5 +94,41 @@ namespace DXAutoFillData.Properties {
                 this["SAutoChooseOptions"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SAutoClearCache {
+            get {
+                return ((bool)(this["SAutoClearCache"]));
+            }
+            set {
+                this["SAutoClearCache"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600")]
+        public int TimeLeft {
+            get {
+                return ((int)(this["TimeLeft"]));
+            }
+            set {
+                this["TimeLeft"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsActive {
+            get {
+                return ((bool)(this["IsActive"]));
+            }
+            set {
+                this["IsActive"] = value;
+            }
+        }
     }
 }
