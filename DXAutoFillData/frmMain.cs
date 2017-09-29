@@ -8,10 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace DXAutoFillData
 {
     public partial class frmMain : DevExpress.XtraEditors.XtraForm
     {
+
         Timer t = new Timer();
         private string title = "Auto Fill Data 1.0.0";
         public frmMain()
@@ -19,7 +21,7 @@ namespace DXAutoFillData
             InitializeComponent();
             loadSkin();
             this.Text = title;
-           
+
         }
         private void disableForm()
         {
@@ -64,8 +66,8 @@ namespace DXAutoFillData
             UC_Main frm = new UC_Main();
             frm.Dock = DockStyle.Fill;
             this.Controls.Add(frm);
-            //UserConfig.setTimeLeft(10);//aedve
-            //UserConfig.setIsActive(false);
+            UserConfig.setTimeLeft(1000);//aedve
+           UserConfig.setIsActive(false);
             if (!UserConfig.getIsActive())
             {
                 if (UserConfig.getTimeLeft() > 0)

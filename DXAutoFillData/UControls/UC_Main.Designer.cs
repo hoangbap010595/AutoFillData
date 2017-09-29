@@ -52,11 +52,11 @@
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.ckAutoCloseForm = new DevExpress.XtraEditors.CheckEdit();
             this.ckAutoChooseOptions = new DevExpress.XtraEditors.CheckEdit();
+            this.ckClearCache = new DevExpress.XtraEditors.CheckEdit();
             this.ckAutoClickSubmit = new DevExpress.XtraEditors.CheckEdit();
             this.btnExit = new DevExpress.XtraEditors.SimpleButton();
-            this.btnUpdateSystem = new DevExpress.XtraEditors.SimpleButton();
-            this.ckClearCache = new DevExpress.XtraEditors.CheckEdit();
             this.btnInfomation = new DevExpress.XtraEditors.SimpleButton();
+            this.btnUpdateSystem = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
@@ -72,8 +72,8 @@
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoCloseForm.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoChooseOptions.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ckAutoClickSubmit.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckClearCache.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ckAutoClickSubmit.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -257,7 +257,7 @@
             this.lblSubmitSuccess.Name = "lblSubmitSuccess";
             this.lblSubmitSuccess.Size = new System.Drawing.Size(15, 33);
             this.lblSubmitSuccess.TabIndex = 0;
-            this.lblSubmitSuccess.Text = "1";
+            this.lblSubmitSuccess.Text = "0";
             // 
             // lblTimeExecute
             // 
@@ -354,6 +354,14 @@
             this.ckAutoChooseOptions.Size = new System.Drawing.Size(165, 19);
             this.ckAutoChooseOptions.TabIndex = 3;
             // 
+            // ckClearCache
+            // 
+            this.ckClearCache.Location = new System.Drawing.Point(8, 88);
+            this.ckClearCache.Name = "ckClearCache";
+            this.ckClearCache.Properties.Caption = "Xóa Cache, Cookies";
+            this.ckClearCache.Size = new System.Drawing.Size(165, 19);
+            this.ckClearCache.TabIndex = 2;
+            // 
             // ckAutoClickSubmit
             // 
             this.ckAutoClickSubmit.Location = new System.Drawing.Point(8, 48);
@@ -374,24 +382,6 @@
             this.btnExit.Text = "Thoát";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // btnUpdateSystem
-            // 
-            this.btnUpdateSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdateSystem.Location = new System.Drawing.Point(265, 36);
-            this.btnUpdateSystem.Name = "btnUpdateSystem";
-            this.btnUpdateSystem.Size = new System.Drawing.Size(124, 23);
-            this.btnUpdateSystem.TabIndex = 5;
-            this.btnUpdateSystem.Text = "Cập nhật";
-            this.btnUpdateSystem.Click += new System.EventHandler(this.btnUpdateSystem_Click);
-            // 
-            // ckClearCache
-            // 
-            this.ckClearCache.Location = new System.Drawing.Point(8, 88);
-            this.ckClearCache.Name = "ckClearCache";
-            this.ckClearCache.Properties.Caption = "Xóa Cache, Cookies";
-            this.ckClearCache.Size = new System.Drawing.Size(165, 19);
-            this.ckClearCache.TabIndex = 2;
-            // 
             // btnInfomation
             // 
             this.btnInfomation.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -401,6 +391,16 @@
             this.btnInfomation.TabIndex = 6;
             this.btnInfomation.Text = "Thông tin";
             this.btnInfomation.Click += new System.EventHandler(this.btnInfomation_Click);
+            // 
+            // btnUpdateSystem
+            // 
+            this.btnUpdateSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateSystem.Location = new System.Drawing.Point(265, 36);
+            this.btnUpdateSystem.Name = "btnUpdateSystem";
+            this.btnUpdateSystem.Size = new System.Drawing.Size(124, 23);
+            this.btnUpdateSystem.TabIndex = 5;
+            this.btnUpdateSystem.Text = "Cập nhật";
+            this.btnUpdateSystem.Click += new System.EventHandler(this.btnUpdateSystem_Click);
             // 
             // UC_Main
             // 
@@ -427,8 +427,8 @@
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoCloseForm.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoChooseOptions.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ckAutoClickSubmit.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckClearCache.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ckAutoClickSubmit.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -109,15 +109,15 @@ namespace DXAutoFillData.UControls
             {
                 if (txtFilePath.Text != "")
                 {
-                    DataTable dt = OpenFileExcel.getDataExcelFromFileToDataTable(txtFilePath.Text);
-                    dt.Rows.RemoveAt(0);
-                    UC_ViewData uc = new UC_ViewData(dt);
-                    frmShowWindow frm = new frmShowWindow();
-                    frm.Controls.Clear();
-                    uc.Dock = DockStyle.Fill;
-                    frm.Text = "Hiển thị dữ liệu";
-                    frm.Controls.Add(uc);
-                    frm.ShowDialog();
+                    //DataTable dt = OpenFileExcel.getDataExcelFromFileToDataTable(txtFilePath.Text);
+                    //dt.Rows.RemoveAt(0);
+                    //UC_ViewData uc = new UC_ViewData(dt);
+                    //frmShowWindow frm = new frmShowWindow();
+                    //frm.Controls.Clear();
+                    //uc.Dock = DockStyle.Fill;
+                    //frm.Text = "Hiển thị dữ liệu";
+                    //frm.Controls.Add(uc);
+                    //frm.ShowDialog();
                 }
                 else
                 {
@@ -153,6 +153,10 @@ namespace DXAutoFillData.UControls
             }
         }
 
+        private void setCountSubmit(int count)
+        {
+            lblSubmitSuccess.Text = count.ToString();
+        }
         private void btnStart_Click(object sender, EventArgs e)
         {
             try
@@ -160,11 +164,13 @@ namespace DXAutoFillData.UControls
                 if (txtFilePath.Text == "")
                 {
                     timeRight = 0;
+                    lblSubmitSuccess.Text = "0";
                     _timer.Enabled = true;
                     btnStart.Enabled = false;
                     btnStop.Enabled = true;
                     //DataTable dt = OpenFileExcel.getDataExcelFromFileToDataTable(txtFilePath.Text);
                     UC_WebBrowser uc = new UC_WebBrowser();
+                    uc.sendCount = new UC_WebBrowser.sendCountSubmit(setCountSubmit);
                     frmShowWindow frm = new frmShowWindow();
                     frm.Controls.Clear();
                     uc.Dock = DockStyle.Fill;
