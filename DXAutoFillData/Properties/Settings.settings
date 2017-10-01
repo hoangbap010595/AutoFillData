@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DXAutoFillData.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="UTargetUrl" Type="System.String" Scope="User">
+    <Setting Name="UUrlTarget" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://laodongkynghi.info/mau-dang-ky-thu-gioi-thieu/</Value>
     </Setting>
     <Setting Name="UPassword" Type="System.String" Scope="User">
@@ -17,7 +17,7 @@
     <Setting Name="SAutoCloseForm" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="SAutoChooseOptions" Type="System.Boolean" Scope="User">
+    <Setting Name="SAutoEnterData" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="SAutoClearCache" Type="System.Boolean" Scope="User">

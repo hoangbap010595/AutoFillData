@@ -83,6 +83,7 @@
     <Compile Include="frmShowWindow.Designer.cs">
       <DependentUpon>frmShowWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="ObjData.cs" />
     <Compile Include="OpenFileExcel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +92,12 @@
     </Compile>
     <Compile Include="UControls\UC_Main.Designer.cs">
       <DependentUpon>UC_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UControls\UC_ViewData.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UControls\UC_ViewData.Designer.cs">
+      <DependentUpon>UC_ViewData.cs</DependentUpon>
     </Compile>
     <Compile Include="UControls\UC_WebBrowser.cs">
       <SubType>UserControl</SubType>
@@ -122,9 +129,13 @@
     <EmbeddedResource Include="UControls\UC_Main.resx">
       <DependentUpon>UC_Main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UControls\UC_ViewData.resx">
+      <DependentUpon>UC_ViewData.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UControls\UC_WebBrowser.resx">
       <DependentUpon>UC_WebBrowser.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -61,10 +61,53 @@ namespace DXAutoFillData
                     DataTable dt = tables[0];
                     return dt;
                 }
+            }
+
+        }
+        public static List<Dictionary<string, object>> getDataExcelFromFileToList(string filePath)
+        {
+            List<Dictionary<string, object>> lsData = new List<Dictionary<string, object>>();
+            using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
+            {
+                // Auto-detect format, supports:
+                //  - Binary Excel files (2.0-2003 format; *.xls)
+                //  - OpenXml Excel files (2007 format; *.xlsx)
+                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                {
+                    var result = reader.AsDataSet(new ExcelDataSetConfiguration()
+                    {
+                        ConfigureDataTable = (data) => new ExcelDataTableConfiguration()
+                        {
+                            UseHeaderRow = true
+                        }
+                    });
+                    //Get all Table
+                    DataTableCollection tables = result.Tables;
+                    //Get Table
+                    DataTable dt = tables[0];
+                    lsData = ConverDataTableToList(dt);
+                    return lsData;
+                }
 
             }
         }
 
+        private static List<Dictionary<string, object>> ConverDataTableToList(DataTable dt)
+        {
+            List<Dictionary<string, object>> ls = new List<Dictionary<string, object>>();
+            Dictionary<string, object> obj;
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                obj = new Dictionary<string, object>();
+                foreach (DataColumn col in dt.Columns)
+                {
+                    obj.Add(col.ColumnName, dr[col]);
+                }
+                ls.Add(obj);
+            }
+            return ls;
+        }
 
         public static string moveFile(string target)
         {
@@ -92,6 +135,6 @@ namespace DXAutoFillData
                 return null;
             }
         }
-    
+
     }
 }

@@ -31,6 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_WebBrowser));
             this.xtraTabControlMain = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPageOne = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPageTwo = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPageThree = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPageFour = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPageFive = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPageSix = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlMain)).BeginInit();
             this.xtraTabControlMain.SuspendLayout();
             this.SuspendLayout();
@@ -42,17 +47,57 @@
             this.xtraTabControlMain.Name = "xtraTabControlMain";
             this.xtraTabControlMain.PaintStyleName = "Skin";
             this.xtraTabControlMain.SelectedTabPage = this.xtraTabPageOne;
-            this.xtraTabControlMain.Size = new System.Drawing.Size(715, 353);
+            this.xtraTabControlMain.Size = new System.Drawing.Size(874, 353);
             this.xtraTabControlMain.TabIndex = 1;
             this.xtraTabControlMain.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPageOne});
+            this.xtraTabPageOne,
+            this.xtraTabPageTwo,
+            this.xtraTabPageThree,
+            this.xtraTabPageFour,
+            this.xtraTabPageFive,
+            this.xtraTabPageSix});
             // 
             // xtraTabPageOne
             // 
             this.xtraTabPageOne.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageOne.Image")));
             this.xtraTabPageOne.Name = "xtraTabPageOne";
-            this.xtraTabPageOne.Size = new System.Drawing.Size(707, 322);
+            this.xtraTabPageOne.Size = new System.Drawing.Size(868, 322);
             this.xtraTabPageOne.Text = "Đang chuyển hướng...";
+            // 
+            // xtraTabPageTwo
+            // 
+            this.xtraTabPageTwo.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageTwo.Image")));
+            this.xtraTabPageTwo.Name = "xtraTabPageTwo";
+            this.xtraTabPageTwo.Size = new System.Drawing.Size(709, 322);
+            this.xtraTabPageTwo.Text = "Đang chuyển hướng...";
+            // 
+            // xtraTabPageThree
+            // 
+            this.xtraTabPageThree.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageThree.Image")));
+            this.xtraTabPageThree.Name = "xtraTabPageThree";
+            this.xtraTabPageThree.Size = new System.Drawing.Size(709, 322);
+            this.xtraTabPageThree.Text = "Đang chuyển hướng...";
+            // 
+            // xtraTabPageFour
+            // 
+            this.xtraTabPageFour.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageFour.Image")));
+            this.xtraTabPageFour.Name = "xtraTabPageFour";
+            this.xtraTabPageFour.Size = new System.Drawing.Size(709, 322);
+            this.xtraTabPageFour.Text = "Đang chuyển hướng...";
+            // 
+            // xtraTabPageFive
+            // 
+            this.xtraTabPageFive.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageFive.Image")));
+            this.xtraTabPageFive.Name = "xtraTabPageFive";
+            this.xtraTabPageFive.Size = new System.Drawing.Size(0, 0);
+            this.xtraTabPageFive.Text = "Đang chuyển hướng";
+            // 
+            // xtraTabPageSix
+            // 
+            this.xtraTabPageSix.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageSix.Image")));
+            this.xtraTabPageSix.Name = "xtraTabPageSix";
+            this.xtraTabPageSix.Size = new System.Drawing.Size(0, 0);
+            this.xtraTabPageSix.Text = "Đang chuyển hướng";
             // 
             // UC_WebBrowser
             // 
@@ -60,7 +105,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.xtraTabControlMain);
             this.Name = "UC_WebBrowser";
-            this.Size = new System.Drawing.Size(715, 353);
+            this.Size = new System.Drawing.Size(874, 353);
             this.Load += new System.EventHandler(this.UC_WebBrowser_Load);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlMain)).EndInit();
             this.xtraTabControlMain.ResumeLayout(false);
@@ -71,5 +116,10 @@
         #endregion
         private DevExpress.XtraTab.XtraTabControl xtraTabControlMain;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageOne;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageTwo;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageThree;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageFour;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageFive;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageSix;
     }
 }

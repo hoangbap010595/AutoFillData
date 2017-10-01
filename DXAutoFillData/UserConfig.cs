@@ -10,7 +10,7 @@ namespace DXAutoFillData
     {
         public static void setUTargetUrl(string target)
         {
-            Properties.Settings.Default.UTargetUrl = target;
+            Properties.Settings.Default.UUrlTarget = target;
             Properties.Settings.Default.Save();
         }
         public static void setUPassword(string password)
@@ -34,9 +34,9 @@ namespace DXAutoFillData
             Properties.Settings.Default.SAutoCloseForm = b;
             Properties.Settings.Default.Save();
         }
-        public static void setSAutoChooseOptions(bool b)
+        public static void setSAutoEnterData(bool b)
         {
-            Properties.Settings.Default.SAutoChooseOptions = b;
+            Properties.Settings.Default.SAutoEnterData = b;
             Properties.Settings.Default.Save();
         }
         public static void setSAutoClearCache(bool b)
@@ -60,7 +60,7 @@ namespace DXAutoFillData
         }
         public static string getUTargetUrl()
         {
-            return Properties.Settings.Default.UTargetUrl;
+            return Properties.Settings.Default.UUrlTarget;
         }
         public static string getUPassword()
         {
@@ -76,9 +76,9 @@ namespace DXAutoFillData
         {
             return Properties.Settings.Default.SAutoCloseForm;
         }
-        public static bool getSAutoChooseOptions()
+        public static bool getSAutoEnterData()
         {
-            return Properties.Settings.Default.SAutoChooseOptions;
+            return Properties.Settings.Default.SAutoEnterData;
         }
         public static bool getSAutoClearCache()
         {

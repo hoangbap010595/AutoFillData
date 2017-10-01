@@ -31,7 +31,7 @@ namespace DXAutoFillData.UControls
 
             ckAutoCloseForm.Checked = UserConfig.getSAutoCloseForm();
             ckAutoClickSubmit.Checked = UserConfig.getSAutoSubmit();
-            ckAutoChooseOptions.Checked = UserConfig.getSAutoChooseOptions();
+            ckAutoEnterData.Checked = UserConfig.getSAutoEnterData();
             ckClearCache.Checked = UserConfig.getSAutoClearCache();
 
             _timer = new System.Windows.Forms.Timer();
@@ -43,7 +43,7 @@ namespace DXAutoFillData.UControls
         private void _timer_Tick(object sender, EventArgs e)
         {
             timeRight++;
-            lblTimeExecute.Text = timeRight.ToString() + "s";
+            lblTimeExecute.Text = timeRight + "s";
         }
 
         private void btnUpdateHeThong_Click(object sender, EventArgs e)
@@ -71,12 +71,12 @@ namespace DXAutoFillData.UControls
             {
                 var ckClose = ckAutoCloseForm.Checked;
                 var ckClick = ckAutoClickSubmit.Checked;
-                var ckChoose = ckAutoChooseOptions.Checked;
+                var ckChoose = ckAutoEnterData.Checked;
                 var ckClear = ckClearCache.Checked;
 
                 UserConfig.setSAutoCloseForm(ckClose);
                 UserConfig.setSAutoSubmit(ckClick);
-                UserConfig.setSAutoChooseOptions(ckChoose);
+                UserConfig.setSAutoEnterData(ckChoose);
                 UserConfig.setSAutoClearCache(ckClear);
 
                 XtraMessageBox.Show("Cập nhật thành công");
@@ -109,15 +109,15 @@ namespace DXAutoFillData.UControls
             {
                 if (txtFilePath.Text != "")
                 {
-                    //DataTable dt = OpenFileExcel.getDataExcelFromFileToDataTable(txtFilePath.Text);
-                    //dt.Rows.RemoveAt(0);
-                    //UC_ViewData uc = new UC_ViewData(dt);
-                    //frmShowWindow frm = new frmShowWindow();
-                    //frm.Controls.Clear();
-                    //uc.Dock = DockStyle.Fill;
-                    //frm.Text = "Hiển thị dữ liệu";
-                    //frm.Controls.Add(uc);
-                    //frm.ShowDialog();
+                    DataTable dt = OpenFileExcel.getDataExcelFromFileToDataTable(txtFilePath.Text);
+                    dt.Rows.RemoveAt(0);
+                    UC_ViewData uc = new UC_ViewData(dt);
+                    frmShowWindow frm = new frmShowWindow();
+                    frm.Controls.Clear();
+                    uc.Dock = DockStyle.Fill;
+                    frm.Text = "Hiển thị dữ liệu";
+                    frm.Controls.Add(uc);
+                    frm.ShowDialog();
                 }
                 else
                 {
@@ -157,24 +157,26 @@ namespace DXAutoFillData.UControls
         {
             lblSubmitSuccess.Text = count.ToString();
         }
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             try
             {
-                if (txtFilePath.Text == "")
+                if (txtFilePath.Text != "")
                 {
                     timeRight = 0;
                     lblSubmitSuccess.Text = "0";
                     _timer.Enabled = true;
                     btnStart.Enabled = false;
                     btnStop.Enabled = true;
-                    //DataTable dt = OpenFileExcel.getDataExcelFromFileToDataTable(txtFilePath.Text);
-                    UC_WebBrowser uc = new UC_WebBrowser();
+                    List<Dictionary<string,object>> lsData = OpenFileExcel.getDataExcelFromFileToList(txtFilePath.Text);
+                    lsData.RemoveAt(0);
+                    UC_WebBrowser uc = new UC_WebBrowser(lsData);
                     uc.sendCount = new UC_WebBrowser.sendCountSubmit(setCountSubmit);
                     frmShowWindow frm = new frmShowWindow();
                     frm.Controls.Clear();
                     uc.Dock = DockStyle.Fill;
-                    frm.Text = "Đang thực hiện quá trình Auto Fill Data...";
+                    frm.Text = "Đang thực hiện quá trình submit dữ liệu...";
                     frm.ControlBox = false;
                     frm.Controls.Add(uc);
                     frm.Show();
@@ -203,11 +205,12 @@ namespace DXAutoFillData.UControls
 
         private void btnInfomation_Click(object sender, EventArgs e)
         {
-            string message = "Phần mềm Auto Fill Data V1.0.0";
-            message += "\nDate: \t\t\t\t29.09.2017 01:30 AM";
+            string message = "Phần mềm Auto Fill Data";
+            message += "\n\nDate: \t\t\t\t29.09.2017 01:30 AM";
             message += "\nDescription:\t\t...";
             message += "\nDesign by:\t\t HoangLC";
-            message += "\nEmail:\t\t\t\t ...@gmail.com";
+            message += "\nEmail:\t\t\t\t lchoang1995@gmail.com";
+            message += "\nVersion:\t\t\t 1.0.0";
             XtraMessageBox.Show(message, "Thông tin");
         }
     }

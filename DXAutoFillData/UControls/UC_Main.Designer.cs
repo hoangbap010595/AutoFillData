@@ -51,7 +51,7 @@
             this.btnStart = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.ckAutoCloseForm = new DevExpress.XtraEditors.CheckEdit();
-            this.ckAutoChooseOptions = new DevExpress.XtraEditors.CheckEdit();
+            this.ckAutoEnterData = new DevExpress.XtraEditors.CheckEdit();
             this.ckClearCache = new DevExpress.XtraEditors.CheckEdit();
             this.ckAutoClickSubmit = new DevExpress.XtraEditors.CheckEdit();
             this.btnExit = new DevExpress.XtraEditors.SimpleButton();
@@ -71,7 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
             this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoCloseForm.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ckAutoChooseOptions.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ckAutoEnterData.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckClearCache.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoClickSubmit.Properties)).BeginInit();
             this.SuspendLayout();
@@ -253,9 +253,12 @@
             this.lblSubmitSuccess.Appearance.ForeColor = System.Drawing.Color.Black;
             this.lblSubmitSuccess.Appearance.Options.UseFont = true;
             this.lblSubmitSuccess.Appearance.Options.UseForeColor = true;
-            this.lblSubmitSuccess.Location = new System.Drawing.Point(261, 165);
+            this.lblSubmitSuccess.Appearance.Options.UseTextOptions = true;
+            this.lblSubmitSuccess.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lblSubmitSuccess.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblSubmitSuccess.Location = new System.Drawing.Point(180, 165);
             this.lblSubmitSuccess.Name = "lblSubmitSuccess";
-            this.lblSubmitSuccess.Size = new System.Drawing.Size(15, 33);
+            this.lblSubmitSuccess.Size = new System.Drawing.Size(184, 33);
             this.lblSubmitSuccess.TabIndex = 0;
             this.lblSubmitSuccess.Text = "0";
             // 
@@ -266,9 +269,12 @@
             this.lblTimeExecute.Appearance.ForeColor = System.Drawing.Color.Black;
             this.lblTimeExecute.Appearance.Options.UseFont = true;
             this.lblTimeExecute.Appearance.Options.UseForeColor = true;
-            this.lblTimeExecute.Location = new System.Drawing.Point(261, 60);
+            this.lblTimeExecute.Appearance.Options.UseTextOptions = true;
+            this.lblTimeExecute.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.lblTimeExecute.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.lblTimeExecute.Location = new System.Drawing.Point(180, 60);
             this.lblTimeExecute.Name = "lblTimeExecute";
-            this.lblTimeExecute.Size = new System.Drawing.Size(27, 33);
+            this.lblTimeExecute.Size = new System.Drawing.Size(184, 33);
             this.lblTimeExecute.TabIndex = 0;
             this.lblTimeExecute.Text = "0s";
             // 
@@ -281,9 +287,9 @@
             this.labelControl6.Appearance.Options.UseForeColor = true;
             this.labelControl6.Location = new System.Drawing.Point(180, 134);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(179, 25);
+            this.labelControl6.Size = new System.Drawing.Size(190, 25);
             this.labelControl6.TabIndex = 0;
-            this.labelControl6.Text = "Submit thành công";
+            this.labelControl6.Text = "Đăng ký thành công";
             // 
             // labelControl3
             // 
@@ -325,7 +331,7 @@
             // groupControl3
             // 
             this.groupControl3.Controls.Add(this.ckAutoCloseForm);
-            this.groupControl3.Controls.Add(this.ckAutoChooseOptions);
+            this.groupControl3.Controls.Add(this.ckAutoEnterData);
             this.groupControl3.Controls.Add(this.ckClearCache);
             this.groupControl3.Controls.Add(this.ckAutoClickSubmit);
             this.groupControl3.Controls.Add(this.btnExit);
@@ -342,21 +348,21 @@
             // 
             this.ckAutoCloseForm.Location = new System.Drawing.Point(8, 172);
             this.ckAutoCloseForm.Name = "ckAutoCloseForm";
-            this.ckAutoCloseForm.Properties.Caption = "Đóng form khi submit hoàn tất";
+            this.ckAutoCloseForm.Properties.Caption = "Đóng trình xử lý khi hoàn tất";
             this.ckAutoCloseForm.Size = new System.Drawing.Size(165, 19);
             this.ckAutoCloseForm.TabIndex = 4;
             // 
-            // ckAutoChooseOptions
+            // ckAutoEnterData
             // 
-            this.ckAutoChooseOptions.Location = new System.Drawing.Point(8, 129);
-            this.ckAutoChooseOptions.Name = "ckAutoChooseOptions";
-            this.ckAutoChooseOptions.Properties.Caption = "Tự động chọn options";
-            this.ckAutoChooseOptions.Size = new System.Drawing.Size(165, 19);
-            this.ckAutoChooseOptions.TabIndex = 3;
+            this.ckAutoEnterData.Location = new System.Drawing.Point(8, 41);
+            this.ckAutoEnterData.Name = "ckAutoEnterData";
+            this.ckAutoEnterData.Properties.Caption = "Tự động nhập dữ liệu";
+            this.ckAutoEnterData.Size = new System.Drawing.Size(165, 19);
+            this.ckAutoEnterData.TabIndex = 3;
             // 
             // ckClearCache
             // 
-            this.ckClearCache.Location = new System.Drawing.Point(8, 88);
+            this.ckClearCache.Location = new System.Drawing.Point(8, 129);
             this.ckClearCache.Name = "ckClearCache";
             this.ckClearCache.Properties.Caption = "Xóa Cache, Cookies";
             this.ckClearCache.Size = new System.Drawing.Size(165, 19);
@@ -364,10 +370,10 @@
             // 
             // ckAutoClickSubmit
             // 
-            this.ckAutoClickSubmit.Location = new System.Drawing.Point(8, 48);
+            this.ckAutoClickSubmit.Location = new System.Drawing.Point(8, 83);
             this.ckAutoClickSubmit.Name = "ckAutoClickSubmit";
-            this.ckAutoClickSubmit.Properties.Caption = "Tự động nhấn submit";
-            this.ckAutoClickSubmit.Size = new System.Drawing.Size(151, 19);
+            this.ckAutoClickSubmit.Properties.Caption = "Tự động nhấn submit sau khi nhập dữ liệu";
+            this.ckAutoClickSubmit.Size = new System.Drawing.Size(229, 19);
             this.ckAutoClickSubmit.TabIndex = 1;
             // 
             // btnExit
@@ -426,7 +432,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoCloseForm.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ckAutoChooseOptions.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ckAutoEnterData.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckClearCache.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoClickSubmit.Properties)).EndInit();
             this.ResumeLayout(false);
@@ -452,7 +458,7 @@
         private DevExpress.XtraEditors.GroupControl groupControl3;
         private DevExpress.XtraEditors.GroupControl groupControl4;
         private DevExpress.XtraEditors.CheckEdit ckAutoCloseForm;
-        private DevExpress.XtraEditors.CheckEdit ckAutoChooseOptions;
+        private DevExpress.XtraEditors.CheckEdit ckAutoEnterData;
         private DevExpress.XtraEditors.CheckEdit ckAutoClickSubmit;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.SimpleButton btnExit;

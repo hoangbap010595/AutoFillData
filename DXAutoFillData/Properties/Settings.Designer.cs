@@ -26,12 +26,12 @@ namespace DXAutoFillData.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://laodongkynghi.info/mau-dang-ky-thu-gioi-thieu/")]
-        public string UTargetUrl {
+        public string UUrlTarget {
             get {
-                return ((string)(this["UTargetUrl"]));
+                return ((string)(this["UUrlTarget"]));
             }
             set {
-                this["UTargetUrl"] = value;
+                this["UUrlTarget"] = value;
             }
         }
         
@@ -86,12 +86,12 @@ namespace DXAutoFillData.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SAutoChooseOptions {
+        public bool SAutoEnterData {
             get {
-                return ((bool)(this["SAutoChooseOptions"]));
+                return ((bool)(this["SAutoEnterData"]));
             }
             set {
-                this["SAutoChooseOptions"] = value;
+                this["SAutoEnterData"] = value;
             }
         }
         

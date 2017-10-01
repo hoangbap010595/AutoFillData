@@ -21,7 +21,6 @@ namespace DXAutoFillData
             InitializeComponent();
             loadSkin();
             this.Text = title;
-
         }
         private void disableForm()
         {
@@ -54,7 +53,7 @@ namespace DXAutoFillData
         }
         private void isActive(bool active)
         {
-            if(active)
+            if (active)
                 if (this.Controls.Count > 0)
                     this.Controls[0].Enabled = true;
             this.Text = title;
@@ -67,7 +66,7 @@ namespace DXAutoFillData
             frm.Dock = DockStyle.Fill;
             this.Controls.Add(frm);
             UserConfig.setTimeLeft(1000);//aedve
-           UserConfig.setIsActive(false);
+            UserConfig.setIsActive(false);
             if (!UserConfig.getIsActive())
             {
                 if (UserConfig.getTimeLeft() > 0)
@@ -110,7 +109,7 @@ namespace DXAutoFillData
             if (!UserConfig.getIsActive())
             {
                 if (UserConfig.getTimeLeft() <= 0)
-                { 
+                {
                     disableForm();
                 }
             }

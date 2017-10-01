@@ -4,81 +4,117 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Net;
 using DevExpress.XtraTab;
+using System.Threading;
+using System.Collections.Generic;
 
 namespace DXAutoFillData.UControls
 {
+
     public partial class UC_WebBrowser : XtraUserControl
     {
-        WebBrowser webBrowserMain;
-        bool isSubmit = false;
-        bool isClick = false;
-        int count = 0;
+        private WebBrowser webBrowserOne = new WebBrowser();
+        private WebBrowser webBrowserTwo = new WebBrowser();
+        private WebBrowser webBrowserThree = new WebBrowser();
+        private WebBrowser webBrowserFour = new WebBrowser();
+        private WebBrowser webBrowserFive = new WebBrowser();
+        private WebBrowser webBrowserSix = new WebBrowser();
+
+        private bool isSubmit = false;
+        private bool isClick = false;
+        private int count = 0;
+        private List<Dictionary<string, object>> _lsData;
+        private List<Dictionary<string, object>> _lsDataOne;
+        private List<Dictionary<string, object>> _lsDataTwo;
+        private List<Dictionary<string, object>> _lsDataThree;
+        private List<Dictionary<string, object>> _lsDataFour;
+        private List<Dictionary<string, object>> _lsDataFive;
+        private List<Dictionary<string, object>> _lsDataSix;
+        private int indexOne = 0;
+        private int indexTwo = 0;
+        private int indexThree = 0;
+        private int indexFour = 0;
+        private int indexFive = 0;
+        private int indexSix = 0;
+
         public UC_WebBrowser()
         {
             InitializeComponent();
-            //autoIT.ControlFocus()
+        }
+        public UC_WebBrowser(List<Dictionary<string, object>> ls)
+        {
+            InitializeComponent();
+            _lsData = ls;
         }
 
         private void UC_WebBrowser_Load(object sender, EventArgs e)
         {
-            CreateWebBrowser();
-
+            CreateWebBrowser(xtraTabPageOne, webBrowserOne);
+            //CreateWebBrowser(xtraTabPageTwo, webBrowserTwo);
+            //CreateWebBrowser(xtraTabPageThree, webBrowserThree);
+            //CreateWebBrowser(xtraTabPageFour, webBrowserFour);
+            //CreateWebBrowser(xtraTabPageFive, webBrowserFive);
+            //CreateWebBrowser(xtraTabPageSix, webBrowserSix);
         }
 
         public delegate void sendCountSubmit(int count);
         public sendCountSubmit sendCount;
 
-        private void CreateWebBrowser()
+        [STAThread]
+        private void CreateWebBrowser(XtraTabPage tabPage, WebBrowser webBrowser)
         {
-            xtraTabPageOne.Controls.Add(webBrowserMain);
-
-            webBrowserMain = new WebBrowser();
-            webBrowserMain.Parent = xtraTabPageOne;
-            webBrowserMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            webBrowserMain.Location = new System.Drawing.Point(0, 0);
-            webBrowserMain.MinimumSize = new System.Drawing.Size(20, 20);
-            webBrowserMain.Name = "webBrowserMain";
-            webBrowserMain.Size = new System.Drawing.Size(709, 321);
-            webBrowserMain.TabIndex = 0;
-            webBrowserMain.Url = new System.Uri("", System.UriKind.Relative);
-            webBrowserMain.Visible = true;
-            webBrowserMain.ScriptErrorsSuppressed = true;
-            webBrowserMain.Document.Window.Navigate(UserConfig.getUTargetUrl());
-            //webBrowserMain.Url = new System.Uri(UserConfig.getUTargetUrl(), System.UriKind.Relative);
-            webBrowserMain.DocumentCompleted += WebBrowserMain_DocumentCompleted;
-
-            if (UserConfig.getSAutoClearCache())
+            tabPage.Invoke((MethodInvoker)delegate
             {
-                bool b = WebBrowserHelper.InternetSetOption(IntPtr.Zero, 42, IntPtr.Zero, 0);
-                string[] theCookies = System.IO.Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Cookies));
-                foreach (string currentFile in theCookies)
+                tabPage.Controls.Add(webBrowser);
+            });
+            webBrowser.Invoke((MethodInvoker)delegate
+            {
+                webBrowser.Parent = tabPage;
+                webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+                webBrowser.Location = new System.Drawing.Point(0, 0);
+                webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+                webBrowser.Name = "webBrowserMain";
+                webBrowser.Size = new System.Drawing.Size(709, 321);
+                webBrowser.TabIndex = 0;
+                webBrowser.Url = new System.Uri("", System.UriKind.Relative);
+                webBrowser.Visible = true;
+                webBrowser.ScriptErrorsSuppressed = true;
+                webBrowser.Navigate(UserConfig.getUTargetUrl());
+                //webBrowserMain.Url = new System.Uri(UserConfig.getUTargetUrl(), System.UriKind.Relative);
+                webBrowser.DocumentCompleted += (sender, e) => WebBrowserOne_DocumentCompleted(tabPage, webBrowser, sender, e);
+
+                if (UserConfig.getSAutoClearCache())
                 {
-                    try
+                    bool b = WebBrowserHelper.InternetSetOption(IntPtr.Zero, 42, IntPtr.Zero, 0);
+                    string[] theCookies = System.IO.Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.Cookies));
+                    foreach (string currentFile in theCookies)
                     {
-                        System.IO.File.Delete(currentFile);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("[ClearCache]: " + ex.Message);
+                        try
+                        {
+                            System.IO.File.Delete(currentFile);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("[ClearCache]: " + ex.Message);
+                        }
                     }
                 }
-            }
-            //xtraTabPageOne.Controls.Add(webBrowserMain);
+            });
+
         }
 
-        private void WebBrowserMain_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        #region ===Event Browser====
+        private void WebBrowserOne_DocumentCompleted(XtraTabPage tabPage, WebBrowser webBrowser, object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             try
             {
-                xtraTabControlMain.SelectedTabPage.Text = webBrowserMain.DocumentTitle;
-
+                tabPage.Text = webBrowser.DocumentTitle;
                 //Tự động đăng nhập
                 if (UserConfig.getUAutoLogin())
                 {
-                    if (webBrowserMain.Document.GetElementById("pwbox-697") != null)
+                    if (webBrowser.Document.GetElementById("pwbox-697") != null)
                     {
-                        webBrowserMain.Document.GetElementById("pwbox-697").InnerText = UserConfig.getUPassword();
-                        HtmlElementCollection links = webBrowserMain.Document.GetElementsByTagName("input");
+                        webBrowser.Document.GetElementById("pwbox-697").InnerText = UserConfig.getUPassword();
+                        HtmlElementCollection links = webBrowser.Document.GetElementsByTagName("input");
 
                         foreach (HtmlElement link in links)
                         {
@@ -89,19 +125,73 @@ namespace DXAutoFillData.UControls
                         }
                     }
                 }
-                webBrowserMain.Document.Window.ScrollTo(0, 500);
-
-                fillData();
-                if (isSubmit)
+                if (webBrowser.Url.AbsoluteUri.Equals(UserConfig.getUTargetUrl()))
                 {
-                    isSubmit = false;
-                    isClick = false;
-                    sendCount(count);
-                    webBrowserMain.Document.Window.Navigate(UserConfig.getUTargetUrl());
-                }
-                Console.WriteLine("WebBrowserReadyState.Interactive");
+                    webBrowser.Document.Window.ScrollTo(0, 500);
 
-                webBrowserMain.Document.Body.MouseDown += Body_MouseDown;
+                    //Tự đông nhập dữ liệu
+                    if (UserConfig.getSAutoEnterData())
+                    {
+                        switch (tabPage.Name)
+                        {
+                            case "xtraTabPageOne":
+                                fillData(webBrowser, _lsData[indexOne]);
+                                break;
+                            case "xtraTabPageTwo":
+                                fillData(webBrowser, _lsData[indexTwo]);
+                                break;
+                            case "xtraTabPageThree":
+                                fillData(webBrowser, _lsData[indexThree]);
+                                break;
+                            case "xtraTabPageFour":
+                                fillData(webBrowser, _lsData[indexFour]);
+                                break;
+                            case "xtraTabPageFive":
+                                fillData(webBrowser, _lsData[indexFive]);
+                                break;
+                            case "xtraTabPageSix":
+                                fillData(webBrowser, _lsData[indexSix]);
+                                break;
+                        }
+                       
+                        if (webBrowser.ReadyState == WebBrowserReadyState.Interactive)
+                        {
+                            if (isSubmit)
+                            {
+                                isSubmit = false;
+                                isClick = false;
+                                switch (tabPage.Name)
+                                {
+                                    case "xtraTabPageOne":
+                                        indexOne++;
+                                        break;
+                                    case "xtraTabPageTwo":
+                                        indexTwo++;
+                                        break;
+                                    case "xtraTabPageThree":
+                                        indexThree++;
+                                        break;
+                                    case "xtraTabPageFour":
+                                        indexFour++;
+                                        break;
+                                    case "xtraTabPageFive":
+                                        indexFive++;
+                                        break;
+                                    case "xtraTabPageSix":
+                                        indexSix++;
+                                        break;
+                                }
+                                sendCount(count);
+                                webBrowser.Navigate(UserConfig.getUTargetUrl());
+                            }
+                            webBrowser.Document.Body.MouseDown += (sender2, e2) => Body_MouseDown(webBrowser, sender2, e2);
+                            Console.WriteLine("WebBrowserReadyState.Interactive");
+                        }
+
+                    }
+                }
+                else
+                    webBrowser.Navigate(UserConfig.getUTargetUrl());
             }
             catch (Exception ex)
             {
@@ -110,13 +200,12 @@ namespace DXAutoFillData.UControls
             }
 
         }
-
-        private void Body_MouseDown(object sender, HtmlElementEventArgs e)
+        private void Body_MouseDown(WebBrowser webBrowser, object sender, HtmlElementEventArgs e)
         {
             switch (e.MouseButtonsPressed)
             {
                 case MouseButtons.Left:
-                    HtmlElement element = this.webBrowserMain.Document.GetElementFromPoint(e.ClientMousePosition);
+                    HtmlElement element = webBrowser.Document.GetElementFromPoint(e.ClientMousePosition);
                     if (element != null && "submit".Equals(element.GetAttribute("type"), StringComparison.OrdinalIgnoreCase))
                     {
                         isClick = true;
@@ -126,13 +215,15 @@ namespace DXAutoFillData.UControls
                     }
                     break;
             }
-        }
 
-        private void fillData()
+        }
+        #endregion
+
+        private void fillData(WebBrowser webBrowser, Dictionary<string, object> data)
         {
-            HtmlElementCollection elementsInput = webBrowserMain.Document.GetElementsByTagName("input");
-            HtmlElementCollection elementsSelect = webBrowserMain.Document.GetElementsByTagName("select");
-            HtmlElementCollection elementsButton = webBrowserMain.Document.GetElementsByTagName("button");
+            HtmlElementCollection elementsInput = webBrowser.Document.GetElementsByTagName("input");
+            HtmlElementCollection elementsSelect = webBrowser.Document.GetElementsByTagName("select");
+            HtmlElementCollection elementsButton = webBrowser.Document.GetElementsByTagName("button");
             // We have to use this form because of the lambda expression that is used to pass
             // in the element instance to the handler. This is the only way to actually get
             // the element instance, as the instance is not passed in if we just provide the
@@ -164,34 +255,37 @@ namespace DXAutoFillData.UControls
                 elementsInput[20].Id = "txtAddressRef";
 
 
-                webBrowserMain.Document.GetElementById("txtFullName").InnerText = "Nguyễn Văn A";
-                webBrowserMain.Document.GetElementById("txtStreet").InnerText = "Lý Thông";
-                webBrowserMain.Document.GetElementById("txtWard").InnerText = "Binh Thuan";
-                webBrowserMain.Document.GetElementById("txtDistrict").InnerText = "Quận 7";
-                webBrowserMain.Document.GetElementById("txtCurrAddress").InnerText = "Quảng sơn ninh sơn ninh thuận";
-                webBrowserMain.Document.GetElementById("txtCMND").InnerText = "192848596";
-                webBrowserMain.Document.GetElementById("txtIssuedBy").InnerText = "Ninh Thuan";
-                webBrowserMain.Document.GetElementById("datepicker1").InnerText = "29-09-2017";
-                webBrowserMain.Document.GetElementById("datepicker2").SetAttribute("value", "30-09-2017");
-                webBrowserMain.Document.GetElementById("txtEmail").SetAttribute("value", "lchoang1995@gmail.com");
-                webBrowserMain.Document.GetElementById("txtPhone").SetAttribute("value", "648596585");
-                webBrowserMain.Document.GetElementById("txtNgoaiNgu").SetAttribute("value", "Tiếng Việt, Tiếng Anh");
-                webBrowserMain.Document.GetElementById("txtTruongDaiHoc").SetAttribute("value", "Sư phạm kỹ thuật");
-                webBrowserMain.Document.GetElementById("txtSoNam").SetAttribute("value", "5");
-                webBrowserMain.Document.GetElementById("txtMaSoVanBang").SetAttribute("value", "KI8548");
-                webBrowserMain.Document.GetElementById("txtNamTotNghiep").SetAttribute("value", "2017");
-                webBrowserMain.Document.GetElementById("txtFullNameRef").SetAttribute("value", "Cao Thi A");
-                webBrowserMain.Document.GetElementById("txtPhoneRef").SetAttribute("value", "0122684895");
-                webBrowserMain.Document.GetElementById("txtAddressRef").SetAttribute("value", "Camboia hoekalsdf");
+                webBrowser.Document.GetElementById("txtFullName").InnerText = data["FullName"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtStreet").InnerText = data["Street"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtWard").InnerText = data["Ward"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtDistrict").InnerText = data["District"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtCurrAddress").InnerText = data["CurrentAddress"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtCMND").InnerText = data["Passport"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtIssuedBy").InnerText = data["IssuedBy"].ToString().Trim();
 
-                webBrowserMain.Document.GetElementById("txtChuaTotNghiep").SetAttribute("checked", "");
-                webBrowserMain.Document.GetElementById("txtDaTotNghiep").SetAttribute("checked", "1");
+                webBrowser.Document.GetElementById("datepicker1").InnerText = data["DateRange"].ToString().Trim();
+                webBrowser.Document.GetElementById("datepicker2").SetAttribute("value", data["DateExpired"].ToString().Trim());
+
+                webBrowser.Document.GetElementById("txtEmail").SetAttribute("value", data["Email"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtPhone").SetAttribute("value", data["Phone"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtNgoaiNgu").SetAttribute("value", data["Languges"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtTruongDaiHoc").SetAttribute("value", data["University"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtSoNam").SetAttribute("value", data["NYear"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtMaSoVanBang").SetAttribute("value", data["NumOfDip"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtNamTotNghiep").SetAttribute("value", data["GradYear"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtFullNameRef").SetAttribute("value", data["FullNameRef"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtPhoneRef").SetAttribute("value", data["PhoneRef"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtAddressRef").SetAttribute("value", data["AddressRef"].ToString().Trim());
+
+                string check = data["Status"].ToString().Trim() == "CTN" ? "1" : "0";
+                webBrowser.Document.GetElementById("txtChuaTotNghiep").SetAttribute("checked", check);
+                webBrowser.Document.GetElementById("txtDaTotNghiep").SetAttribute("checked", check);
             }
             #endregion
 
             #region ===== Tag Select
             if (elementsSelect.Count > 0 && elementsSelect != null)
-            {
+            {                           
                 elementsSelect[0].Id = "txtDay";
                 elementsSelect[1].Id = "txtMonth";
                 elementsSelect[2].Id = "txtYear";
@@ -202,25 +296,89 @@ namespace DXAutoFillData.UControls
                 elementsSelect[7].Id = "txtToYear";
                 elementsSelect[8].Id = "txtChinhQui";
 
-                webBrowserMain.Document.GetElementById("txtDay").SetAttribute("value", "15");
-                webBrowserMain.Document.GetElementById("txtMonth").SetAttribute("value", "10");
-                webBrowserMain.Document.GetElementById("txtYear").SetAttribute("value", "2000");
-                webBrowserMain.Document.GetElementById("txtGender").SetAttribute("value", "Nam");//Nữ
-                webBrowserMain.Document.GetElementById("txtMarriage").SetAttribute("value", "Độc thân");//Đã kết hôn, Đã ly hôn
-                                                                                                        //Tỉnh thành
-                                                                                                        //webBrowserMain.Document.GetElementById("slPref_cd").SetAttribute("value", "44");
-                var xElementCollection = webBrowserMain.Document.GetElementById("slPref_cd").GetElementsByTagName("option");
-                foreach (HtmlElement el in xElementCollection)
+                var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
+                var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+
+                webBrowser.Document.GetElementById("txtDay").SetAttribute("value", day);
+                webBrowser.Document.GetElementById("txtMonth").SetAttribute("value", DateB[1].ToString());
+                webBrowser.Document.GetElementById("txtYear").SetAttribute("value", DateB[2].ToString());
+
+                var xGender = webBrowser.Document.GetElementById("txtGender").GetElementsByTagName("option");
+                foreach (HtmlElement el in xGender)
                 {
-                    if (el.InnerText.Contains("Ninh Thuận"))
+                    if (!el.InnerText.StartsWith("-"))
                     {
-                        el.SetAttribute("selected", "selected");
-                        //el.InvokeMember("click");
+                        var x1 = el.InnerText.Equals("Nam");
+                        var x2 = data["Gender"].ToString().Trim().Equals("Nam");
+                        if (x1 == x2)
+                        {
+                            el.SetAttribute("selected", "selected");
+                            break;
+                        }
                     }
                 }
-                webBrowserMain.Document.GetElementById("txtFromYear").SetAttribute("value", "2015");
-                webBrowserMain.Document.GetElementById("txtToYear").SetAttribute("value", "2017");
-                webBrowserMain.Document.GetElementById("txtChinhQui").SetAttribute("value", "Có");//Không
+                var xMarriage = webBrowser.Document.GetElementById("txtMarriage").GetElementsByTagName("option");
+                foreach (HtmlElement el in xMarriage)
+                {
+                    if (!el.InnerText.StartsWith("-"))
+                    {
+                        var x1 = el.InnerText.Trim().ToLower().Split(' ');
+                        var x2 = data["Marriage"].ToString().Trim().ToLower().Split(' ');
+                        if (x1[1].Equals(x2[1]))
+                        {
+                            el.SetAttribute("selected", "selected");
+                            break;
+                        }
+                        else if (x1[1].StartsWith("k") && x2[1].StartsWith("k"))
+                        {
+                            el.SetAttribute("selected", "selected");
+                            break;
+                        }
+                    }
+                }
+                
+                var xElementCollection = webBrowser.Document.GetElementById("slPref_cd").GetElementsByTagName("option");
+                foreach (HtmlElement el in xElementCollection)
+                {
+                    var x1 = el.InnerText.Trim().ToUpper();
+                    var x2 = data["Province"].ToString().Trim().ToUpper();
+                    if (x1.Contains(x2))
+                    {
+                        el.SetAttribute("selected", "selected");
+                        break;
+                    }
+                }
+                
+                webBrowser.Document.GetElementById("txtFromYear").SetAttribute("value", data["FromYear"].ToString().Trim());
+
+                var xToYear = webBrowser.Document.GetElementById("txtToYear").GetElementsByTagName("option");
+                foreach (HtmlElement el in xToYear)
+                {
+                    if (el.InnerText != null)
+                    {
+                        var x1 = int.Parse(el.InnerText.Trim());
+                        var x2 = int.Parse(data["ToYear"].ToString().Trim());
+                        if (x1 == x2)
+                        {
+                            el.SetAttribute("selected", "selected");
+                            break;
+                        }
+                    }
+                }
+                var xChinhQui = webBrowser.Document.GetElementById("txtChinhQui").GetElementsByTagName("option");
+                foreach (HtmlElement el in xChinhQui)
+                {
+                    if (el.InnerText != null)
+                    {
+                        var x1 = el.InnerText.Remove(1, el.InnerText.Length-1).Equals("C");
+                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
+                        if (x1 == x2)
+                        {
+                            el.SetAttribute("selected", "selected");
+                            break;
+                        }
+                    }
+                }
             }
             #endregion
 
@@ -247,14 +405,14 @@ namespace DXAutoFillData.UControls
             #endregion
         }
 
-        private void SubmitForm(String formName)
+        private void SubmitForm(WebBrowser webBrowser, String formName)
         {
             HtmlElementCollection elems = null;
             HtmlElement elem = null;
 
-            if (webBrowserMain.Document != null)
+            if (webBrowser.Document != null)
             {
-                HtmlDocument doc = webBrowserMain.Document;
+                HtmlDocument doc = webBrowser.Document;
                 elems = doc.All.GetElementsByName(formName);
                 if (elems != null && elems.Count > 0)
                 {
