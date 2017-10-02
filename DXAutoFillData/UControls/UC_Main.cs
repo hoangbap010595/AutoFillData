@@ -17,6 +17,8 @@ namespace DXAutoFillData.UControls
     {
         private System.Windows.Forms.Timer _timer;
         private int timeRight = 0;
+        private List<Dictionary<string, object>> lsData;
+        private List<List<Dictionary<string, object>>> lsAllData;
         public UC_Main()
         {
             InitializeComponent();
@@ -94,7 +96,15 @@ namespace DXAutoFillData.UControls
                 op.Filter = "Excel .xlsx|*.xlsx|Excel .xls|*.xls";
                 if (DialogResult.OK == op.ShowDialog())
                 {
+                    btnStart.Enabled = false;
                     txtFilePath.Text = op.FileName.Trim();
+                    Thread t = new Thread(new ThreadStart(()=> {
+                        lsData = OpenFileExcel.getDataExcelFromFileToList(op.FileName.Trim());
+                        lsData.RemoveAt(0);
+                        lsAllData = loadDataToList(lsData);
+                        btnStart.Invoke((MethodInvoker)delegate { btnStart.Enabled = true; });
+                    }));
+                    t.Start();
                 }
             }
             catch (Exception ex)
@@ -102,7 +112,63 @@ namespace DXAutoFillData.UControls
                 XtraMessageBox.Show("" + ex.Message, "Lỗi");
             }
         }
+        private List<List<Dictionary<string, object>>> loadDataToList(List<Dictionary<string, object>> ls)
+        {
+            List<List<Dictionary<string, object>>> allData = new List<List<Dictionary<string, object>>>();
+            List<Dictionary<string, object>> _lsDataOne = new List<Dictionary<string, object>>();
+            List<Dictionary<string, object>> _lsDataTwo = new List<Dictionary<string, object>>();
+            List<Dictionary<string, object>> _lsDataThree = new List<Dictionary<string, object>>();
+            List<Dictionary<string, object>> _lsDataFour = new List<Dictionary<string, object>>();
+            List<Dictionary<string, object>> _lsDataFive = new List<Dictionary<string, object>>();
+            List<Dictionary<string, object>> _lsDataSix = new List<Dictionary<string, object>>();
 
+            int total = ls.Count;
+            int num = total / 6;
+            int index = 0;
+            if (num == 0)
+            {
+                for (; index < ls.Count; index++)
+                {
+                    _lsDataOne.Add(ls[index]);
+                    index++;
+                }
+            }
+            else
+            {
+                for (; index < num; index++)
+                {
+                    _lsDataOne.Add(ls[index]);
+                }
+                for (; index < num * 2; index++)
+                {
+                    _lsDataTwo.Add(ls[index]);
+                }
+                for (; index < num * 3; index++)
+                {
+                    _lsDataThree.Add(ls[index]);
+                }
+                for (; index < num * 4; index++)
+                {
+                    _lsDataFour.Add(ls[index]);
+                }
+                for (; index < num * 5; index++)
+                {
+                    _lsDataFive.Add(ls[index]);
+                }
+                for (; index < ls.Count; index++)
+                {
+                    _lsDataSix.Add(ls[index]);
+                }
+            }
+            allData.Add(_lsDataOne);
+            allData.Add(_lsDataTwo);
+            allData.Add(_lsDataThree);
+            allData.Add(_lsDataFour);
+            allData.Add(_lsDataFive);
+            allData.Add(_lsDataSix);
+            return allData;
+
+        }
         private void btnViewData_Click(object sender, EventArgs e)
         {
             try
@@ -156,6 +222,14 @@ namespace DXAutoFillData.UControls
         private void setCountSubmit(int count)
         {
             lblSubmitSuccess.Text = count.ToString();
+            if (count == lsData.Count() && UserConfig.getSAutoCloseForm())
+            {
+                Form f = Application.OpenForms["frmShowWindow"];
+                if (f != null)
+                    f.Close();
+                XtraMessageBox.Show("Đã xử lý thành công: " + count + "/" + lsData.Count + " lần", "Thông báo");
+                _timer.Enabled = false;
+            }
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -169,9 +243,7 @@ namespace DXAutoFillData.UControls
                     _timer.Enabled = true;
                     btnStart.Enabled = false;
                     btnStop.Enabled = true;
-                    List<Dictionary<string,object>> lsData = OpenFileExcel.getDataExcelFromFileToList(txtFilePath.Text);
-                    lsData.RemoveAt(0);
-                    UC_WebBrowser uc = new UC_WebBrowser(lsData);
+                    UC_WebBrowser uc = new UC_WebBrowser(lsAllData);
                     uc.sendCount = new UC_WebBrowser.sendCountSubmit(setCountSubmit);
                     frmShowWindow frm = new frmShowWindow();
                     frm.Controls.Clear();
