@@ -224,11 +224,11 @@ namespace DXAutoFillData.UControls
             lblSubmitSuccess.Text = count.ToString();
             if (count == lsData.Count() && UserConfig.getSAutoCloseForm())
             {
+                _timer.Enabled = false;
                 Form f = Application.OpenForms["frmShowWindow"];
                 if (f != null)
                     f.Close();
                 XtraMessageBox.Show("Đã xử lý thành công: " + count + "/" + lsData.Count + " lần", "Thông báo");
-                _timer.Enabled = false;
             }
         }
 

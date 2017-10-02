@@ -312,6 +312,7 @@ namespace DXAutoFillData.UControls
             });
 
         }
+
         #region ===Event Browser====
         private void WebBrowserOne_DocumentCompleted(XtraTabPage tabPage, WebBrowser webBrowser, object sender, WebBrowserDocumentCompletedEventArgs e)
         {
@@ -342,41 +343,23 @@ namespace DXAutoFillData.UControls
                     //Tự đông nhập dữ liệu
                     if (UserConfig.getSAutoEnterData())
                     {
-                        switch (tabPage.Name)
+                        if (webBrowser.ReadyState == WebBrowserReadyState.Interactive)
                         {
-                            case "xtraTabPageOne":
-                                if (indexOne < _lsDataOne.Count)
-                                    fillData(webBrowser, xtraTabPageOne, _lsDataOne[indexOne]);
-                                break;
-                            case "xtraTabPageTwo":
-                                if (indexTwo < _lsDataTwo.Count)
-                                    fillData(webBrowser, xtraTabPageTwo, _lsDataTwo[indexTwo]);
-                                break;
-                            case "xtraTabPageThree":
-                                if (indexThree < _lsDataThree.Count)
-                                    fillData(webBrowser, xtraTabPageThree, _lsDataThree[indexThree]);
-                                break;
-                            case "xtraTabPageFour":
-                                if (indexFour < _lsDataFour.Count)
-                                    fillData(webBrowser, xtraTabPageFour, _lsDataFour[indexFour]);
-                                break;
-                            case "xtraTabPageFive":
-                                if (indexFive < _lsDataFive.Count)
-                                    fillData(webBrowser, xtraTabPageFive, _lsDataFive[indexFive]);
-                                break;
-                            case "xtraTabPageSix":
-                                if (indexSix < _lsDataSix.Count)
-                                    fillData(webBrowser, xtraTabPageSix, _lsDataSix[indexSix]);
-                                break;
-                        }
-
-                        if (webBrowser.ReadyState == WebBrowserReadyState.Interactive && isSubmit)
-                        {
-                            isSubmit = false;
-                            isClick = false;
-                            sendCount(count);
-                            webBrowser.Navigate(UserConfig.getUTargetUrl());
-                            Console.WriteLine("[One]WebBrowserReadyState.Interactive");
+                            if (indexOne < _lsDataOne.Count)
+                                fillData(webBrowser, xtraTabPageOne, _lsDataOne[indexOne]);
+                            else
+                                return;
+                            if (isSubmit)
+                            {
+                                indexOne++;
+                                isSubmit = false;
+                                isClick = false;
+                                sendCount(count);
+                                webBrowser.Navigate(UserConfig.getUTargetUrl());
+                                Console.WriteLine("[One]ID: " + _lsDataOne[indexOne]["No"].ToString());
+                            }
+                            Console.WriteLine("[One]indexOne: " + indexOne);
+                            Console.WriteLine("[One]WebBrowserOne.Interactive");
                         }
                         webBrowser.Document.Body.MouseDown += (sender2, e2) => Body_MouseDown(webBrowser, sender2, e2);
                     }
@@ -439,14 +422,23 @@ namespace DXAutoFillData.UControls
                     //Tự đông nhập dữ liệu
                     if (UserConfig.getSAutoEnterData())
                     {
-                        if (indexTwo < _lsDataTwo.Count)
-                            fillDataTwo(webBrowserTwo, _lsDataTwo[indexTwo]);
-                        if (webBrowserTwo.ReadyState == WebBrowserReadyState.Interactive && isSubmit)
+                        
+                        if (webBrowserTwo.ReadyState == WebBrowserReadyState.Interactive)
                         {
-                            isSubmit = false;
-                            isClick = false;
-                            sendCount(count);
-                            webBrowserTwo.Navigate(UserConfig.getUTargetUrl());
+                            if (indexTwo < _lsDataTwo.Count)
+                                fillDataAll(webBrowserTwo, _lsDataTwo[indexTwo]);
+                            else
+                                return;
+                            if (isSubmit)
+                            {
+                                indexTwo++;
+                                isSubmit = false;
+                                isClick = false;
+                                sendCount(count);
+                                webBrowserTwo.Navigate(UserConfig.getUTargetUrl());
+                                Console.WriteLine("[Two]ID: " + _lsDataTwo[indexTwo]["No"].ToString());   
+                            }
+                            Console.WriteLine("[Two]IndexTwo: " + indexTwo);
                             Console.WriteLine("[Two]WebBrowserReadyState.Interactive");
                         }
                         webBrowserTwo.Document.Body.MouseDown += (sender2, e2) => BodyTwo_MouseDown(sender2, e2);
@@ -511,14 +503,23 @@ namespace DXAutoFillData.UControls
                     //Tự đông nhập dữ liệu
                     if (UserConfig.getSAutoEnterData())
                     {
-                        if(indexThree < _lsDataThree.Count)
-                            fillDataThree(webBrowserThree, _lsDataThree[indexThree]);
-                        if (webBrowserThree.ReadyState == WebBrowserReadyState.Interactive && isSubmit)
+                       
+                        if (webBrowserThree.ReadyState == WebBrowserReadyState.Interactive)
                         {
-                            isSubmit = false;
-                            isClick = false;
-                            sendCount(count);
-                            webBrowserThree.Navigate(UserConfig.getUTargetUrl());
+                            if (indexThree < _lsDataThree.Count)
+                                fillDataAll(webBrowserThree, _lsDataThree[indexThree]);
+                            else
+                                return;
+                            if (isSubmit)
+                            {
+                                indexThree++;
+                                isSubmit = false;
+                                isClick = false;
+                                sendCount(count);
+                                webBrowserThree.Navigate(UserConfig.getUTargetUrl());
+                                Console.WriteLine("[Three]ID: " + _lsDataThree[indexThree]["No"].ToString());
+                            }
+                            Console.WriteLine("[Three]indexThree: " + indexThree);
                             Console.WriteLine("[Three]WebBrowserReadyState.Interactive");
                         }
                         webBrowserThree.Document.Body.MouseDown += (sender2, e2) => BodyThree_MouseDown(sender2, e2);
@@ -583,14 +584,23 @@ namespace DXAutoFillData.UControls
                     //Tự đông nhập dữ liệu
                     if (UserConfig.getSAutoEnterData())
                     {
-                        if (indexFour < _lsDataFour.Count)
-                            fillDataFour(webBrowserFour, _lsDataFour[indexFour]);
-                        if (webBrowserFour.ReadyState == WebBrowserReadyState.Interactive && isSubmit)
+                        
+                        if (webBrowserFour.ReadyState == WebBrowserReadyState.Interactive)
                         {
-                            isSubmit = false;
-                            isClick = false;
-                            sendCount(count);
-                            webBrowserFour.Navigate(UserConfig.getUTargetUrl());
+                            if (indexFour < _lsDataFour.Count)
+                                fillDataAll(webBrowserFour, _lsDataFour[indexFour]);
+                            else
+                                return;
+                            if (isSubmit)
+                            {
+                                indexFour++;
+                                isSubmit = false;
+                                isClick = false;
+                                sendCount(count);
+                                webBrowserFour.Navigate(UserConfig.getUTargetUrl());
+                                Console.WriteLine("[Four]ID: " + _lsDataFour[indexFour]["No"].ToString());
+                            }
+                            Console.WriteLine("[Four]indexFour: " + indexFour);
                             Console.WriteLine("[Four]WebBrowserReadyState.Interactive");
                         }
                         webBrowserFour.Document.Body.MouseDown += (sender2, e2) => BodyFour_MouseDown(sender2, e2);
@@ -654,14 +664,23 @@ namespace DXAutoFillData.UControls
                     //Tự đông nhập dữ liệu
                     if (UserConfig.getSAutoEnterData())
                     {
-                        if (indexFive < _lsDataFive.Count)
-                            fillDataFive(webBrowserFive, _lsDataFive[indexFive]);
-                        if (webBrowserFive.ReadyState == WebBrowserReadyState.Interactive && isSubmit)
+                       
+                        if (webBrowserFive.ReadyState == WebBrowserReadyState.Interactive)
                         {
-                            isSubmit = false;
-                            isClick = false;
-                            sendCount(count);
-                            webBrowserFive.Navigate(UserConfig.getUTargetUrl());
+                            if (indexFive < _lsDataFive.Count)
+                                fillDataAll(webBrowserFive, _lsDataFive[indexFive]);
+                            else
+                                return;
+                            if (isSubmit)
+                            {
+                                indexFive++;
+                                isSubmit = false;
+                                isClick = false;
+                                sendCount(count);
+                                webBrowserFive.Navigate(UserConfig.getUTargetUrl());
+                                Console.WriteLine("[Five]ID: " + _lsDataFive[indexFive]["No"].ToString());
+                            }
+                            Console.WriteLine("[Five]indexFive: " + indexFive);
                             Console.WriteLine("[Five]WebBrowserReadyState.Interactive");
                         }
                         webBrowserFive.Document.Body.MouseDown += (sender2, e2) => BodyFive_MouseDown(sender2, e2);
@@ -726,14 +745,23 @@ namespace DXAutoFillData.UControls
                     //Tự đông nhập dữ liệu
                     if (UserConfig.getSAutoEnterData())
                     {
-                        if (indexSix < _lsDataSix.Count)
-                            fillDataSix(webBrowserSix, _lsDataSix[indexSix]);
-                        if (webBrowserSix.ReadyState == WebBrowserReadyState.Interactive && isSubmit)
+                       
+                        if (webBrowserSix.ReadyState == WebBrowserReadyState.Interactive)
                         {
-                            isSubmit = false;
-                            isClick = false;
-                            sendCount(count);
-                            webBrowserSix.Navigate(UserConfig.getUTargetUrl());
+                            if (indexSix < _lsDataSix.Count)
+                                fillDataAll(webBrowserSix, _lsDataSix[indexSix]);
+                            else
+                                return;
+                            if (isSubmit)
+                            {
+                                indexSix++;
+                                isSubmit = false;
+                                isClick = false;
+                                sendCount(count);
+                                webBrowserSix.Navigate(UserConfig.getUTargetUrl());
+                                Console.WriteLine("[Six]ID: " + _lsDataSix[indexSix]["No"].ToString());
+                            }
+                            Console.WriteLine("[Six]indexSix: " + indexSix);
                             Console.WriteLine("[Six]WebBrowserReadyState.Interactive");
                         }
                         webBrowserSix.Document.Body.MouseDown += (sender2, e2) => BodySix_MouseDown(sender2, e2);
@@ -767,9 +795,9 @@ namespace DXAutoFillData.UControls
             }
 
         }
-
         #endregion
 
+        #region ===Fill Data====
         private void fillData(WebBrowser webBrowser, XtraTabPage tabPage, Dictionary<string, object> data)
         {
             HtmlElementCollection elementsInput = webBrowser.Document.GetElementsByTagName("input");
@@ -945,27 +973,6 @@ namespace DXAutoFillData.UControls
                         {
                             if (!isClick && !isSubmit)
                             {
-                                switch (tabPage.Name)
-                                {
-                                    case "xtraTabPageOne":
-                                        indexOne++;
-                                        break;
-                                    case "xtraTabPageTwo":
-                                        indexTwo++;
-                                        break;
-                                    case "xtraTabPageThree":
-                                        indexThree++;
-                                        break;
-                                    case "xtraTabPageFour":
-                                        indexFour++;
-                                        break;
-                                    case "xtraTabPageFive":
-                                        indexFive++;
-                                        break;
-                                    case "xtraTabPageSix":
-                                        indexSix++;
-                                        break;
-                                }
                                 isClick = true;
                                 isSubmit = true;
                                 item.InvokeMember("Click");
@@ -973,6 +980,195 @@ namespace DXAutoFillData.UControls
                                 break;
                             }
                             //Console.WriteLine(item.InnerText);
+                        }
+                    }
+            }
+            #endregion
+        }
+
+        private void fillDataAll(WebBrowser webBrowser, Dictionary<string, object> data)
+        {
+            HtmlElementCollection elementsInput = webBrowser.Document.GetElementsByTagName("input");
+            HtmlElementCollection elementsSelect = webBrowser.Document.GetElementsByTagName("select");
+            HtmlElementCollection elementsButton = webBrowser.Document.GetElementsByTagName("button");
+            // We have to use this form because of the lambda expression that is used to pass
+            // in the element instance to the handler. This is the only way to actually get
+            // the element instance, as the instance is not passed in if we just provide the
+            // event sink method name.
+            #region ===== Tag Input
+            if (elementsInput.Count > 0 && elementsInput != null)
+            {
+                elementsInput[0].Id = "txtFullName";
+                elementsInput[1].Id = "txtStreet";
+                elementsInput[2].Id = "txtWard";
+                elementsInput[3].Id = "txtDistrict";
+                elementsInput[4].Id = "txtCurrAddress";
+                elementsInput[5].Id = "txtCMND";
+                elementsInput[6].Id = "txtIssuedBy";
+
+                elementsInput[9].Id = "txtEmail";
+                elementsInput[10].Id = "txtPhone";
+                elementsInput[11].Id = "txtNgoaiNgu";
+
+                elementsInput[12].Id = "txtChuaTotNghiep";
+                elementsInput[13].Id = "txtDaTotNghiep";
+
+                elementsInput[14].Id = "txtTruongDaiHoc";
+                elementsInput[15].Id = "txtSoNam";
+                elementsInput[16].Id = "txtMaSoVanBang";
+                elementsInput[17].Id = "txtNamTotNghiep";
+                elementsInput[18].Id = "txtFullNameRef";
+                elementsInput[19].Id = "txtPhoneRef";
+                elementsInput[20].Id = "txtAddressRef";
+
+
+                webBrowser.Document.GetElementById("txtFullName").InnerText = data["FullName"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtStreet").InnerText = data["Street"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtWard").InnerText = data["Ward"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtDistrict").InnerText = data["District"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtCurrAddress").InnerText = data["CurrentAddress"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtCMND").InnerText = data["Passport"].ToString().Trim();
+                webBrowser.Document.GetElementById("txtIssuedBy").InnerText = data["IssuedBy"].ToString().Trim();
+
+                webBrowser.Document.GetElementById("datepicker1").InnerText = data["DateRange"].ToString().Trim();
+                webBrowser.Document.GetElementById("datepicker2").SetAttribute("value", data["DateExpired"].ToString().Trim());
+
+                webBrowser.Document.GetElementById("txtEmail").SetAttribute("value", data["Email"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtPhone").SetAttribute("value", data["Phone"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtNgoaiNgu").SetAttribute("value", data["Languges"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtTruongDaiHoc").SetAttribute("value", data["University"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtSoNam").SetAttribute("value", data["NYear"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtMaSoVanBang").SetAttribute("value", data["NumOfDip"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtNamTotNghiep").SetAttribute("value", data["GradYear"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtFullNameRef").SetAttribute("value", data["FullNameRef"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtPhoneRef").SetAttribute("value", data["PhoneRef"].ToString().Trim());
+                webBrowser.Document.GetElementById("txtAddressRef").SetAttribute("value", data["AddressRef"].ToString().Trim());
+
+                bool check = data["Status"].ToString().Trim() == "CTN" ? true : false;
+                if (check)
+                    webBrowser.Document.GetElementById("txtChuaTotNghiep").SetAttribute("checked", "1");
+                else
+                    webBrowser.Document.GetElementById("txtDaTotNghiep").SetAttribute("checked", "1");
+            }
+            #endregion
+
+            #region ===== Tag Select
+            if (elementsSelect.Count > 0 && elementsSelect != null)
+            {
+                elementsSelect[0].Id = "txtDay";
+                elementsSelect[1].Id = "txtMonth";
+                elementsSelect[2].Id = "txtYear";
+                elementsSelect[3].Id = "txtGender";
+                elementsSelect[4].Id = "txtMarriage";
+
+                elementsSelect[6].Id = "txtFromYear";
+                elementsSelect[7].Id = "txtToYear";
+                elementsSelect[8].Id = "txtChinhQui";
+
+                var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
+                var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+
+                webBrowser.Document.GetElementById("txtDay").SetAttribute("value", day);
+                webBrowser.Document.GetElementById("txtMonth").SetAttribute("value", DateB[1].ToString());
+                webBrowser.Document.GetElementById("txtYear").SetAttribute("value", DateB[2].ToString());
+
+                var xGender = webBrowser.Document.GetElementById("txtGender").GetElementsByTagName("option");
+                foreach (HtmlElement el in xGender)
+                {
+                    if (!el.InnerText.StartsWith("-"))
+                    {
+                        var x1 = el.InnerText.Equals("Nam");
+                        var x2 = data["Gender"].ToString().Trim().Equals("Nam");
+                        if (x1 == x2)
+                        {
+                            el.SetAttribute("selected", "selected");
+                            break;
+                        }
+                    }
+                }
+                var xMarriage = webBrowser.Document.GetElementById("txtMarriage").GetElementsByTagName("option");
+                foreach (HtmlElement el in xMarriage)
+                {
+                    if (!el.InnerText.StartsWith("-"))
+                    {
+                        var x1 = el.InnerText.Trim().ToLower().Split(' ');
+                        var x2 = data["Marriage"].ToString().Trim().ToLower().Split(' ');
+                        if (x1[1].Equals(x2[1]))
+                        {
+                            el.SetAttribute("selected", "selected");
+                            break;
+                        }
+                        else if (x1[1].StartsWith("k") && x2[1].StartsWith("k"))
+                        {
+                            el.SetAttribute("selected", "selected");
+                            break;
+                        }
+                    }
+                }
+
+                var xElementCollection = webBrowser.Document.GetElementById("slPref_cd").GetElementsByTagName("option");
+                foreach (HtmlElement el in xElementCollection)
+                {
+                    var x1 = el.InnerText.Trim().ToUpper();
+                    var x2 = data["Province"].ToString().Trim().ToUpper();
+                    if (x1.Contains(x2))
+                    {
+                        el.SetAttribute("selected", "selected");
+                        break;
+                    }
+                }
+
+                webBrowser.Document.GetElementById("txtFromYear").SetAttribute("value", data["FromYear"].ToString().Trim());
+
+                var xToYear = webBrowser.Document.GetElementById("txtToYear").GetElementsByTagName("option");
+                foreach (HtmlElement el in xToYear)
+                {
+                    if (el.InnerText != null)
+                    {
+                        var x1 = int.Parse(el.InnerText.Trim());
+                        var x2 = int.Parse(data["ToYear"].ToString().Trim());
+                        if (x1 == x2)
+                        {
+                            el.SetAttribute("selected", "selected");
+                            break;
+                        }
+                    }
+                }
+                var xChinhQui = webBrowser.Document.GetElementById("txtChinhQui").GetElementsByTagName("option");
+                foreach (HtmlElement el in xChinhQui)
+                {
+                    if (el.InnerText != null)
+                    {
+                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
+                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
+                        if (x1 == x2)
+                        {
+                            el.SetAttribute("selected", "selected");
+                            break;
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            #region===== Tag Button
+            if (UserConfig.getSAutoSubmit())
+            {
+                if (elementsButton.Count > 0 && elementsButton != null)
+                    foreach (HtmlElement item in elementsButton)
+                    {
+                        if (item.GetAttribute("type") == "submit")
+                        {
+                            if (!isClick && !isSubmit)
+                            {
+                                isClick = true;
+                                isSubmit = true;
+                                count++;
+                                Console.WriteLine("[Submit] Clicked NAME : " + webBrowser.Document.GetElementById("txtFullName").InnerText);
+                                Console.WriteLine("[Submit] Clicked : " + count);
+                                item.InvokeMember("Click");
+                                break;
+                            }   
                         }
                     }
             }
@@ -1156,9 +1352,9 @@ namespace DXAutoFillData.UControls
                           {
                                 isClick = true;
                                 isSubmit = true;
-                                item.InvokeMember("Click");
                                 count++;
-                                indexTwo++;
+                              
+                                item.InvokeMember("Click");  
                                 break;
                             }
                             //Console.WriteLine(item.InnerText);
@@ -1344,9 +1540,8 @@ namespace DXAutoFillData.UControls
                             {
                                 isClick = true;
                                 isSubmit = true;
-                                item.InvokeMember("Click");
                                 count++;
-                                indexThree++;
+                                item.InvokeMember("Click");
                                 break;
                             }
                             //Console.WriteLine(item.InnerText);
@@ -1532,9 +1727,8 @@ namespace DXAutoFillData.UControls
                             {
                                 isClick = true;
                                 isSubmit = true;
-                                item.InvokeMember("Click");
-                                count++;
-                                indexFour++;
+                                count++;      
+                                item.InvokeMember("Click");  
                                 break;
                             }
                             //Console.WriteLine(item.InnerText);
@@ -1720,9 +1914,8 @@ namespace DXAutoFillData.UControls
                             {
                                 isClick = true;
                                 isSubmit = true;
-                                item.InvokeMember("Click");
                                 count++;
-                                indexFive++;
+                                item.InvokeMember("Click");      
                                 break;
                             }
                             //Console.WriteLine(item.InnerText);
@@ -1908,9 +2101,8 @@ namespace DXAutoFillData.UControls
                             {
                                 isClick = true;
                                 isSubmit = true;
-                                item.InvokeMember("Click");
                                 count++;
-                                indexSix++;
+                                item.InvokeMember("Click"); 
                                 break;
                             }
                             //Console.WriteLine(item.InnerText);
@@ -1919,6 +2111,7 @@ namespace DXAutoFillData.UControls
             }
             #endregion
         }
+        #endregion
 
         private void SubmitForm(WebBrowser webBrowser, String formName)
         {
