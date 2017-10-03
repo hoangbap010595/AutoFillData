@@ -99,10 +99,17 @@ namespace DXAutoFillData.UControls
                     btnStart.Enabled = false;
                     txtFilePath.Text = op.FileName.Trim();
                     Thread t = new Thread(new ThreadStart(()=> {
-                        lsData = OpenFileExcel.getDataExcelFromFileToList(op.FileName.Trim());
-                        lsData.RemoveAt(0);
-                        lsAllData = loadDataToList(lsData);
-                        btnStart.Invoke((MethodInvoker)delegate { btnStart.Enabled = true; });
+                        try
+                        {
+                            lsData = OpenFileExcel.getDataExcelFromFileToList(op.FileName.Trim());
+                            lsData.RemoveAt(0);
+                            lsAllData = loadDataToList(lsData);
+                            btnStart.Invoke((MethodInvoker)delegate { btnStart.Enabled = true; });
+                        }
+                        catch (Exception ex)
+                        {
+                            XtraMessageBox.Show("" + ex.Message, "Thông báo lỗi");
+                        }
                     }));
                     t.Start();
                 }

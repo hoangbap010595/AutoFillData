@@ -68,35 +68,35 @@
             // 
             this.xtraTabPageTwo.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageTwo.Image")));
             this.xtraTabPageTwo.Name = "xtraTabPageTwo";
-            this.xtraTabPageTwo.Size = new System.Drawing.Size(709, 322);
+            this.xtraTabPageTwo.Size = new System.Drawing.Size(868, 322);
             this.xtraTabPageTwo.Text = "Đang chuyển hướng...";
             // 
             // xtraTabPageThree
             // 
             this.xtraTabPageThree.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageThree.Image")));
             this.xtraTabPageThree.Name = "xtraTabPageThree";
-            this.xtraTabPageThree.Size = new System.Drawing.Size(709, 322);
+            this.xtraTabPageThree.Size = new System.Drawing.Size(868, 322);
             this.xtraTabPageThree.Text = "Đang chuyển hướng...";
             // 
             // xtraTabPageFour
             // 
             this.xtraTabPageFour.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageFour.Image")));
             this.xtraTabPageFour.Name = "xtraTabPageFour";
-            this.xtraTabPageFour.Size = new System.Drawing.Size(709, 322);
+            this.xtraTabPageFour.Size = new System.Drawing.Size(868, 322);
             this.xtraTabPageFour.Text = "Đang chuyển hướng...";
             // 
             // xtraTabPageFive
             // 
             this.xtraTabPageFive.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageFive.Image")));
             this.xtraTabPageFive.Name = "xtraTabPageFive";
-            this.xtraTabPageFive.Size = new System.Drawing.Size(0, 0);
+            this.xtraTabPageFive.Size = new System.Drawing.Size(868, 322);
             this.xtraTabPageFive.Text = "Đang chuyển hướng";
             // 
             // xtraTabPageSix
             // 
             this.xtraTabPageSix.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageSix.Image")));
             this.xtraTabPageSix.Name = "xtraTabPageSix";
-            this.xtraTabPageSix.Size = new System.Drawing.Size(0, 0);
+            this.xtraTabPageSix.Size = new System.Drawing.Size(868, 322);
             this.xtraTabPageSix.Text = "Đang chuyển hướng";
             // 
             // UC_WebBrowser

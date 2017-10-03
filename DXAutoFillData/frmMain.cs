@@ -92,15 +92,15 @@ namespace DXAutoFillData
                 || DateTime.Now.ToString("dd-MM-yyyy").Equals("13-02-" + DateTime.Now.Year)
                 || DateTime.Now.ToString("dd-MM-yyyy").Equals("15-02-" + DateTime.Now.Year))
                 skinApp.LookAndFeel.SkinName = "Valentine";
-            else if (DateTime.Now.Year == 9)
+            else if (DateTime.Now.Month == 12)
                 skinApp.LookAndFeel.SkinName = "Xmas 2008 Blue";
             else if (DateTime.Now.ToString("dd-MM-yyyy").Equals("29-10-" + DateTime.Now.Year)
                 || DateTime.Now.ToString("dd-MM-yyyy").Equals("30-10-" + DateTime.Now.Year)
                 || DateTime.Now.ToString("dd-MM-yyyy").Equals("31-10-" + DateTime.Now.Year))
                 skinApp.LookAndFeel.SkinName = "Pumpkin";
-            else if (DateTime.Now.Year == 6)
+            else if (DateTime.Now.Month == 6)
                 skinApp.LookAndFeel.SkinName = "Summer 2008";
-            else if (DateTime.Now.Year == 1)
+            else if (DateTime.Now.Month == 1)
                 skinApp.LookAndFeel.SkinName = "Springtime";
         }
 
