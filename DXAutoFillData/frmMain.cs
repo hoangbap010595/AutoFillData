@@ -65,8 +65,6 @@ namespace DXAutoFillData
             UC_Main frm = new UC_Main();
             frm.Dock = DockStyle.Fill;
             this.Controls.Add(frm);
-            UserConfig.setTimeLeft(1000);//aedve
-            UserConfig.setIsActive(false);
             if (!UserConfig.getIsActive())
             {
                 if (UserConfig.getTimeLeft() > 0)

@@ -10,7 +10,7 @@ namespace DXAutoFillData
     {
         public static void setUTargetUrl(string target)
         {
-            Properties.Settings.Default.ULinkTarget = target;
+            Properties.Settings.Default.UURLTarget = target;
             Properties.Settings.Default.Save();
         }
         public static void setUPassword(string password)
@@ -60,7 +60,7 @@ namespace DXAutoFillData
         }
         public static string getUTargetUrl()
         {
-            return Properties.Settings.Default.ULinkTarget;
+            return Properties.Settings.Default.UURLTarget;
         }
         public static string getUPassword()
         {

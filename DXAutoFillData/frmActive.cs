@@ -1,13 +1,5 @@
 ﻿using DevExpress.XtraEditors;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace DXAutoFillData
 {
@@ -23,14 +15,15 @@ namespace DXAutoFillData
         private void btnActive_Click(object sender, EventArgs e)
         {
             string key = txtKey.Text;
-            if (key == "aedve")
+            if (key == "XmI5L3-G3ig93-102017")
             {
                 UserConfig.setIsActive(true);
                 XtraMessageBox.Show("Kích hoạt phần mềm thành công!", "Thông báo");
                 if (isActive != null)
                 {
+                    btnActive.Enabled = false;
                     isActive(true);
-                    Close();
+                    this.Close();
                 }
             }else
             {

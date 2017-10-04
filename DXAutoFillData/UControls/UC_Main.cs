@@ -21,12 +21,29 @@ namespace DXAutoFillData.UControls
         private List<List<Dictionary<string, object>>> lsAllData;
         public UC_Main()
         {
-            InitializeComponent();
+            InitializeComponent();           
             loadConfig();
-
         }
         private void loadConfig()
         {
+            //UserConfig.setTimeLeft(600);//XmI5L3-G3ig93-102017
+            //UserConfig.setIsActive(false);
+            if (UserConfig.getIsActive())
+            {
+                btnUpdateHeThong.Enabled = btnUpdateSystem.Enabled = true;
+                btnAcctive.Visible = false;
+            }
+            else
+            {       
+                btnUpdateHeThong.Enabled = btnUpdateSystem.Enabled = false;
+                UserConfig.setUAutoLogin(false);
+                UserConfig.setSAutoCloseForm(false);
+                UserConfig.setSAutoSubmit(false);
+                UserConfig.setSAutoEnterData(true);
+                UserConfig.setSAutoClearCache(false);
+                btnAcctive.Visible = true;
+            }
+            
             txtTarget.Text = UserConfig.getUTargetUrl();
             txtPassword.Text = UserConfig.getUPassword();
             ckAutoLogin.Checked = UserConfig.getUAutoLogin();
@@ -39,7 +56,6 @@ namespace DXAutoFillData.UControls
             _timer = new System.Windows.Forms.Timer();
             _timer.Interval = 1000;
             _timer.Tick += _timer_Tick;
-
         }
 
         private void _timer_Tick(object sender, EventArgs e)
@@ -232,10 +248,12 @@ namespace DXAutoFillData.UControls
             if (count == lsData.Count() && UserConfig.getSAutoCloseForm())
             {
                 _timer.Enabled = false;
+                btnStart.Enabled = true;
+                btnStop.Enabled = false;
                 Form f = Application.OpenForms["frmShowWindow"];
                 if (f != null)
                     f.Close();
-                XtraMessageBox.Show("Đã xử lý thành công: " + count + "/" + lsData.Count + " lần", "Thông báo");
+                XtraMessageBox.Show("Đã xử lý thành công: " + count + "/" + lsData.Count + " bản ghi", "Thông báo");
             }
         }
 
@@ -291,6 +309,12 @@ namespace DXAutoFillData.UControls
             message += "\nEmail:\t\t\t\t lchoang1995@gmail.com";
             message += "\nVersion:\t\t\t 1.0.0";
             XtraMessageBox.Show(message, "Thông tin");
+        }
+
+        private void btnAcctive_Click(object sender, EventArgs e)
+        {
+            frmActive frmActive = new frmActive();
+            frmActive.ShowDialog();
         }
     }
 }

@@ -1163,7 +1163,6 @@ namespace DXAutoFillData.UControls
                                 Console.WriteLine("Two: index[" + (indexTwo - 1) + "]-Clicked-Count[" + count + "]");
                                 break;
                             }
-                            //Console.WriteLine(item.InnerText);
                         }
                     }
             }

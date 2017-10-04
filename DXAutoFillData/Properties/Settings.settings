@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DXAutoFillData.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ULinkTarget" Type="System.String" Scope="User">
+    <Setting Name="UURLTarget" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://laodongkynghi.info/mau-dang-ky-thu-gioi-thieu/</Value>
     </Setting>
     <Setting Name="UPassword" Type="System.String" Scope="User">

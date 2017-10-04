@@ -26,12 +26,12 @@ namespace DXAutoFillData.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://laodongkynghi.info/mau-dang-ky-thu-gioi-thieu/")]
-        public string ULinkTarget {
+        public string UURLTarget {
             get {
-                return ((string)(this["ULinkTarget"]));
+                return ((string)(this["UURLTarget"]));
             }
             set {
-                this["ULinkTarget"] = value;
+                this["UURLTarget"] = value;
             }
         }
         

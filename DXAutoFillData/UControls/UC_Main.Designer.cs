@@ -57,6 +57,7 @@
             this.btnExit = new DevExpress.XtraEditors.SimpleButton();
             this.btnInfomation = new DevExpress.XtraEditors.SimpleButton();
             this.btnUpdateSystem = new DevExpress.XtraEditors.SimpleButton();
+            this.btnAcctive = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
@@ -336,6 +337,7 @@
             this.groupControl3.Controls.Add(this.ckAutoClickSubmit);
             this.groupControl3.Controls.Add(this.btnExit);
             this.groupControl3.Controls.Add(this.btnInfomation);
+            this.groupControl3.Controls.Add(this.btnAcctive);
             this.groupControl3.Controls.Add(this.btnUpdateSystem);
             this.groupControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl3.Location = new System.Drawing.Point(3, 151);
@@ -408,6 +410,16 @@
             this.btnUpdateSystem.Text = "Cập nhật";
             this.btnUpdateSystem.Click += new System.EventHandler(this.btnUpdateSystem_Click);
             // 
+            // btnAcctive
+            // 
+            this.btnAcctive.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAcctive.Location = new System.Drawing.Point(265, 71);
+            this.btnAcctive.Name = "btnAcctive";
+            this.btnAcctive.Size = new System.Drawing.Size(124, 23);
+            this.btnAcctive.TabIndex = 5;
+            this.btnAcctive.Text = "Kích hoạt";
+            this.btnAcctive.Click += new System.EventHandler(this.btnAcctive_Click);
+            // 
             // UC_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -470,5 +482,6 @@
         private DevExpress.XtraEditors.SimpleButton btnUpdateSystem;
         private DevExpress.XtraEditors.CheckEdit ckClearCache;
         private DevExpress.XtraEditors.SimpleButton btnInfomation;
+        private DevExpress.XtraEditors.SimpleButton btnAcctive;
     }
 }
