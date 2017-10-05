@@ -56,8 +56,8 @@
             this.ckAutoClickSubmit = new DevExpress.XtraEditors.CheckEdit();
             this.btnExit = new DevExpress.XtraEditors.SimpleButton();
             this.btnInfomation = new DevExpress.XtraEditors.SimpleButton();
-            this.btnUpdateSystem = new DevExpress.XtraEditors.SimpleButton();
             this.btnAcctive = new DevExpress.XtraEditors.SimpleButton();
+            this.btnUpdateSystem = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
@@ -133,6 +133,7 @@
             // btnUpdateHeThong
             // 
             this.btnUpdateHeThong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateHeThong.Enabled = false;
             this.btnUpdateHeThong.Location = new System.Drawing.Point(265, 110);
             this.btnUpdateHeThong.Name = "btnUpdateHeThong";
             this.btnUpdateHeThong.Size = new System.Drawing.Size(124, 23);
@@ -400,16 +401,6 @@
             this.btnInfomation.Text = "Thông tin";
             this.btnInfomation.Click += new System.EventHandler(this.btnInfomation_Click);
             // 
-            // btnUpdateSystem
-            // 
-            this.btnUpdateSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUpdateSystem.Location = new System.Drawing.Point(265, 36);
-            this.btnUpdateSystem.Name = "btnUpdateSystem";
-            this.btnUpdateSystem.Size = new System.Drawing.Size(124, 23);
-            this.btnUpdateSystem.TabIndex = 5;
-            this.btnUpdateSystem.Text = "Cập nhật";
-            this.btnUpdateSystem.Click += new System.EventHandler(this.btnUpdateSystem_Click);
-            // 
             // btnAcctive
             // 
             this.btnAcctive.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -419,6 +410,17 @@
             this.btnAcctive.TabIndex = 5;
             this.btnAcctive.Text = "Kích hoạt";
             this.btnAcctive.Click += new System.EventHandler(this.btnAcctive_Click);
+            // 
+            // btnUpdateSystem
+            // 
+            this.btnUpdateSystem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUpdateSystem.Enabled = false;
+            this.btnUpdateSystem.Location = new System.Drawing.Point(265, 36);
+            this.btnUpdateSystem.Name = "btnUpdateSystem";
+            this.btnUpdateSystem.Size = new System.Drawing.Size(124, 23);
+            this.btnUpdateSystem.TabIndex = 5;
+            this.btnUpdateSystem.Text = "Cập nhật";
+            this.btnUpdateSystem.Click += new System.EventHandler(this.btnUpdateSystem_Click);
             // 
             // UC_Main
             // 

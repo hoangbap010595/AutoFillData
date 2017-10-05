@@ -27,7 +27,7 @@ namespace DXAutoFillData.UControls
         private void loadConfig()
         {
             //UserConfig.setTimeLeft(600);//XmI5L3-G3ig93-102017
-            //UserConfig.setIsActive(false);
+            UserConfig.setIsActive(true);
             if (UserConfig.getIsActive())
             {
                 btnUpdateHeThong.Enabled = btnUpdateSystem.Enabled = true;
@@ -268,8 +268,10 @@ namespace DXAutoFillData.UControls
                     _timer.Enabled = true;
                     btnStart.Enabled = false;
                     btnStop.Enabled = true;
-                    UC_WebBrowser uc = new UC_WebBrowser(lsAllData);
-                    uc.sendCount = new UC_WebBrowser.sendCountSubmit(setCountSubmit);
+                    UC_WebBrowserReal uc = new UC_WebBrowserReal(lsAllData);
+                    //UC_WebBrowser uc = new UC_WebBrowser(lsAllData);
+                    uc.sendCount = new UC_WebBrowserReal.sendCountSubmit(setCountSubmit);
+                    //uc.sendCount = new UC_WebBrowser.sendCountSubmit(setCountSubmit);
                     frmShowWindow frm = new frmShowWindow();
                     frm.Controls.Clear();
                     uc.Dock = DockStyle.Fill;

@@ -119,11 +119,11 @@
     <Compile Include="UControls\UC_ViewData.Designer.cs">
       <DependentUpon>UC_ViewData.cs</DependentUpon>
     </Compile>
-    <Compile Include="UControls\UC_WebBrowser2.cs">
+    <Compile Include="UControls\UC_WebBrowserReal.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UControls\UC_WebBrowser2.Designer.cs">
-      <DependentUpon>UC_WebBrowser2.cs</DependentUpon>
+    <Compile Include="UControls\UC_WebBrowserReal.Designer.cs">
+      <DependentUpon>UC_WebBrowserReal.cs</DependentUpon>
     </Compile>
     <Compile Include="UControls\UC_WebBrowser.cs">
       <SubType>UserControl</SubType>
@@ -158,8 +158,8 @@
     <EmbeddedResource Include="UControls\UC_ViewData.resx">
       <DependentUpon>UC_ViewData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UControls\UC_WebBrowser2.resx">
-      <DependentUpon>UC_WebBrowser2.cs</DependentUpon>
+    <EmbeddedResource Include="UControls\UC_WebBrowserReal.resx">
+      <DependentUpon>UC_WebBrowserReal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UControls\UC_WebBrowser.resx">
       <DependentUpon>UC_WebBrowser.cs</DependentUpon>
@@ -175,6 +175,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="form.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
