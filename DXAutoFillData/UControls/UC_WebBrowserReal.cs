@@ -55,11 +55,11 @@ namespace DXAutoFillData.UControls
         private void UC_WebBrowser_Load(object sender, EventArgs e)
         {
             CreateWebBrowser(xtraTabPageOne, webBrowserOne);
-            //CreateWebBrowserTwo();
-            //CreateWebBrowserThree();
-            //CreateWebBrowserFour();
-            //CreateWebBrowserFive();
-            //CreateWebBrowserSix();
+            CreateWebBrowserTwo();
+            CreateWebBrowserThree();
+            CreateWebBrowserFour();
+            CreateWebBrowserFive();
+            CreateWebBrowserSix();
         }
 
         public delegate void sendCountSubmit(int count);
@@ -324,8 +324,8 @@ namespace DXAutoFillData.UControls
                                 fillDataOne(webBrowser, _lsDataOne[indexOne]);
                             else
                             {
-                                webBrowser.Stop();
-                                xtraTabControlMain.TabPages.Remove(tabPage);
+                                webBrowser.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(tabPage);
                             }
                             if (isSubmitOne)
                             {
@@ -408,8 +408,8 @@ namespace DXAutoFillData.UControls
                                 fillDataTwo(webBrowserTwo, _lsDataTwo[indexTwo]);
                             else
                             {
-                                webBrowserTwo.Stop();
-                                xtraTabControlMain.TabPages.Remove(xtraTabPageTwo);
+                                webBrowserTwo.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(xtraTabPageTwo);
                             }
                             if (isSubmitTwo)
                             {
@@ -492,8 +492,8 @@ namespace DXAutoFillData.UControls
                                 fillDataThree(webBrowserThree, _lsDataThree[indexThree]);
                             else
                             {
-                                webBrowserThree.Stop();
-                                xtraTabControlMain.TabPages.Remove(xtraTabPageThree);
+                                webBrowserThree.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(xtraTabPageThree);
                             }
                             if (isSubmitThree)
                             {
@@ -575,8 +575,8 @@ namespace DXAutoFillData.UControls
                                 fillDataFour(webBrowserFour, _lsDataFour[indexFour]);
                             else
                             {
-                                webBrowserFour.Stop();
-                                xtraTabControlMain.TabPages.Remove(xtraTabPageFour);
+                                webBrowserFour.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(xtraTabPageFour);
                             }
                             if (isSubmitFour)
                             {
@@ -659,8 +659,8 @@ namespace DXAutoFillData.UControls
                                 fillDataFive(webBrowserFive, _lsDataFive[indexFive]);
                             else
                             {
-                                webBrowserFive.Stop();
-                                xtraTabControlMain.TabPages.Remove(xtraTabPageFive);
+                                webBrowserFive.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(xtraTabPageFive);
                             }
                             if (isSubmitFive)
                             {
@@ -743,8 +743,8 @@ namespace DXAutoFillData.UControls
                                 fillDataSix(webBrowserSix, _lsDataSix[indexSix]);
                             else
                             {
-                                webBrowserSix.Stop();
-                                xtraTabControlMain.TabPages.Remove(xtraTabPageSix);
+                                webBrowserSix.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(xtraTabPageSix);
                             }
                             if (isSubmitSix)
                             {
@@ -796,8 +796,22 @@ namespace DXAutoFillData.UControls
         #region ===Fill Data====
         private void fillDataOne(WebBrowser webBrowser, Dictionary<string, object> data)
         {
+            HtmlElementCollection elementsInput = webBrowser.Document.GetElementsByTagName("input");
+            HtmlElementCollection elementsSelect = webBrowser.Document.GetElementsByTagName("select");
             HtmlElementCollection elementsButton = webBrowser.Document.GetElementsByTagName("button");
+
             #region ===== Tag Input
+            elementsInput[0].Id = "txtFullName";
+            elementsInput[1].Id = "txtStreet";
+            elementsInput[2].Id = "txtWard";
+            elementsInput[3].Id = "txtDistrict";
+            elementsInput[4].Id = "txtCurrAddress";
+            elementsInput[5].Id = "txtCMND";
+            elementsInput[12].Id = "txtChuaTotNghiep";
+            elementsInput[13].Id = "txtDaTotNghiep";
+            elementsInput[16].Id = "txtMaSoVanBang";
+            elementsInput[17].Id = "txtNamTotNghiep";
+
             if (webBrowser.Document.GetElementById("txtFullName") != null)
                 webBrowser.Document.GetElementById("txtFullName").InnerText = data["FullName"].ToString().Trim();
             if (webBrowser.Document.GetElementById("txtStreet") != null)
@@ -859,6 +873,10 @@ namespace DXAutoFillData.UControls
             #endregion
 
             #region ===== Tag Select
+            elementsSelect[3].Id = "txtGender";
+            elementsSelect[4].Id = "txtMarriage";
+            elementsSelect[5].Id = "txtProvince";
+
             var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
             var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
             //done
@@ -910,9 +928,9 @@ namespace DXAutoFillData.UControls
                     }
                 }
             }
-            if (webBrowser.Document.GetElementById("slPref_cd") != null)
+            if (webBrowser.Document.GetElementById("txtProvince") != null)
             {
-                var xElementCollection = webBrowser.Document.GetElementById("slPref_cd").GetElementsByTagName("option");
+                var xElementCollection = webBrowser.Document.GetElementById("txtProvince").GetElementsByTagName("option");
                 foreach (HtmlElement el in xElementCollection)
                 {
                     var x1 = el.InnerText.Trim().ToUpper();
@@ -966,87 +984,98 @@ namespace DXAutoFillData.UControls
             HtmlElementCollection elementsInput = webBrowser.Document.GetElementsByTagName("input");
             HtmlElementCollection elementsSelect = webBrowser.Document.GetElementsByTagName("select");
             HtmlElementCollection elementsButton = webBrowser.Document.GetElementsByTagName("button");
-            // We have to use this form because of the lambda expression that is used to pass
-            // in the element instance to the handler. This is the only way to actually get
-            // the element instance, as the instance is not passed in if we just provide the
-            // event sink method name.
+
             #region ===== Tag Input
-            if (elementsInput.Count > 0 && elementsInput != null)
-            {
-                elementsInput[0].Id = "txtFullName";
-                elementsInput[1].Id = "txtStreet";
-                elementsInput[2].Id = "txtWard";
-                elementsInput[3].Id = "txtDistrict";
-                elementsInput[4].Id = "txtCurrAddress";
-                elementsInput[5].Id = "txtCMND";
-                elementsInput[6].Id = "txtIssuedBy";
+            elementsInput[0].Id = "txtFullName";
+            elementsInput[1].Id = "txtStreet";
+            elementsInput[2].Id = "txtWard";
+            elementsInput[3].Id = "txtDistrict";
+            elementsInput[4].Id = "txtCurrAddress";
+            elementsInput[5].Id = "txtCMND";
+            elementsInput[12].Id = "txtChuaTotNghiep";
+            elementsInput[13].Id = "txtDaTotNghiep";
+            elementsInput[16].Id = "txtMaSoVanBang";
+            elementsInput[17].Id = "txtNamTotNghiep";
 
-                elementsInput[9].Id = "txtEmail";
-                elementsInput[10].Id = "txtPhone";
-                elementsInput[11].Id = "txtNgoaiNgu";
-
-                elementsInput[12].Id = "txtChuaTotNghiep";
-                elementsInput[13].Id = "txtDaTotNghiep";
-
-                elementsInput[14].Id = "txtTruongDaiHoc";
-                elementsInput[15].Id = "txtSoNam";
-                elementsInput[16].Id = "txtMaSoVanBang";
-                elementsInput[17].Id = "txtNamTotNghiep";
-                elementsInput[18].Id = "txtFullNameRef";
-                elementsInput[19].Id = "txtPhoneRef";
-                elementsInput[20].Id = "txtAddressRef";
-
-
+            if (webBrowser.Document.GetElementById("txtFullName") != null)
                 webBrowser.Document.GetElementById("txtFullName").InnerText = data["FullName"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtStreet") != null)
                 webBrowser.Document.GetElementById("txtStreet").InnerText = data["Street"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtWard") != null)
                 webBrowser.Document.GetElementById("txtWard").InnerText = data["Ward"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtDistrict") != null)
                 webBrowser.Document.GetElementById("txtDistrict").InnerText = data["District"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtCurrAddress") != null)
                 webBrowser.Document.GetElementById("txtCurrAddress").InnerText = data["CurrentAddress"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtCMND") != null)
                 webBrowser.Document.GetElementById("txtCMND").InnerText = data["Passport"].ToString().Trim();
-                webBrowser.Document.GetElementById("txtIssuedBy").InnerText = data["IssuedBy"].ToString().Trim();
-
-                webBrowser.Document.GetElementById("datepicker1").InnerText = data["DateRange"].ToString().Trim();
-                webBrowser.Document.GetElementById("datepicker2").SetAttribute("value", data["DateExpired"].ToString().Trim());
-
-                webBrowser.Document.GetElementById("txtEmail").SetAttribute("value", data["Email"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("noicaphochieu") != null)
+                webBrowser.Document.GetElementById("noicaphochieu").InnerText = data["IssuedBy"].ToString().Trim();
+            //done
+            if (webBrowser.Document.GetElementById("field_260") != null)
+                webBrowser.Document.GetElementById("field_260").InnerText = data["DateRange"].ToString().Trim();
+            //done
+            if (webBrowser.Document.GetElementById("field_261") != null)
+                webBrowser.Document.GetElementById("field_261").SetAttribute("value", data["DateExpired"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("diachiemail") != null)
+                webBrowser.Document.GetElementById("diachiemail").SetAttribute("value", data["Email"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtPhone") != null)
                 webBrowser.Document.GetElementById("txtPhone").SetAttribute("value", data["Phone"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtNgoaiNgu").SetAttribute("value", data["Languges"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtTruongDaiHoc").SetAttribute("value", data["University"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtSoNam").SetAttribute("value", data["NYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("trinhdotienganh") != null)
+                webBrowser.Document.GetElementById("trinhdotienganh").SetAttribute("value", data["Languges"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("tentruongdaihoc") != null)
+                webBrowser.Document.GetElementById("tentruongdaihoc").SetAttribute("value", data["University"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("thoigianhoc") != null)
+                webBrowser.Document.GetElementById("thoigianhoc").SetAttribute("value", data["NYear"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtMaSoVanBang") != null)
                 webBrowser.Document.GetElementById("txtMaSoVanBang").SetAttribute("value", data["NumOfDip"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtNamTotNghiep") != null)
                 webBrowser.Document.GetElementById("txtNamTotNghiep").SetAttribute("value", data["GradYear"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtFullNameRef").SetAttribute("value", data["FullNameRef"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtPhoneRef").SetAttribute("value", data["PhoneRef"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtAddressRef").SetAttribute("value", data["AddressRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("lh_nguoilienhe") != null)
+                webBrowser.Document.GetElementById("lh_nguoilienhe").SetAttribute("value", data["FullNameRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("lh_dienthoai") != null)
+                webBrowser.Document.GetElementById("lh_dienthoai").SetAttribute("value", data["PhoneRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("ld_diachi") != null)
+                webBrowser.Document.GetElementById("ld_diachi").SetAttribute("value", data["AddressRef"].ToString().Trim());
 
-                bool check = data["Status"].ToString().Trim() == "CTN" ? true : false;
-                if (check)
+
+            bool check = data["Status"].ToString().Trim() == "CTN" ? true : false;
+            if (check)
+                if (webBrowser.Document.GetElementById("txtChuaTotNghiep") != null)
                     webBrowser.Document.GetElementById("txtChuaTotNghiep").SetAttribute("checked", "1");
                 else
+                    if (webBrowser.Document.GetElementById("txtDaTotNghiep") != null)
                     webBrowser.Document.GetElementById("txtDaTotNghiep").SetAttribute("checked", "1");
-            }
+
             #endregion
 
             #region ===== Tag Select
-            if (elementsSelect.Count > 0 && elementsSelect != null)
+            elementsSelect[3].Id = "txtGender";
+            elementsSelect[4].Id = "txtMarriage";
+            elementsSelect[5].Id = "txtProvince";
+
+            var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
+            var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+            //done
+            if (webBrowser.Document.GetElementById("field_176_days") != null)
+                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", day);
+            //done
+            if (webBrowser.Document.GetElementById("field_176_month") != null)
+                webBrowser.Document.GetElementById("field_176_month").SetAttribute("value", DateB[1].ToString());
+            //done
+            if (webBrowser.Document.GetElementById("field_176_year") != null)
+                webBrowser.Document.GetElementById("field_176_year").SetAttribute("value", DateB[2].ToString());
+
+            if (webBrowser.Document.GetElementById("txtGender") != null)
             {
-                elementsSelect[0].Id = "txtDay";
-                elementsSelect[1].Id = "txtMonth";
-                elementsSelect[2].Id = "txtYear";
-                elementsSelect[3].Id = "txtGender";
-                elementsSelect[4].Id = "txtMarriage";
-
-                elementsSelect[6].Id = "txtFromYear";
-                elementsSelect[7].Id = "txtToYear";
-                elementsSelect[8].Id = "txtChinhQui";
-
-                var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
-                var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
-
-                webBrowser.Document.GetElementById("txtDay").SetAttribute("value", day);
-                webBrowser.Document.GetElementById("txtMonth").SetAttribute("value", DateB[1].ToString());
-                webBrowser.Document.GetElementById("txtYear").SetAttribute("value", DateB[2].ToString());
-
                 var xGender = webBrowser.Document.GetElementById("txtGender").GetElementsByTagName("option");
                 foreach (HtmlElement el in xGender)
                 {
@@ -1061,6 +1090,9 @@ namespace DXAutoFillData.UControls
                         }
                     }
                 }
+            }
+            if (webBrowser.Document.GetElementById("txtMarriage") != null)
+            {
                 var xMarriage = webBrowser.Document.GetElementById("txtMarriage").GetElementsByTagName("option");
                 foreach (HtmlElement el in xMarriage)
                 {
@@ -1080,8 +1112,10 @@ namespace DXAutoFillData.UControls
                         }
                     }
                 }
-
-                var xElementCollection = webBrowser.Document.GetElementById("slPref_cd").GetElementsByTagName("option");
+            }
+            if (webBrowser.Document.GetElementById("txtProvince") != null)
+            {
+                var xElementCollection = webBrowser.Document.GetElementById("txtProvince").GetElementsByTagName("option");
                 foreach (HtmlElement el in xElementCollection)
                 {
                     var x1 = el.InnerText.Trim().ToUpper();
@@ -1092,38 +1126,20 @@ namespace DXAutoFillData.UControls
                         break;
                     }
                 }
-
-                webBrowser.Document.GetElementById("txtFromYear").SetAttribute("value", data["FromYear"].ToString().Trim());
-
-                var xToYear = webBrowser.Document.GetElementById("txtToYear").GetElementsByTagName("option");
-                foreach (HtmlElement el in xToYear)
-                {
-                    if (el.InnerText != null)
-                    {
-                        var x1 = int.Parse(el.InnerText.Trim());
-                        var x2 = int.Parse(data["ToYear"].ToString().Trim());
-                        if (x1 == x2)
-                        {
-                            el.SetAttribute("selected", "selected");
-                            break;
-                        }
-                    }
-                }
-                var xChinhQui = webBrowser.Document.GetElementById("txtChinhQui").GetElementsByTagName("option");
-                foreach (HtmlElement el in xChinhQui)
-                {
-                    if (el.InnerText != null)
-                    {
-                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
-                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
-                        if (x1 == x2)
-                        {
-                            el.SetAttribute("selected", "selected");
-                            break;
-                        }
-                    }
-                }
             }
+            //done 
+            if (webBrowser.Document.GetElementById("thoigianhocbatdau") != null)
+                webBrowser.Document.GetElementById("thoigianhocbatdau").SetAttribute("value", data["FromYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("thoigianhocketthuc") != null)
+                webBrowser.Document.GetElementById("thoigianhocketthuc").SetAttribute("value", data["ToYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("hechinhquy") != null)
+                webBrowser.Document.GetElementById("hechinhquy").SetAttribute("value", data["Formal"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("diachinoi_nhanthongbao") != null)
+                webBrowser.Document.GetElementById("diachinoi_nhanthongbao").SetAttribute("value", data["AddressNotf"].ToString().Trim());
+
             #endregion
 
             #region===== Tag Button
@@ -1153,87 +1169,98 @@ namespace DXAutoFillData.UControls
             HtmlElementCollection elementsInput = webBrowser.Document.GetElementsByTagName("input");
             HtmlElementCollection elementsSelect = webBrowser.Document.GetElementsByTagName("select");
             HtmlElementCollection elementsButton = webBrowser.Document.GetElementsByTagName("button");
-            // We have to use this form because of the lambda expression that is used to pass
-            // in the element instance to the handler. This is the only way to actually get
-            // the element instance, as the instance is not passed in if we just provide the
-            // event sink method name.
+
             #region ===== Tag Input
-            if (elementsInput.Count > 0 && elementsInput != null)
-            {
-                elementsInput[0].Id = "txtFullName";
-                elementsInput[1].Id = "txtStreet";
-                elementsInput[2].Id = "txtWard";
-                elementsInput[3].Id = "txtDistrict";
-                elementsInput[4].Id = "txtCurrAddress";
-                elementsInput[5].Id = "txtCMND";
-                elementsInput[6].Id = "txtIssuedBy";
+            elementsInput[0].Id = "txtFullName";
+            elementsInput[1].Id = "txtStreet";
+            elementsInput[2].Id = "txtWard";
+            elementsInput[3].Id = "txtDistrict";
+            elementsInput[4].Id = "txtCurrAddress";
+            elementsInput[5].Id = "txtCMND";
+            elementsInput[12].Id = "txtChuaTotNghiep";
+            elementsInput[13].Id = "txtDaTotNghiep";
+            elementsInput[16].Id = "txtMaSoVanBang";
+            elementsInput[17].Id = "txtNamTotNghiep";
 
-                elementsInput[9].Id = "txtEmail";
-                elementsInput[10].Id = "txtPhone";
-                elementsInput[11].Id = "txtNgoaiNgu";
-
-                elementsInput[12].Id = "txtChuaTotNghiep";
-                elementsInput[13].Id = "txtDaTotNghiep";
-
-                elementsInput[14].Id = "txtTruongDaiHoc";
-                elementsInput[15].Id = "txtSoNam";
-                elementsInput[16].Id = "txtMaSoVanBang";
-                elementsInput[17].Id = "txtNamTotNghiep";
-                elementsInput[18].Id = "txtFullNameRef";
-                elementsInput[19].Id = "txtPhoneRef";
-                elementsInput[20].Id = "txtAddressRef";
-
-
+            if (webBrowser.Document.GetElementById("txtFullName") != null)
                 webBrowser.Document.GetElementById("txtFullName").InnerText = data["FullName"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtStreet") != null)
                 webBrowser.Document.GetElementById("txtStreet").InnerText = data["Street"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtWard") != null)
                 webBrowser.Document.GetElementById("txtWard").InnerText = data["Ward"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtDistrict") != null)
                 webBrowser.Document.GetElementById("txtDistrict").InnerText = data["District"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtCurrAddress") != null)
                 webBrowser.Document.GetElementById("txtCurrAddress").InnerText = data["CurrentAddress"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtCMND") != null)
                 webBrowser.Document.GetElementById("txtCMND").InnerText = data["Passport"].ToString().Trim();
-                webBrowser.Document.GetElementById("txtIssuedBy").InnerText = data["IssuedBy"].ToString().Trim();
-
-                webBrowser.Document.GetElementById("datepicker1").InnerText = data["DateRange"].ToString().Trim();
-                webBrowser.Document.GetElementById("datepicker2").SetAttribute("value", data["DateExpired"].ToString().Trim());
-
-                webBrowser.Document.GetElementById("txtEmail").SetAttribute("value", data["Email"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("noicaphochieu") != null)
+                webBrowser.Document.GetElementById("noicaphochieu").InnerText = data["IssuedBy"].ToString().Trim();
+            //done
+            if (webBrowser.Document.GetElementById("field_260") != null)
+                webBrowser.Document.GetElementById("field_260").InnerText = data["DateRange"].ToString().Trim();
+            //done
+            if (webBrowser.Document.GetElementById("field_261") != null)
+                webBrowser.Document.GetElementById("field_261").SetAttribute("value", data["DateExpired"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("diachiemail") != null)
+                webBrowser.Document.GetElementById("diachiemail").SetAttribute("value", data["Email"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtPhone") != null)
                 webBrowser.Document.GetElementById("txtPhone").SetAttribute("value", data["Phone"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtNgoaiNgu").SetAttribute("value", data["Languges"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtTruongDaiHoc").SetAttribute("value", data["University"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtSoNam").SetAttribute("value", data["NYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("trinhdotienganh") != null)
+                webBrowser.Document.GetElementById("trinhdotienganh").SetAttribute("value", data["Languges"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("tentruongdaihoc") != null)
+                webBrowser.Document.GetElementById("tentruongdaihoc").SetAttribute("value", data["University"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("thoigianhoc") != null)
+                webBrowser.Document.GetElementById("thoigianhoc").SetAttribute("value", data["NYear"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtMaSoVanBang") != null)
                 webBrowser.Document.GetElementById("txtMaSoVanBang").SetAttribute("value", data["NumOfDip"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtNamTotNghiep") != null)
                 webBrowser.Document.GetElementById("txtNamTotNghiep").SetAttribute("value", data["GradYear"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtFullNameRef").SetAttribute("value", data["FullNameRef"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtPhoneRef").SetAttribute("value", data["PhoneRef"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtAddressRef").SetAttribute("value", data["AddressRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("lh_nguoilienhe") != null)
+                webBrowser.Document.GetElementById("lh_nguoilienhe").SetAttribute("value", data["FullNameRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("lh_dienthoai") != null)
+                webBrowser.Document.GetElementById("lh_dienthoai").SetAttribute("value", data["PhoneRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("ld_diachi") != null)
+                webBrowser.Document.GetElementById("ld_diachi").SetAttribute("value", data["AddressRef"].ToString().Trim());
 
-                bool check = data["Status"].ToString().Trim() == "CTN" ? true : false;
-                if (check)
+
+            bool check = data["Status"].ToString().Trim() == "CTN" ? true : false;
+            if (check)
+                if (webBrowser.Document.GetElementById("txtChuaTotNghiep") != null)
                     webBrowser.Document.GetElementById("txtChuaTotNghiep").SetAttribute("checked", "1");
                 else
+                    if (webBrowser.Document.GetElementById("txtDaTotNghiep") != null)
                     webBrowser.Document.GetElementById("txtDaTotNghiep").SetAttribute("checked", "1");
-            }
+
             #endregion
 
             #region ===== Tag Select
-            if (elementsSelect.Count > 0 && elementsSelect != null)
+            elementsSelect[3].Id = "txtGender";
+            elementsSelect[4].Id = "txtMarriage";
+            elementsSelect[5].Id = "txtProvince";
+
+            var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
+            var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+            //done
+            if (webBrowser.Document.GetElementById("field_176_days") != null)
+                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", day);
+            //done
+            if (webBrowser.Document.GetElementById("field_176_month") != null)
+                webBrowser.Document.GetElementById("field_176_month").SetAttribute("value", DateB[1].ToString());
+            //done
+            if (webBrowser.Document.GetElementById("field_176_year") != null)
+                webBrowser.Document.GetElementById("field_176_year").SetAttribute("value", DateB[2].ToString());
+
+            if (webBrowser.Document.GetElementById("txtGender") != null)
             {
-                elementsSelect[0].Id = "txtDay";
-                elementsSelect[1].Id = "txtMonth";
-                elementsSelect[2].Id = "txtYear";
-                elementsSelect[3].Id = "txtGender";
-                elementsSelect[4].Id = "txtMarriage";
-
-                elementsSelect[6].Id = "txtFromYear";
-                elementsSelect[7].Id = "txtToYear";
-                elementsSelect[8].Id = "txtChinhQui";
-
-                var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
-                var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
-
-                webBrowser.Document.GetElementById("txtDay").SetAttribute("value", day);
-                webBrowser.Document.GetElementById("txtMonth").SetAttribute("value", DateB[1].ToString());
-                webBrowser.Document.GetElementById("txtYear").SetAttribute("value", DateB[2].ToString());
-
                 var xGender = webBrowser.Document.GetElementById("txtGender").GetElementsByTagName("option");
                 foreach (HtmlElement el in xGender)
                 {
@@ -1248,6 +1275,9 @@ namespace DXAutoFillData.UControls
                         }
                     }
                 }
+            }
+            if (webBrowser.Document.GetElementById("txtMarriage") != null)
+            {
                 var xMarriage = webBrowser.Document.GetElementById("txtMarriage").GetElementsByTagName("option");
                 foreach (HtmlElement el in xMarriage)
                 {
@@ -1267,8 +1297,10 @@ namespace DXAutoFillData.UControls
                         }
                     }
                 }
-
-                var xElementCollection = webBrowser.Document.GetElementById("slPref_cd").GetElementsByTagName("option");
+            }
+            if (webBrowser.Document.GetElementById("txtProvince") != null)
+            {
+                var xElementCollection = webBrowser.Document.GetElementById("txtProvince").GetElementsByTagName("option");
                 foreach (HtmlElement el in xElementCollection)
                 {
                     var x1 = el.InnerText.Trim().ToUpper();
@@ -1279,38 +1311,20 @@ namespace DXAutoFillData.UControls
                         break;
                     }
                 }
-
-                webBrowser.Document.GetElementById("txtFromYear").SetAttribute("value", data["FromYear"].ToString().Trim());
-
-                var xToYear = webBrowser.Document.GetElementById("txtToYear").GetElementsByTagName("option");
-                foreach (HtmlElement el in xToYear)
-                {
-                    if (el.InnerText != null)
-                    {
-                        var x1 = int.Parse(el.InnerText.Trim());
-                        var x2 = int.Parse(data["ToYear"].ToString().Trim());
-                        if (x1 == x2)
-                        {
-                            el.SetAttribute("selected", "selected");
-                            break;
-                        }
-                    }
-                }
-                var xChinhQui = webBrowser.Document.GetElementById("txtChinhQui").GetElementsByTagName("option");
-                foreach (HtmlElement el in xChinhQui)
-                {
-                    if (el.InnerText != null)
-                    {
-                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
-                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
-                        if (x1 == x2)
-                        {
-                            el.SetAttribute("selected", "selected");
-                            break;
-                        }
-                    }
-                }
             }
+            //done 
+            if (webBrowser.Document.GetElementById("thoigianhocbatdau") != null)
+                webBrowser.Document.GetElementById("thoigianhocbatdau").SetAttribute("value", data["FromYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("thoigianhocketthuc") != null)
+                webBrowser.Document.GetElementById("thoigianhocketthuc").SetAttribute("value", data["ToYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("hechinhquy") != null)
+                webBrowser.Document.GetElementById("hechinhquy").SetAttribute("value", data["Formal"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("diachinoi_nhanthongbao") != null)
+                webBrowser.Document.GetElementById("diachinoi_nhanthongbao").SetAttribute("value", data["AddressNotf"].ToString().Trim());
+
             #endregion
 
             #region===== Tag Button
@@ -1340,87 +1354,98 @@ namespace DXAutoFillData.UControls
             HtmlElementCollection elementsInput = webBrowser.Document.GetElementsByTagName("input");
             HtmlElementCollection elementsSelect = webBrowser.Document.GetElementsByTagName("select");
             HtmlElementCollection elementsButton = webBrowser.Document.GetElementsByTagName("button");
-            // We have to use this form because of the lambda expression that is used to pass
-            // in the element instance to the handler. This is the only way to actually get
-            // the element instance, as the instance is not passed in if we just provide the
-            // event sink method name.
+
             #region ===== Tag Input
-            if (elementsInput.Count > 0 && elementsInput != null)
-            {
-                elementsInput[0].Id = "txtFullName";
-                elementsInput[1].Id = "txtStreet";
-                elementsInput[2].Id = "txtWard";
-                elementsInput[3].Id = "txtDistrict";
-                elementsInput[4].Id = "txtCurrAddress";
-                elementsInput[5].Id = "txtCMND";
-                elementsInput[6].Id = "txtIssuedBy";
+            elementsInput[0].Id = "txtFullName";
+            elementsInput[1].Id = "txtStreet";
+            elementsInput[2].Id = "txtWard";
+            elementsInput[3].Id = "txtDistrict";
+            elementsInput[4].Id = "txtCurrAddress";
+            elementsInput[5].Id = "txtCMND";
+            elementsInput[12].Id = "txtChuaTotNghiep";
+            elementsInput[13].Id = "txtDaTotNghiep";
+            elementsInput[16].Id = "txtMaSoVanBang";
+            elementsInput[17].Id = "txtNamTotNghiep";
 
-                elementsInput[9].Id = "txtEmail";
-                elementsInput[10].Id = "txtPhone";
-                elementsInput[11].Id = "txtNgoaiNgu";
-
-                elementsInput[12].Id = "txtChuaTotNghiep";
-                elementsInput[13].Id = "txtDaTotNghiep";
-
-                elementsInput[14].Id = "txtTruongDaiHoc";
-                elementsInput[15].Id = "txtSoNam";
-                elementsInput[16].Id = "txtMaSoVanBang";
-                elementsInput[17].Id = "txtNamTotNghiep";
-                elementsInput[18].Id = "txtFullNameRef";
-                elementsInput[19].Id = "txtPhoneRef";
-                elementsInput[20].Id = "txtAddressRef";
-
-
+            if (webBrowser.Document.GetElementById("txtFullName") != null)
                 webBrowser.Document.GetElementById("txtFullName").InnerText = data["FullName"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtStreet") != null)
                 webBrowser.Document.GetElementById("txtStreet").InnerText = data["Street"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtWard") != null)
                 webBrowser.Document.GetElementById("txtWard").InnerText = data["Ward"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtDistrict") != null)
                 webBrowser.Document.GetElementById("txtDistrict").InnerText = data["District"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtCurrAddress") != null)
                 webBrowser.Document.GetElementById("txtCurrAddress").InnerText = data["CurrentAddress"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtCMND") != null)
                 webBrowser.Document.GetElementById("txtCMND").InnerText = data["Passport"].ToString().Trim();
-                webBrowser.Document.GetElementById("txtIssuedBy").InnerText = data["IssuedBy"].ToString().Trim();
-
-                webBrowser.Document.GetElementById("datepicker1").InnerText = data["DateRange"].ToString().Trim();
-                webBrowser.Document.GetElementById("datepicker2").SetAttribute("value", data["DateExpired"].ToString().Trim());
-
-                webBrowser.Document.GetElementById("txtEmail").SetAttribute("value", data["Email"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("noicaphochieu") != null)
+                webBrowser.Document.GetElementById("noicaphochieu").InnerText = data["IssuedBy"].ToString().Trim();
+            //done
+            if (webBrowser.Document.GetElementById("field_260") != null)
+                webBrowser.Document.GetElementById("field_260").InnerText = data["DateRange"].ToString().Trim();
+            //done
+            if (webBrowser.Document.GetElementById("field_261") != null)
+                webBrowser.Document.GetElementById("field_261").SetAttribute("value", data["DateExpired"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("diachiemail") != null)
+                webBrowser.Document.GetElementById("diachiemail").SetAttribute("value", data["Email"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtPhone") != null)
                 webBrowser.Document.GetElementById("txtPhone").SetAttribute("value", data["Phone"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtNgoaiNgu").SetAttribute("value", data["Languges"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtTruongDaiHoc").SetAttribute("value", data["University"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtSoNam").SetAttribute("value", data["NYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("trinhdotienganh") != null)
+                webBrowser.Document.GetElementById("trinhdotienganh").SetAttribute("value", data["Languges"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("tentruongdaihoc") != null)
+                webBrowser.Document.GetElementById("tentruongdaihoc").SetAttribute("value", data["University"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("thoigianhoc") != null)
+                webBrowser.Document.GetElementById("thoigianhoc").SetAttribute("value", data["NYear"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtMaSoVanBang") != null)
                 webBrowser.Document.GetElementById("txtMaSoVanBang").SetAttribute("value", data["NumOfDip"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtNamTotNghiep") != null)
                 webBrowser.Document.GetElementById("txtNamTotNghiep").SetAttribute("value", data["GradYear"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtFullNameRef").SetAttribute("value", data["FullNameRef"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtPhoneRef").SetAttribute("value", data["PhoneRef"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtAddressRef").SetAttribute("value", data["AddressRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("lh_nguoilienhe") != null)
+                webBrowser.Document.GetElementById("lh_nguoilienhe").SetAttribute("value", data["FullNameRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("lh_dienthoai") != null)
+                webBrowser.Document.GetElementById("lh_dienthoai").SetAttribute("value", data["PhoneRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("ld_diachi") != null)
+                webBrowser.Document.GetElementById("ld_diachi").SetAttribute("value", data["AddressRef"].ToString().Trim());
 
-                bool check = data["Status"].ToString().Trim() == "CTN" ? true : false;
-                if (check)
+
+            bool check = data["Status"].ToString().Trim() == "CTN" ? true : false;
+            if (check)
+                if (webBrowser.Document.GetElementById("txtChuaTotNghiep") != null)
                     webBrowser.Document.GetElementById("txtChuaTotNghiep").SetAttribute("checked", "1");
                 else
+                    if (webBrowser.Document.GetElementById("txtDaTotNghiep") != null)
                     webBrowser.Document.GetElementById("txtDaTotNghiep").SetAttribute("checked", "1");
-            }
+
             #endregion
 
             #region ===== Tag Select
-            if (elementsSelect.Count > 0 && elementsSelect != null)
+            elementsSelect[3].Id = "txtGender";
+            elementsSelect[4].Id = "txtMarriage";
+            elementsSelect[5].Id = "txtProvince";
+
+            var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
+            var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+            //done
+            if (webBrowser.Document.GetElementById("field_176_days") != null)
+                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", day);
+            //done
+            if (webBrowser.Document.GetElementById("field_176_month") != null)
+                webBrowser.Document.GetElementById("field_176_month").SetAttribute("value", DateB[1].ToString());
+            //done
+            if (webBrowser.Document.GetElementById("field_176_year") != null)
+                webBrowser.Document.GetElementById("field_176_year").SetAttribute("value", DateB[2].ToString());
+
+            if (webBrowser.Document.GetElementById("txtGender") != null)
             {
-                elementsSelect[0].Id = "txtDay";
-                elementsSelect[1].Id = "txtMonth";
-                elementsSelect[2].Id = "txtYear";
-                elementsSelect[3].Id = "txtGender";
-                elementsSelect[4].Id = "txtMarriage";
-
-                elementsSelect[6].Id = "txtFromYear";
-                elementsSelect[7].Id = "txtToYear";
-                elementsSelect[8].Id = "txtChinhQui";
-
-                var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
-                var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
-
-                webBrowser.Document.GetElementById("txtDay").SetAttribute("value", day);
-                webBrowser.Document.GetElementById("txtMonth").SetAttribute("value", DateB[1].ToString());
-                webBrowser.Document.GetElementById("txtYear").SetAttribute("value", DateB[2].ToString());
-
                 var xGender = webBrowser.Document.GetElementById("txtGender").GetElementsByTagName("option");
                 foreach (HtmlElement el in xGender)
                 {
@@ -1435,6 +1460,9 @@ namespace DXAutoFillData.UControls
                         }
                     }
                 }
+            }
+            if (webBrowser.Document.GetElementById("txtMarriage") != null)
+            {
                 var xMarriage = webBrowser.Document.GetElementById("txtMarriage").GetElementsByTagName("option");
                 foreach (HtmlElement el in xMarriage)
                 {
@@ -1454,8 +1482,10 @@ namespace DXAutoFillData.UControls
                         }
                     }
                 }
-
-                var xElementCollection = webBrowser.Document.GetElementById("slPref_cd").GetElementsByTagName("option");
+            }
+            if (webBrowser.Document.GetElementById("txtProvince") != null)
+            {
+                var xElementCollection = webBrowser.Document.GetElementById("txtProvince").GetElementsByTagName("option");
                 foreach (HtmlElement el in xElementCollection)
                 {
                     var x1 = el.InnerText.Trim().ToUpper();
@@ -1466,38 +1496,20 @@ namespace DXAutoFillData.UControls
                         break;
                     }
                 }
-
-                webBrowser.Document.GetElementById("txtFromYear").SetAttribute("value", data["FromYear"].ToString().Trim());
-
-                var xToYear = webBrowser.Document.GetElementById("txtToYear").GetElementsByTagName("option");
-                foreach (HtmlElement el in xToYear)
-                {
-                    if (el.InnerText != null)
-                    {
-                        var x1 = int.Parse(el.InnerText.Trim());
-                        var x2 = int.Parse(data["ToYear"].ToString().Trim());
-                        if (x1 == x2)
-                        {
-                            el.SetAttribute("selected", "selected");
-                            break;
-                        }
-                    }
-                }
-                var xChinhQui = webBrowser.Document.GetElementById("txtChinhQui").GetElementsByTagName("option");
-                foreach (HtmlElement el in xChinhQui)
-                {
-                    if (el.InnerText != null)
-                    {
-                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
-                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
-                        if (x1 == x2)
-                        {
-                            el.SetAttribute("selected", "selected");
-                            break;
-                        }
-                    }
-                }
             }
+            //done 
+            if (webBrowser.Document.GetElementById("thoigianhocbatdau") != null)
+                webBrowser.Document.GetElementById("thoigianhocbatdau").SetAttribute("value", data["FromYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("thoigianhocketthuc") != null)
+                webBrowser.Document.GetElementById("thoigianhocketthuc").SetAttribute("value", data["ToYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("hechinhquy") != null)
+                webBrowser.Document.GetElementById("hechinhquy").SetAttribute("value", data["Formal"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("diachinoi_nhanthongbao") != null)
+                webBrowser.Document.GetElementById("diachinoi_nhanthongbao").SetAttribute("value", data["AddressNotf"].ToString().Trim());
+
             #endregion
 
             #region===== Tag Button
@@ -1528,87 +1540,98 @@ namespace DXAutoFillData.UControls
             HtmlElementCollection elementsInput = webBrowser.Document.GetElementsByTagName("input");
             HtmlElementCollection elementsSelect = webBrowser.Document.GetElementsByTagName("select");
             HtmlElementCollection elementsButton = webBrowser.Document.GetElementsByTagName("button");
-            // We have to use this form because of the lambda expression that is used to pass
-            // in the element instance to the handler. This is the only way to actually get
-            // the element instance, as the instance is not passed in if we just provide the
-            // event sink method name.
+
             #region ===== Tag Input
-            if (elementsInput.Count > 0 && elementsInput != null)
-            {
-                elementsInput[0].Id = "txtFullName";
-                elementsInput[1].Id = "txtStreet";
-                elementsInput[2].Id = "txtWard";
-                elementsInput[3].Id = "txtDistrict";
-                elementsInput[4].Id = "txtCurrAddress";
-                elementsInput[5].Id = "txtCMND";
-                elementsInput[6].Id = "txtIssuedBy";
+            elementsInput[0].Id = "txtFullName";
+            elementsInput[1].Id = "txtStreet";
+            elementsInput[2].Id = "txtWard";
+            elementsInput[3].Id = "txtDistrict";
+            elementsInput[4].Id = "txtCurrAddress";
+            elementsInput[5].Id = "txtCMND";
+            elementsInput[12].Id = "txtChuaTotNghiep";
+            elementsInput[13].Id = "txtDaTotNghiep";
+            elementsInput[16].Id = "txtMaSoVanBang";
+            elementsInput[17].Id = "txtNamTotNghiep";
 
-                elementsInput[9].Id = "txtEmail";
-                elementsInput[10].Id = "txtPhone";
-                elementsInput[11].Id = "txtNgoaiNgu";
-
-                elementsInput[12].Id = "txtChuaTotNghiep";
-                elementsInput[13].Id = "txtDaTotNghiep";
-
-                elementsInput[14].Id = "txtTruongDaiHoc";
-                elementsInput[15].Id = "txtSoNam";
-                elementsInput[16].Id = "txtMaSoVanBang";
-                elementsInput[17].Id = "txtNamTotNghiep";
-                elementsInput[18].Id = "txtFullNameRef";
-                elementsInput[19].Id = "txtPhoneRef";
-                elementsInput[20].Id = "txtAddressRef";
-
-
+            if (webBrowser.Document.GetElementById("txtFullName") != null)
                 webBrowser.Document.GetElementById("txtFullName").InnerText = data["FullName"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtStreet") != null)
                 webBrowser.Document.GetElementById("txtStreet").InnerText = data["Street"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtWard") != null)
                 webBrowser.Document.GetElementById("txtWard").InnerText = data["Ward"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtDistrict") != null)
                 webBrowser.Document.GetElementById("txtDistrict").InnerText = data["District"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtCurrAddress") != null)
                 webBrowser.Document.GetElementById("txtCurrAddress").InnerText = data["CurrentAddress"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtCMND") != null)
                 webBrowser.Document.GetElementById("txtCMND").InnerText = data["Passport"].ToString().Trim();
-                webBrowser.Document.GetElementById("txtIssuedBy").InnerText = data["IssuedBy"].ToString().Trim();
-
-                webBrowser.Document.GetElementById("datepicker1").InnerText = data["DateRange"].ToString().Trim();
-                webBrowser.Document.GetElementById("datepicker2").SetAttribute("value", data["DateExpired"].ToString().Trim());
-
-                webBrowser.Document.GetElementById("txtEmail").SetAttribute("value", data["Email"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("noicaphochieu") != null)
+                webBrowser.Document.GetElementById("noicaphochieu").InnerText = data["IssuedBy"].ToString().Trim();
+            //done
+            if (webBrowser.Document.GetElementById("field_260") != null)
+                webBrowser.Document.GetElementById("field_260").InnerText = data["DateRange"].ToString().Trim();
+            //done
+            if (webBrowser.Document.GetElementById("field_261") != null)
+                webBrowser.Document.GetElementById("field_261").SetAttribute("value", data["DateExpired"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("diachiemail") != null)
+                webBrowser.Document.GetElementById("diachiemail").SetAttribute("value", data["Email"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtPhone") != null)
                 webBrowser.Document.GetElementById("txtPhone").SetAttribute("value", data["Phone"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtNgoaiNgu").SetAttribute("value", data["Languges"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtTruongDaiHoc").SetAttribute("value", data["University"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtSoNam").SetAttribute("value", data["NYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("trinhdotienganh") != null)
+                webBrowser.Document.GetElementById("trinhdotienganh").SetAttribute("value", data["Languges"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("tentruongdaihoc") != null)
+                webBrowser.Document.GetElementById("tentruongdaihoc").SetAttribute("value", data["University"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("thoigianhoc") != null)
+                webBrowser.Document.GetElementById("thoigianhoc").SetAttribute("value", data["NYear"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtMaSoVanBang") != null)
                 webBrowser.Document.GetElementById("txtMaSoVanBang").SetAttribute("value", data["NumOfDip"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtNamTotNghiep") != null)
                 webBrowser.Document.GetElementById("txtNamTotNghiep").SetAttribute("value", data["GradYear"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtFullNameRef").SetAttribute("value", data["FullNameRef"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtPhoneRef").SetAttribute("value", data["PhoneRef"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtAddressRef").SetAttribute("value", data["AddressRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("lh_nguoilienhe") != null)
+                webBrowser.Document.GetElementById("lh_nguoilienhe").SetAttribute("value", data["FullNameRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("lh_dienthoai") != null)
+                webBrowser.Document.GetElementById("lh_dienthoai").SetAttribute("value", data["PhoneRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("ld_diachi") != null)
+                webBrowser.Document.GetElementById("ld_diachi").SetAttribute("value", data["AddressRef"].ToString().Trim());
 
-                bool check = data["Status"].ToString().Trim() == "CTN" ? true : false;
-                if (check)
+
+            bool check = data["Status"].ToString().Trim() == "CTN" ? true : false;
+            if (check)
+                if (webBrowser.Document.GetElementById("txtChuaTotNghiep") != null)
                     webBrowser.Document.GetElementById("txtChuaTotNghiep").SetAttribute("checked", "1");
                 else
+                    if (webBrowser.Document.GetElementById("txtDaTotNghiep") != null)
                     webBrowser.Document.GetElementById("txtDaTotNghiep").SetAttribute("checked", "1");
-            }
+
             #endregion
 
             #region ===== Tag Select
-            if (elementsSelect.Count > 0 && elementsSelect != null)
+            elementsSelect[3].Id = "txtGender";
+            elementsSelect[4].Id = "txtMarriage";
+            elementsSelect[5].Id = "txtProvince";
+
+            var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
+            var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+            //done
+            if (webBrowser.Document.GetElementById("field_176_days") != null)
+                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", day);
+            //done
+            if (webBrowser.Document.GetElementById("field_176_month") != null)
+                webBrowser.Document.GetElementById("field_176_month").SetAttribute("value", DateB[1].ToString());
+            //done
+            if (webBrowser.Document.GetElementById("field_176_year") != null)
+                webBrowser.Document.GetElementById("field_176_year").SetAttribute("value", DateB[2].ToString());
+
+            if (webBrowser.Document.GetElementById("txtGender") != null)
             {
-                elementsSelect[0].Id = "txtDay";
-                elementsSelect[1].Id = "txtMonth";
-                elementsSelect[2].Id = "txtYear";
-                elementsSelect[3].Id = "txtGender";
-                elementsSelect[4].Id = "txtMarriage";
-
-                elementsSelect[6].Id = "txtFromYear";
-                elementsSelect[7].Id = "txtToYear";
-                elementsSelect[8].Id = "txtChinhQui";
-
-                var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
-                var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
-
-                webBrowser.Document.GetElementById("txtDay").SetAttribute("value", day);
-                webBrowser.Document.GetElementById("txtMonth").SetAttribute("value", DateB[1].ToString());
-                webBrowser.Document.GetElementById("txtYear").SetAttribute("value", DateB[2].ToString());
-
                 var xGender = webBrowser.Document.GetElementById("txtGender").GetElementsByTagName("option");
                 foreach (HtmlElement el in xGender)
                 {
@@ -1623,6 +1646,9 @@ namespace DXAutoFillData.UControls
                         }
                     }
                 }
+            }
+            if (webBrowser.Document.GetElementById("txtMarriage") != null)
+            {
                 var xMarriage = webBrowser.Document.GetElementById("txtMarriage").GetElementsByTagName("option");
                 foreach (HtmlElement el in xMarriage)
                 {
@@ -1642,8 +1668,10 @@ namespace DXAutoFillData.UControls
                         }
                     }
                 }
-
-                var xElementCollection = webBrowser.Document.GetElementById("slPref_cd").GetElementsByTagName("option");
+            }
+            if (webBrowser.Document.GetElementById("txtProvince") != null)
+            {
+                var xElementCollection = webBrowser.Document.GetElementById("txtProvince").GetElementsByTagName("option");
                 foreach (HtmlElement el in xElementCollection)
                 {
                     var x1 = el.InnerText.Trim().ToUpper();
@@ -1654,38 +1682,20 @@ namespace DXAutoFillData.UControls
                         break;
                     }
                 }
-
-                webBrowser.Document.GetElementById("txtFromYear").SetAttribute("value", data["FromYear"].ToString().Trim());
-
-                var xToYear = webBrowser.Document.GetElementById("txtToYear").GetElementsByTagName("option");
-                foreach (HtmlElement el in xToYear)
-                {
-                    if (el.InnerText != null)
-                    {
-                        var x1 = int.Parse(el.InnerText.Trim());
-                        var x2 = int.Parse(data["ToYear"].ToString().Trim());
-                        if (x1 == x2)
-                        {
-                            el.SetAttribute("selected", "selected");
-                            break;
-                        }
-                    }
-                }
-                var xChinhQui = webBrowser.Document.GetElementById("txtChinhQui").GetElementsByTagName("option");
-                foreach (HtmlElement el in xChinhQui)
-                {
-                    if (el.InnerText != null)
-                    {
-                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
-                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
-                        if (x1 == x2)
-                        {
-                            el.SetAttribute("selected", "selected");
-                            break;
-                        }
-                    }
-                }
             }
+            //done 
+            if (webBrowser.Document.GetElementById("thoigianhocbatdau") != null)
+                webBrowser.Document.GetElementById("thoigianhocbatdau").SetAttribute("value", data["FromYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("thoigianhocketthuc") != null)
+                webBrowser.Document.GetElementById("thoigianhocketthuc").SetAttribute("value", data["ToYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("hechinhquy") != null)
+                webBrowser.Document.GetElementById("hechinhquy").SetAttribute("value", data["Formal"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("diachinoi_nhanthongbao") != null)
+                webBrowser.Document.GetElementById("diachinoi_nhanthongbao").SetAttribute("value", data["AddressNotf"].ToString().Trim());
+
             #endregion
 
             #region===== Tag Button
@@ -1715,87 +1725,98 @@ namespace DXAutoFillData.UControls
             HtmlElementCollection elementsInput = webBrowser.Document.GetElementsByTagName("input");
             HtmlElementCollection elementsSelect = webBrowser.Document.GetElementsByTagName("select");
             HtmlElementCollection elementsButton = webBrowser.Document.GetElementsByTagName("button");
-            // We have to use this form because of the lambda expression that is used to pass
-            // in the element instance to the handler. This is the only way to actually get
-            // the element instance, as the instance is not passed in if we just provide the
-            // event sink method name.
+
             #region ===== Tag Input
-            if (elementsInput.Count > 0 && elementsInput != null)
-            {
-                elementsInput[0].Id = "txtFullName";
-                elementsInput[1].Id = "txtStreet";
-                elementsInput[2].Id = "txtWard";
-                elementsInput[3].Id = "txtDistrict";
-                elementsInput[4].Id = "txtCurrAddress";
-                elementsInput[5].Id = "txtCMND";
-                elementsInput[6].Id = "txtIssuedBy";
+            elementsInput[0].Id = "txtFullName";
+            elementsInput[1].Id = "txtStreet";
+            elementsInput[2].Id = "txtWard";
+            elementsInput[3].Id = "txtDistrict";
+            elementsInput[4].Id = "txtCurrAddress";
+            elementsInput[5].Id = "txtCMND";
+            elementsInput[12].Id = "txtChuaTotNghiep";
+            elementsInput[13].Id = "txtDaTotNghiep";
+            elementsInput[16].Id = "txtMaSoVanBang";
+            elementsInput[17].Id = "txtNamTotNghiep";
 
-                elementsInput[9].Id = "txtEmail";
-                elementsInput[10].Id = "txtPhone";
-                elementsInput[11].Id = "txtNgoaiNgu";
-
-                elementsInput[12].Id = "txtChuaTotNghiep";
-                elementsInput[13].Id = "txtDaTotNghiep";
-
-                elementsInput[14].Id = "txtTruongDaiHoc";
-                elementsInput[15].Id = "txtSoNam";
-                elementsInput[16].Id = "txtMaSoVanBang";
-                elementsInput[17].Id = "txtNamTotNghiep";
-                elementsInput[18].Id = "txtFullNameRef";
-                elementsInput[19].Id = "txtPhoneRef";
-                elementsInput[20].Id = "txtAddressRef";
-
-
+            if (webBrowser.Document.GetElementById("txtFullName") != null)
                 webBrowser.Document.GetElementById("txtFullName").InnerText = data["FullName"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtStreet") != null)
                 webBrowser.Document.GetElementById("txtStreet").InnerText = data["Street"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtWard") != null)
                 webBrowser.Document.GetElementById("txtWard").InnerText = data["Ward"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtDistrict") != null)
                 webBrowser.Document.GetElementById("txtDistrict").InnerText = data["District"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtCurrAddress") != null)
                 webBrowser.Document.GetElementById("txtCurrAddress").InnerText = data["CurrentAddress"].ToString().Trim();
+            if (webBrowser.Document.GetElementById("txtCMND") != null)
                 webBrowser.Document.GetElementById("txtCMND").InnerText = data["Passport"].ToString().Trim();
-                webBrowser.Document.GetElementById("txtIssuedBy").InnerText = data["IssuedBy"].ToString().Trim();
-
-                webBrowser.Document.GetElementById("datepicker1").InnerText = data["DateRange"].ToString().Trim();
-                webBrowser.Document.GetElementById("datepicker2").SetAttribute("value", data["DateExpired"].ToString().Trim());
-
-                webBrowser.Document.GetElementById("txtEmail").SetAttribute("value", data["Email"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("noicaphochieu") != null)
+                webBrowser.Document.GetElementById("noicaphochieu").InnerText = data["IssuedBy"].ToString().Trim();
+            //done
+            if (webBrowser.Document.GetElementById("field_260") != null)
+                webBrowser.Document.GetElementById("field_260").InnerText = data["DateRange"].ToString().Trim();
+            //done
+            if (webBrowser.Document.GetElementById("field_261") != null)
+                webBrowser.Document.GetElementById("field_261").SetAttribute("value", data["DateExpired"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("diachiemail") != null)
+                webBrowser.Document.GetElementById("diachiemail").SetAttribute("value", data["Email"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtPhone") != null)
                 webBrowser.Document.GetElementById("txtPhone").SetAttribute("value", data["Phone"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtNgoaiNgu").SetAttribute("value", data["Languges"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtTruongDaiHoc").SetAttribute("value", data["University"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtSoNam").SetAttribute("value", data["NYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("trinhdotienganh") != null)
+                webBrowser.Document.GetElementById("trinhdotienganh").SetAttribute("value", data["Languges"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("tentruongdaihoc") != null)
+                webBrowser.Document.GetElementById("tentruongdaihoc").SetAttribute("value", data["University"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("thoigianhoc") != null)
+                webBrowser.Document.GetElementById("thoigianhoc").SetAttribute("value", data["NYear"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtMaSoVanBang") != null)
                 webBrowser.Document.GetElementById("txtMaSoVanBang").SetAttribute("value", data["NumOfDip"].ToString().Trim());
+            if (webBrowser.Document.GetElementById("txtNamTotNghiep") != null)
                 webBrowser.Document.GetElementById("txtNamTotNghiep").SetAttribute("value", data["GradYear"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtFullNameRef").SetAttribute("value", data["FullNameRef"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtPhoneRef").SetAttribute("value", data["PhoneRef"].ToString().Trim());
-                webBrowser.Document.GetElementById("txtAddressRef").SetAttribute("value", data["AddressRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("lh_nguoilienhe") != null)
+                webBrowser.Document.GetElementById("lh_nguoilienhe").SetAttribute("value", data["FullNameRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("lh_dienthoai") != null)
+                webBrowser.Document.GetElementById("lh_dienthoai").SetAttribute("value", data["PhoneRef"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("ld_diachi") != null)
+                webBrowser.Document.GetElementById("ld_diachi").SetAttribute("value", data["AddressRef"].ToString().Trim());
 
-                bool check = data["Status"].ToString().Trim() == "CTN" ? true : false;
-                if (check)
+
+            bool check = data["Status"].ToString().Trim() == "CTN" ? true : false;
+            if (check)
+                if (webBrowser.Document.GetElementById("txtChuaTotNghiep") != null)
                     webBrowser.Document.GetElementById("txtChuaTotNghiep").SetAttribute("checked", "1");
                 else
+                    if (webBrowser.Document.GetElementById("txtDaTotNghiep") != null)
                     webBrowser.Document.GetElementById("txtDaTotNghiep").SetAttribute("checked", "1");
-            }
+
             #endregion
 
             #region ===== Tag Select
-            if (elementsSelect.Count > 0 && elementsSelect != null)
+            elementsSelect[3].Id = "txtGender";
+            elementsSelect[4].Id = "txtMarriage";
+            elementsSelect[5].Id = "txtProvince";
+
+            var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
+            var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+            //done
+            if (webBrowser.Document.GetElementById("field_176_days") != null)
+                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", day);
+            //done
+            if (webBrowser.Document.GetElementById("field_176_month") != null)
+                webBrowser.Document.GetElementById("field_176_month").SetAttribute("value", DateB[1].ToString());
+            //done
+            if (webBrowser.Document.GetElementById("field_176_year") != null)
+                webBrowser.Document.GetElementById("field_176_year").SetAttribute("value", DateB[2].ToString());
+
+            if (webBrowser.Document.GetElementById("txtGender") != null)
             {
-                elementsSelect[0].Id = "txtDay";
-                elementsSelect[1].Id = "txtMonth";
-                elementsSelect[2].Id = "txtYear";
-                elementsSelect[3].Id = "txtGender";
-                elementsSelect[4].Id = "txtMarriage";
-
-                elementsSelect[6].Id = "txtFromYear";
-                elementsSelect[7].Id = "txtToYear";
-                elementsSelect[8].Id = "txtChinhQui";
-
-                var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
-                var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
-
-                webBrowser.Document.GetElementById("txtDay").SetAttribute("value", day);
-                webBrowser.Document.GetElementById("txtMonth").SetAttribute("value", DateB[1].ToString());
-                webBrowser.Document.GetElementById("txtYear").SetAttribute("value", DateB[2].ToString());
-
                 var xGender = webBrowser.Document.GetElementById("txtGender").GetElementsByTagName("option");
                 foreach (HtmlElement el in xGender)
                 {
@@ -1810,6 +1831,9 @@ namespace DXAutoFillData.UControls
                         }
                     }
                 }
+            }
+            if (webBrowser.Document.GetElementById("txtMarriage") != null)
+            {
                 var xMarriage = webBrowser.Document.GetElementById("txtMarriage").GetElementsByTagName("option");
                 foreach (HtmlElement el in xMarriage)
                 {
@@ -1829,8 +1853,10 @@ namespace DXAutoFillData.UControls
                         }
                     }
                 }
-
-                var xElementCollection = webBrowser.Document.GetElementById("slPref_cd").GetElementsByTagName("option");
+            }
+            if (webBrowser.Document.GetElementById("txtProvince") != null)
+            {
+                var xElementCollection = webBrowser.Document.GetElementById("txtProvince").GetElementsByTagName("option");
                 foreach (HtmlElement el in xElementCollection)
                 {
                     var x1 = el.InnerText.Trim().ToUpper();
@@ -1841,38 +1867,20 @@ namespace DXAutoFillData.UControls
                         break;
                     }
                 }
-
-                webBrowser.Document.GetElementById("txtFromYear").SetAttribute("value", data["FromYear"].ToString().Trim());
-
-                var xToYear = webBrowser.Document.GetElementById("txtToYear").GetElementsByTagName("option");
-                foreach (HtmlElement el in xToYear)
-                {
-                    if (el.InnerText != null)
-                    {
-                        var x1 = int.Parse(el.InnerText.Trim());
-                        var x2 = int.Parse(data["ToYear"].ToString().Trim());
-                        if (x1 == x2)
-                        {
-                            el.SetAttribute("selected", "selected");
-                            break;
-                        }
-                    }
-                }
-                var xChinhQui = webBrowser.Document.GetElementById("txtChinhQui").GetElementsByTagName("option");
-                foreach (HtmlElement el in xChinhQui)
-                {
-                    if (el.InnerText != null)
-                    {
-                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
-                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
-                        if (x1 == x2)
-                        {
-                            el.SetAttribute("selected", "selected");
-                            break;
-                        }
-                    }
-                }
             }
+            //done 
+            if (webBrowser.Document.GetElementById("thoigianhocbatdau") != null)
+                webBrowser.Document.GetElementById("thoigianhocbatdau").SetAttribute("value", data["FromYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("thoigianhocketthuc") != null)
+                webBrowser.Document.GetElementById("thoigianhocketthuc").SetAttribute("value", data["ToYear"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("hechinhquy") != null)
+                webBrowser.Document.GetElementById("hechinhquy").SetAttribute("value", data["Formal"].ToString().Trim());
+            //done
+            if (webBrowser.Document.GetElementById("diachinoi_nhanthongbao") != null)
+                webBrowser.Document.GetElementById("diachinoi_nhanthongbao").SetAttribute("value", data["AddressNotf"].ToString().Trim());
+
             #endregion
 
             #region===== Tag Button
@@ -1900,24 +1908,24 @@ namespace DXAutoFillData.UControls
         }
         #endregion
 
-        private void SubmitForm(WebBrowser webBrowser, String formName)
+        private void kêtThucToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HtmlElementCollection elems = null;
-            HtmlElement elem = null;
+            Form f = Application.OpenForms["frmShowWindow"];
+            if (f != null)
+                f.Close();
+        }
 
-            if (webBrowser.Document != null)
-            {
-                HtmlDocument doc = webBrowser.Document;
-                elems = doc.All.GetElementsByName(formName);
-                if (elems != null && elems.Count > 0)
-                {
-                    elem = elems[0];
-                    if (elem.TagName.Equals("FORM"))
-                    {
-                        elem.InvokeMember("Submit");
-                    }
-                }
-            }
+        private void đongTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            XtraTabPage page = xtraTabControlMain.SelectedTabPage;
+            xtraTabControlMain.TabPages.Remove(page);
+        }
+
+        private void lamMơiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            XtraTabPage page = xtraTabControlMain.SelectedTabPage;
+            if (page.Controls.Count > 0)
+                ((WebBrowser)page.Controls[0]).Navigate(UserConfig.getUTargetUrl());
         }
     }
 }

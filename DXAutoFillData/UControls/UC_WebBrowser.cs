@@ -324,8 +324,8 @@ namespace DXAutoFillData.UControls
                                 fillDataOne(webBrowser, _lsDataOne[indexOne]);
                             else
                             {
-                                webBrowser.Stop();
-                                xtraTabControlMain.TabPages.Remove(tabPage);
+                                webBrowser.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(tabPage);
                             }
                             if (isSubmitOne)
                             {
@@ -408,8 +408,8 @@ namespace DXAutoFillData.UControls
                                 fillDataTwo(webBrowserTwo, _lsDataTwo[indexTwo]);
                             else
                             {
-                                webBrowserTwo.Stop();
-                                xtraTabControlMain.TabPages.Remove(xtraTabPageTwo);
+                                webBrowserTwo.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(xtraTabPageTwo)
                             }
                             if (isSubmitTwo)
                             {
@@ -492,8 +492,8 @@ namespace DXAutoFillData.UControls
                                 fillDataThree(webBrowserThree, _lsDataThree[indexThree]);
                             else
                             {
-                                webBrowserThree.Stop();
-                                xtraTabControlMain.TabPages.Remove(xtraTabPageThree);
+                                webBrowserThree.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(xtraTabPageThree);
                             }
                             if (isSubmitThree)
                             {
@@ -575,8 +575,8 @@ namespace DXAutoFillData.UControls
                                 fillDataFour(webBrowserFour, _lsDataFour[indexFour]);
                             else
                             {
-                                webBrowserFour.Stop();
-                                xtraTabControlMain.TabPages.Remove(xtraTabPageFour);
+                                webBrowserFour.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(xtraTabPageFour);
                             }
                             if (isSubmitFour)
                             {
@@ -659,8 +659,8 @@ namespace DXAutoFillData.UControls
                                 fillDataFive(webBrowserFive, _lsDataFive[indexFive]);
                             else
                             {
-                                webBrowserFive.Stop();
-                                xtraTabControlMain.TabPages.Remove(xtraTabPageFive);
+                                webBrowserFive.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(xtraTabPageFive);
                             }
                             if (isSubmitFive)
                             {
@@ -743,8 +743,8 @@ namespace DXAutoFillData.UControls
                                 fillDataSix(webBrowserSix, _lsDataSix[indexSix]);
                             else
                             {
-                                webBrowserSix.Stop();
-                                xtraTabControlMain.TabPages.Remove(xtraTabPageSix);
+                                webBrowserSix.Navigate(UserConfig.getUTargetUrl());
+                                //xtraTabControlMain.TabPages.Remove(xtraTabPageSix);
                             }
                             if (isSubmitSix)
                             {
@@ -1938,6 +1938,26 @@ namespace DXAutoFillData.UControls
                     }
                 }
             }
+        }
+
+        private void kêtThucToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form f = Application.OpenForms["frmShowWindow"];
+            if (f != null)
+                f.Close();
+        }
+
+        private void đongTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            XtraTabPage page = xtraTabControlMain.SelectedTabPage;
+            xtraTabControlMain.TabPages.Remove(page);
+        }
+
+        private void lamMơiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            XtraTabPage page = xtraTabControlMain.SelectedTabPage;
+            if (page.Controls.Count > 0)
+                ((WebBrowser)page.Controls[0]).Navigate(UserConfig.getUTargetUrl());
         }
     }
 }

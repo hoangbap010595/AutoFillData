@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_WebBrowser));
             this.xtraTabControlMain = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPageOne = new DevExpress.XtraTab.XtraTabPage();
@@ -36,12 +37,18 @@
             this.xtraTabPageFour = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPageFive = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPageSix = new DevExpress.XtraTab.XtraTabPage();
+            this.contextMenuStripWeb1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.lamMơiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.đongTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kêtThucToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlMain)).BeginInit();
             this.xtraTabControlMain.SuspendLayout();
+            this.contextMenuStripWeb1.SuspendLayout();
             this.SuspendLayout();
             // 
             // xtraTabControlMain
             // 
+            this.xtraTabControlMain.ContextMenuStrip = this.contextMenuStripWeb1;
             this.xtraTabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.xtraTabControlMain.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControlMain.Name = "xtraTabControlMain";
@@ -59,6 +66,7 @@
             // 
             // xtraTabPageOne
             // 
+            this.xtraTabPageOne.ContextMenuStrip = this.contextMenuStripWeb1;
             this.xtraTabPageOne.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageOne.Image")));
             this.xtraTabPageOne.Name = "xtraTabPageOne";
             this.xtraTabPageOne.Size = new System.Drawing.Size(868, 322);
@@ -66,6 +74,7 @@
             // 
             // xtraTabPageTwo
             // 
+            this.xtraTabPageTwo.ContextMenuStrip = this.contextMenuStripWeb1;
             this.xtraTabPageTwo.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageTwo.Image")));
             this.xtraTabPageTwo.Name = "xtraTabPageTwo";
             this.xtraTabPageTwo.Size = new System.Drawing.Size(868, 322);
@@ -73,6 +82,7 @@
             // 
             // xtraTabPageThree
             // 
+            this.xtraTabPageThree.ContextMenuStrip = this.contextMenuStripWeb1;
             this.xtraTabPageThree.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageThree.Image")));
             this.xtraTabPageThree.Name = "xtraTabPageThree";
             this.xtraTabPageThree.Size = new System.Drawing.Size(868, 322);
@@ -80,6 +90,7 @@
             // 
             // xtraTabPageFour
             // 
+            this.xtraTabPageFour.ContextMenuStrip = this.contextMenuStripWeb1;
             this.xtraTabPageFour.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageFour.Image")));
             this.xtraTabPageFour.Name = "xtraTabPageFour";
             this.xtraTabPageFour.Size = new System.Drawing.Size(868, 322);
@@ -87,6 +98,7 @@
             // 
             // xtraTabPageFive
             // 
+            this.xtraTabPageFive.ContextMenuStrip = this.contextMenuStripWeb1;
             this.xtraTabPageFive.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageFive.Image")));
             this.xtraTabPageFive.Name = "xtraTabPageFive";
             this.xtraTabPageFive.Size = new System.Drawing.Size(868, 322);
@@ -94,10 +106,42 @@
             // 
             // xtraTabPageSix
             // 
+            this.xtraTabPageSix.ContextMenuStrip = this.contextMenuStripWeb1;
             this.xtraTabPageSix.Image = ((System.Drawing.Image)(resources.GetObject("xtraTabPageSix.Image")));
             this.xtraTabPageSix.Name = "xtraTabPageSix";
             this.xtraTabPageSix.Size = new System.Drawing.Size(868, 322);
             this.xtraTabPageSix.Text = "Đang chuyển hướng";
+            // 
+            // contextMenuStripWeb1
+            // 
+            this.contextMenuStripWeb1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lamMơiToolStripMenuItem,
+            this.đongTabToolStripMenuItem,
+            this.kêtThucToolStripMenuItem});
+            this.contextMenuStripWeb1.Name = "contextMenuStripWeb1";
+            this.contextMenuStripWeb1.Size = new System.Drawing.Size(153, 92);
+            // 
+            // lamMơiToolStripMenuItem
+            // 
+            this.lamMơiToolStripMenuItem.Name = "lamMơiToolStripMenuItem";
+            this.lamMơiToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.lamMơiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lamMơiToolStripMenuItem.Text = "Làm mới";
+            this.lamMơiToolStripMenuItem.Click += new System.EventHandler(this.lamMơiToolStripMenuItem_Click);
+            // 
+            // đongTabToolStripMenuItem
+            // 
+            this.đongTabToolStripMenuItem.Name = "đongTabToolStripMenuItem";
+            this.đongTabToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.đongTabToolStripMenuItem.Text = "Đóng tab";
+            this.đongTabToolStripMenuItem.Click += new System.EventHandler(this.đongTabToolStripMenuItem_Click);
+            // 
+            // kêtThucToolStripMenuItem
+            // 
+            this.kêtThucToolStripMenuItem.Name = "kêtThucToolStripMenuItem";
+            this.kêtThucToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.kêtThucToolStripMenuItem.Text = "Kết thúc";
+            this.kêtThucToolStripMenuItem.Click += new System.EventHandler(this.kêtThucToolStripMenuItem_Click);
             // 
             // UC_WebBrowser
             // 
@@ -109,6 +153,7 @@
             this.Load += new System.EventHandler(this.UC_WebBrowser_Load);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlMain)).EndInit();
             this.xtraTabControlMain.ResumeLayout(false);
+            this.contextMenuStripWeb1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -121,5 +166,9 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPageFour;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageFive;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageSix;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripWeb1;
+        private System.Windows.Forms.ToolStripMenuItem lamMơiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem đongTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kêtThucToolStripMenuItem;
     }
 }

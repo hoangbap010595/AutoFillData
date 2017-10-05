@@ -58,6 +58,7 @@
             this.btnInfomation = new DevExpress.XtraEditors.SimpleButton();
             this.btnAcctive = new DevExpress.XtraEditors.SimpleButton();
             this.btnUpdateSystem = new DevExpress.XtraEditors.SimpleButton();
+            this.btnStart2 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
@@ -241,6 +242,7 @@
             this.groupControl4.Controls.Add(this.labelControl6);
             this.groupControl4.Controls.Add(this.labelControl3);
             this.groupControl4.Controls.Add(this.btnStop);
+            this.groupControl4.Controls.Add(this.btnStart2);
             this.groupControl4.Controls.Add(this.btnStart);
             this.groupControl4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl4.Location = new System.Drawing.Point(403, 151);
@@ -325,9 +327,9 @@
             this.btnStart.Appearance.Options.UseFont = true;
             this.btnStart.Location = new System.Drawing.Point(10, 42);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(139, 75);
+            this.btnStart.Size = new System.Drawing.Size(139, 39);
             this.btnStart.TabIndex = 1;
-            this.btnStart.Text = "Bắt đầu";
+            this.btnStart.Text = "[1]Bắt đầu";
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // groupControl3
@@ -422,6 +424,17 @@
             this.btnUpdateSystem.Text = "Cập nhật";
             this.btnUpdateSystem.Click += new System.EventHandler(this.btnUpdateSystem_Click);
             // 
+            // btnStart2
+            // 
+            this.btnStart2.Appearance.Font = new System.Drawing.Font("Tahoma", 14F);
+            this.btnStart2.Appearance.Options.UseFont = true;
+            this.btnStart2.Location = new System.Drawing.Point(10, 86);
+            this.btnStart2.Name = "btnStart2";
+            this.btnStart2.Size = new System.Drawing.Size(139, 39);
+            this.btnStart2.TabIndex = 1;
+            this.btnStart2.Text = "[2]Bắt đầu";
+            this.btnStart2.Click += new System.EventHandler(this.btnStart2_Click);
+            // 
             // UC_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,5 +498,6 @@
         private DevExpress.XtraEditors.CheckEdit ckClearCache;
         private DevExpress.XtraEditors.SimpleButton btnInfomation;
         private DevExpress.XtraEditors.SimpleButton btnAcctive;
+        private DevExpress.XtraEditors.SimpleButton btnStart2;
     }
 }

@@ -27,7 +27,7 @@ namespace DXAutoFillData.UControls
         private void loadConfig()
         {
             //UserConfig.setTimeLeft(600);//XmI5L3-G3ig93-102017
-            UserConfig.setIsActive(true);
+            //UserConfig.setIsActive(true);
             if (UserConfig.getIsActive())
             {
                 btnUpdateHeThong.Enabled = btnUpdateSystem.Enabled = true;
@@ -113,6 +113,7 @@ namespace DXAutoFillData.UControls
                 if (DialogResult.OK == op.ShowDialog())
                 {
                     btnStart.Enabled = false;
+                    btnStart2.Enabled = false;
                     txtFilePath.Text = op.FileName.Trim();
                     Thread t = new Thread(new ThreadStart(()=> {
                         try
@@ -121,6 +122,7 @@ namespace DXAutoFillData.UControls
                             lsData.RemoveAt(0);
                             lsAllData = loadDataToList(lsData);
                             btnStart.Invoke((MethodInvoker)delegate { btnStart.Enabled = true; });
+                            btnStart2.Invoke((MethodInvoker)delegate { btnStart2.Enabled = true; });
                         }
                         catch (Exception ex)
                         {
@@ -249,6 +251,7 @@ namespace DXAutoFillData.UControls
             {
                 _timer.Enabled = false;
                 btnStart.Enabled = true;
+                btnStart2.Enabled = true;
                 btnStop.Enabled = false;
                 Form f = Application.OpenForms["frmShowWindow"];
                 if (f != null)
@@ -263,22 +266,29 @@ namespace DXAutoFillData.UControls
             {
                 if (txtFilePath.Text != "")
                 {
-                    timeRight = 0;
-                    lblSubmitSuccess.Text = "0";
-                    _timer.Enabled = true;
-                    btnStart.Enabled = false;
-                    btnStop.Enabled = true;
-                    UC_WebBrowserReal uc = new UC_WebBrowserReal(lsAllData);
-                    //UC_WebBrowser uc = new UC_WebBrowser(lsAllData);
-                    uc.sendCount = new UC_WebBrowserReal.sendCountSubmit(setCountSubmit);
-                    //uc.sendCount = new UC_WebBrowser.sendCountSubmit(setCountSubmit);
-                    frmShowWindow frm = new frmShowWindow();
-                    frm.Controls.Clear();
-                    uc.Dock = DockStyle.Fill;
-                    frm.Text = "Đang thực hiện quá trình submit dữ liệu...";
-                    frm.ControlBox = false;
-                    frm.Controls.Add(uc);
-                    frm.Show();
+                    Form frm = Application.OpenForms["frmShowWindow"];
+                    if (frm == null)
+                    {
+                        frm = new frmShowWindow();
+                        timeRight = 0;
+                        lblSubmitSuccess.Text = "0";
+                        _timer.Enabled = true;
+                        btnStart.Enabled = false;
+                        btnStart2.Enabled = false;
+                        btnStop.Enabled = true;
+                        UC_WebBrowser uc = new UC_WebBrowser(lsAllData);
+                        uc.sendCount = new UC_WebBrowser.sendCountSubmit(setCountSubmit);
+                        frm.Controls.Clear();
+                        uc.Dock = DockStyle.Fill;
+                        frm.Text = "Đang thực hiện quá trình submit dữ liệu...";
+                        frm.ControlBox = false;
+                        frm.Controls.Add(uc);
+                        frm.Show();
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show("Đóng các cửa sổ còn lại để thực hiện");
+                    }
                 }
                 else
                 {
@@ -299,6 +309,7 @@ namespace DXAutoFillData.UControls
 
             _timer.Enabled = false;
             btnStart.Enabled = true;
+            btnStart2.Enabled = true;
             btnStop.Enabled = false;
         }
 
@@ -317,6 +328,46 @@ namespace DXAutoFillData.UControls
         {
             frmActive frmActive = new frmActive();
             frmActive.ShowDialog();
+        }
+
+        private void btnStart2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Form frm = Application.OpenForms["frmShowWindow"];
+                if (frm == null)
+                {
+                    if (txtFilePath.Text != "")
+                    {
+                        frm = new frmShowWindow();
+                        timeRight = 0;
+                        lblSubmitSuccess.Text = "0";
+                        _timer.Enabled = true;
+                        btnStart.Enabled = false;
+                        btnStart2.Enabled = false;
+                        btnStop.Enabled = true;
+                        UC_WebBrowserReal uc = new UC_WebBrowserReal(lsAllData);
+                        uc.sendCount = new UC_WebBrowserReal.sendCountSubmit(setCountSubmit);
+                        frm.Controls.Clear();
+                        uc.Dock = DockStyle.Fill;
+                        frm.Text = "Đang thực hiện quá trình submit dữ liệu...";
+                        frm.ControlBox = false;
+                        frm.Controls.Add(uc);
+                        frm.Show();
+                    }else
+                    {
+                        XtraMessageBox.Show("Đóng các cửa sổ còn lại để thực hiện");
+                    }
+                }
+                else
+                {
+                    XtraMessageBox.Show("Bạn chưa chọn file để hiển thị");
+                }
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show("" + ex.Message, "Lỗi");
+            }
         }
     }
 }
