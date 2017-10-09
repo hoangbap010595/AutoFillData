@@ -21,20 +21,21 @@ namespace DXAutoFillData.UControls
         private List<List<Dictionary<string, object>>> lsAllData;
         public UC_Main()
         {
-            InitializeComponent();           
+            InitializeComponent();
             loadConfig();
         }
         private void loadConfig()
         {
             //UserConfig.setTimeLeft(600);//XmI5L3-G3ig93-102017
-            //UserConfig.setIsActive(true);
+            UserConfig.setIsActive(false);
+            btnUpdateHeThong.Enabled = btnUpdateSystem.Enabled = false;
             if (UserConfig.getIsActive())
             {
                 btnUpdateHeThong.Enabled = btnUpdateSystem.Enabled = true;
                 btnAcctive.Visible = false;
             }
             else
-            {       
+            {
                 btnUpdateHeThong.Enabled = btnUpdateSystem.Enabled = false;
                 UserConfig.setUAutoLogin(false);
                 UserConfig.setSAutoCloseForm(false);
@@ -43,7 +44,7 @@ namespace DXAutoFillData.UControls
                 UserConfig.setSAutoClearCache(false);
                 btnAcctive.Visible = true;
             }
-            
+
             txtTarget.Text = UserConfig.getUTargetUrl();
             txtPassword.Text = UserConfig.getUPassword();
             ckAutoLogin.Checked = UserConfig.getUAutoLogin();
@@ -91,11 +92,13 @@ namespace DXAutoFillData.UControls
                 var ckClick = ckAutoClickSubmit.Checked;
                 var ckChoose = ckAutoEnterData.Checked;
                 var ckClear = ckClearCache.Checked;
+                var iTab = int.Parse(numTab.Value.ToString());
 
                 UserConfig.setSAutoCloseForm(ckClose);
                 UserConfig.setSAutoSubmit(ckClick);
                 UserConfig.setSAutoEnterData(ckChoose);
                 UserConfig.setSAutoClearCache(ckClear);
+                UserConfig.setSActiveTab(iTab);
 
                 XtraMessageBox.Show("Cập nhật thành công");
             }
@@ -115,7 +118,8 @@ namespace DXAutoFillData.UControls
                     btnStart.Enabled = false;
                     btnStart2.Enabled = false;
                     txtFilePath.Text = op.FileName.Trim();
-                    Thread t = new Thread(new ThreadStart(()=> {
+                    Thread t = new Thread(new ThreadStart(() =>
+                    {
                         try
                         {
                             lsData = OpenFileExcel.getDataExcelFromFileToList(op.FileName.Trim());
@@ -148,7 +152,9 @@ namespace DXAutoFillData.UControls
             List<Dictionary<string, object>> _lsDataSix = new List<Dictionary<string, object>>();
 
             int total = ls.Count;
-            int num = total / 6;
+            int tab = UserConfig.getSActiveTab();
+            int num = total / tab;
+
             int index = 0;
             if (num == 0)
             {
@@ -160,29 +166,119 @@ namespace DXAutoFillData.UControls
             }
             else
             {
-                for (; index < num; index++)
+                if (tab == 6)
                 {
-                    _lsDataOne.Add(ls[index]);
+                    #region == tab 6 ===
+                    for (; index < num; index++)
+                    {
+                        _lsDataOne.Add(ls[index]);
+                    }
+                    for (; index < num * 2; index++)
+                    {
+                        _lsDataTwo.Add(ls[index]);
+                    }
+                    for (; index < num * 3; index++)
+                    {
+                        _lsDataThree.Add(ls[index]);
+                    }
+                    for (; index < num * 4; index++)
+                    {
+                        _lsDataFour.Add(ls[index]);
+                    }
+                    for (; index < num * 5; index++)
+                    {
+                        _lsDataFive.Add(ls[index]);
+                    }
+                    for (; index < ls.Count; index++)
+                    {
+                        _lsDataSix.Add(ls[index]);
+                    }
+                    #endregion
                 }
-                for (; index < num * 2; index++)
+                else if (tab == 5)
                 {
-                    _lsDataTwo.Add(ls[index]);
+                    #region == tab 5 ===
+                    for (; index < num; index++)
+                    {
+                        _lsDataOne.Add(ls[index]);
+                    }
+                    for (; index < num * 2; index++)
+                    {
+                        _lsDataTwo.Add(ls[index]);
+                    }
+                    for (; index < num * 3; index++)
+                    {
+                        _lsDataThree.Add(ls[index]);
+                    }
+                    for (; index < num * 4; index++)
+                    {
+                        _lsDataFour.Add(ls[index]);
+                    }
+                    for (; index < num * 5; index++)
+                    {
+                        _lsDataFive.Add(ls[index]);
+                    }
+                    #endregion
                 }
-                for (; index < num * 3; index++)
+                else if (tab == 4)
                 {
-                    _lsDataThree.Add(ls[index]);
+                    #region == tab 4 ===
+                    for (; index < num; index++)
+                    {
+                        _lsDataOne.Add(ls[index]);
+                    }
+                    for (; index < num * 2; index++)
+                    {
+                        _lsDataTwo.Add(ls[index]);
+                    }
+                    for (; index < num * 3; index++)
+                    {
+                        _lsDataThree.Add(ls[index]);
+                    }
+                    for (; index < num * 4; index++)
+                    {
+                        _lsDataFour.Add(ls[index]);
+                    }
+                    #endregion
                 }
-                for (; index < num * 4; index++)
+                else if (tab == 3)
                 {
-                    _lsDataFour.Add(ls[index]);
+                    #region == tab 3 ===
+                    for (; index < num; index++)
+                    {
+                        _lsDataOne.Add(ls[index]);
+                    }
+                    for (; index < num * 2; index++)
+                    {
+                        _lsDataTwo.Add(ls[index]);
+                    }
+                    for (; index < num * 3; index++)
+                    {
+                        _lsDataThree.Add(ls[index]);
+                    }
+                    #endregion
                 }
-                for (; index < num * 5; index++)
+                else if (tab == 2)
                 {
-                    _lsDataFive.Add(ls[index]);
+                    #region == tab 2 ===
+                    for (; index < num; index++)
+                    {
+                        _lsDataOne.Add(ls[index]);
+                    }
+                    for (; index < num * 2; index++)
+                    {
+                        _lsDataTwo.Add(ls[index]);
+                    }
+                    #endregion
                 }
-                for (; index < ls.Count; index++)
+                else if (tab == 1)
                 {
-                    _lsDataSix.Add(ls[index]);
+                    #region == tab 1 ===
+                    for (; index < num; index++)
+                    {
+                        _lsDataOne.Add(ls[index]);
+                    }
+                    #endregion
                 }
             }
             allData.Add(_lsDataOne);
@@ -334,10 +430,11 @@ namespace DXAutoFillData.UControls
         {
             try
             {
-                Form frm = Application.OpenForms["frmShowWindow"];
-                if (frm == null)
+
+                if (txtFilePath.Text != "")
                 {
-                    if (txtFilePath.Text != "")
+                    Form frm = Application.OpenForms["frmShowWindow"];
+                    if (frm == null)
                     {
                         frm = new frmShowWindow();
                         timeRight = 0;
@@ -354,7 +451,8 @@ namespace DXAutoFillData.UControls
                         frm.ControlBox = false;
                         frm.Controls.Add(uc);
                         frm.Show();
-                    }else
+                    }
+                    else
                     {
                         XtraMessageBox.Show("Đóng các cửa sổ còn lại để thực hiện");
                     }

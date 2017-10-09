@@ -54,12 +54,59 @@ namespace DXAutoFillData.UControls
 
         private void UC_WebBrowser_Load(object sender, EventArgs e)
         {
-            CreateWebBrowser(xtraTabPageOne, webBrowserOne);
-            CreateWebBrowserTwo();
-            CreateWebBrowserThree();
-            CreateWebBrowserFour();
-            CreateWebBrowserFive();
-            CreateWebBrowserSix();
+            int tab = UserConfig.getSActiveTab();
+            switch (tab)
+            {
+                case 1:
+                    CreateWebBrowser(xtraTabPageOne, webBrowserOne);
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageTwo);
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageThree);
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageFour);
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageFive);
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageSix);
+                    break;
+                case 2:
+                    CreateWebBrowser(xtraTabPageOne, webBrowserOne);
+                    CreateWebBrowserTwo();
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageThree);
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageFour);
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageFive);
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageSix);
+                    break;
+                case 3:
+                    CreateWebBrowser(xtraTabPageOne, webBrowserOne);
+                    CreateWebBrowserTwo();
+                    CreateWebBrowserThree();
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageFour);
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageFive);
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageSix);
+                    break;
+                case 4:
+                    CreateWebBrowser(xtraTabPageOne, webBrowserOne);
+                    CreateWebBrowserTwo();
+                    CreateWebBrowserThree();
+                    CreateWebBrowserFour();
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageFive);
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageSix);
+                    break;
+                case 5:
+                    CreateWebBrowser(xtraTabPageOne, webBrowserOne);
+                    CreateWebBrowserTwo();
+                    CreateWebBrowserThree();
+                    CreateWebBrowserFour();
+                    CreateWebBrowserFive();
+                    xtraTabControlMain.TabPages.Remove(xtraTabPageSix);
+                    break;
+                case 6:
+                default:
+                    CreateWebBrowser(xtraTabPageOne, webBrowserOne);
+                    CreateWebBrowserTwo();
+                    CreateWebBrowserThree();
+                    CreateWebBrowserFour();
+                    CreateWebBrowserFive();
+                    CreateWebBrowserSix();
+                    break;
+            }
         }
 
         public delegate void sendCountSubmit(int count);
@@ -878,10 +925,10 @@ namespace DXAutoFillData.UControls
             elementsSelect[5].Id = "txtProvince";
 
             var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
-            var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+            //var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
             //done
             if (webBrowser.Document.GetElementById("field_176_days") != null)
-                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", day);
+                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", DateB[0].ToString());
             //done
             if (webBrowser.Document.GetElementById("field_176_month") != null)
                 webBrowser.Document.GetElementById("field_176_month").SetAttribute("value", DateB[1].ToString());
@@ -1063,10 +1110,9 @@ namespace DXAutoFillData.UControls
             elementsSelect[5].Id = "txtProvince";
 
             var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
-            var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
             //done
             if (webBrowser.Document.GetElementById("field_176_days") != null)
-                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", day);
+                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", DateB[0].ToString());
             //done
             if (webBrowser.Document.GetElementById("field_176_month") != null)
                 webBrowser.Document.GetElementById("field_176_month").SetAttribute("value", DateB[1].ToString());
@@ -1248,10 +1294,10 @@ namespace DXAutoFillData.UControls
             elementsSelect[5].Id = "txtProvince";
 
             var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
-            var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+            //var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
             //done
             if (webBrowser.Document.GetElementById("field_176_days") != null)
-                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", day);
+                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", DateB[0].ToString());
             //done
             if (webBrowser.Document.GetElementById("field_176_month") != null)
                 webBrowser.Document.GetElementById("field_176_month").SetAttribute("value", DateB[1].ToString());
@@ -1433,10 +1479,10 @@ namespace DXAutoFillData.UControls
             elementsSelect[5].Id = "txtProvince";
 
             var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
-            var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+            //var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
             //done
             if (webBrowser.Document.GetElementById("field_176_days") != null)
-                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", day);
+                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", DateB[0].ToString());
             //done
             if (webBrowser.Document.GetElementById("field_176_month") != null)
                 webBrowser.Document.GetElementById("field_176_month").SetAttribute("value", DateB[1].ToString());
@@ -1619,10 +1665,10 @@ namespace DXAutoFillData.UControls
             elementsSelect[5].Id = "txtProvince";
 
             var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
-            var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+            //var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
             //done
             if (webBrowser.Document.GetElementById("field_176_days") != null)
-                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", day);
+                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", DateB[0].ToString());
             //done
             if (webBrowser.Document.GetElementById("field_176_month") != null)
                 webBrowser.Document.GetElementById("field_176_month").SetAttribute("value", DateB[1].ToString());
@@ -1804,10 +1850,10 @@ namespace DXAutoFillData.UControls
             elementsSelect[5].Id = "txtProvince";
 
             var DateB = data["DateOfBirth"].ToString().Trim().Split('-');
-            var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
+            //var day = int.Parse(DateB[0]) < 10 ? DateB[0].Replace("0", "") : DateB[0];
             //done
             if (webBrowser.Document.GetElementById("field_176_days") != null)
-                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", day);
+                webBrowser.Document.GetElementById("field_176_days").SetAttribute("value", DateB[0].ToString());
             //done
             if (webBrowser.Document.GetElementById("field_176_month") != null)
                 webBrowser.Document.GetElementById("field_176_month").SetAttribute("value", DateB[1].ToString());

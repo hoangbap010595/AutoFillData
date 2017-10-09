@@ -48,6 +48,7 @@
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.btnStop = new DevExpress.XtraEditors.SimpleButton();
+            this.btnStart2 = new DevExpress.XtraEditors.SimpleButton();
             this.btnStart = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
             this.ckAutoCloseForm = new DevExpress.XtraEditors.CheckEdit();
@@ -58,7 +59,8 @@
             this.btnInfomation = new DevExpress.XtraEditors.SimpleButton();
             this.btnAcctive = new DevExpress.XtraEditors.SimpleButton();
             this.btnUpdateSystem = new DevExpress.XtraEditors.SimpleButton();
-            this.btnStart2 = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.numTab = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
@@ -76,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoEnterData.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckClearCache.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoClickSubmit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTab)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -321,10 +324,25 @@
             this.btnStop.Text = "Dừng lại";
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
+            // btnStart2
+            // 
+            this.btnStart2.Appearance.Font = new System.Drawing.Font("Tahoma", 14F);
+            this.btnStart2.Appearance.ForeColor = System.Drawing.Color.Purple;
+            this.btnStart2.Appearance.Options.UseFont = true;
+            this.btnStart2.Appearance.Options.UseForeColor = true;
+            this.btnStart2.Location = new System.Drawing.Point(10, 86);
+            this.btnStart2.Name = "btnStart2";
+            this.btnStart2.Size = new System.Drawing.Size(139, 39);
+            this.btnStart2.TabIndex = 1;
+            this.btnStart2.Text = "[2]Bắt đầu";
+            this.btnStart2.Click += new System.EventHandler(this.btnStart2_Click);
+            // 
             // btnStart
             // 
             this.btnStart.Appearance.Font = new System.Drawing.Font("Tahoma", 14F);
+            this.btnStart.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.btnStart.Appearance.Options.UseFont = true;
+            this.btnStart.Appearance.Options.UseForeColor = true;
             this.btnStart.Location = new System.Drawing.Point(10, 42);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(139, 39);
@@ -334,6 +352,8 @@
             // 
             // groupControl3
             // 
+            this.groupControl3.Controls.Add(this.numTab);
+            this.groupControl3.Controls.Add(this.labelControl5);
             this.groupControl3.Controls.Add(this.ckAutoCloseForm);
             this.groupControl3.Controls.Add(this.ckAutoEnterData);
             this.groupControl3.Controls.Add(this.ckClearCache);
@@ -351,7 +371,7 @@
             // 
             // ckAutoCloseForm
             // 
-            this.ckAutoCloseForm.Location = new System.Drawing.Point(8, 172);
+            this.ckAutoCloseForm.Location = new System.Drawing.Point(8, 150);
             this.ckAutoCloseForm.Name = "ckAutoCloseForm";
             this.ckAutoCloseForm.Properties.Caption = "Đóng trình xử lý khi hoàn tất";
             this.ckAutoCloseForm.Size = new System.Drawing.Size(165, 19);
@@ -367,7 +387,7 @@
             // 
             // ckClearCache
             // 
-            this.ckClearCache.Location = new System.Drawing.Point(8, 129);
+            this.ckClearCache.Location = new System.Drawing.Point(8, 113);
             this.ckClearCache.Name = "ckClearCache";
             this.ckClearCache.Properties.Caption = "Xóa Cache, Cookies";
             this.ckClearCache.Size = new System.Drawing.Size(165, 19);
@@ -375,7 +395,7 @@
             // 
             // ckAutoClickSubmit
             // 
-            this.ckAutoClickSubmit.Location = new System.Drawing.Point(8, 83);
+            this.ckAutoClickSubmit.Location = new System.Drawing.Point(8, 75);
             this.ckAutoClickSubmit.Name = "ckAutoClickSubmit";
             this.ckAutoClickSubmit.Properties.Caption = "Tự động nhấn submit sau khi nhập dữ liệu";
             this.ckAutoClickSubmit.Size = new System.Drawing.Size(229, 19);
@@ -424,16 +444,35 @@
             this.btnUpdateSystem.Text = "Cập nhật";
             this.btnUpdateSystem.Click += new System.EventHandler(this.btnUpdateSystem_Click);
             // 
-            // btnStart2
+            // labelControl5
             // 
-            this.btnStart2.Appearance.Font = new System.Drawing.Font("Tahoma", 14F);
-            this.btnStart2.Appearance.Options.UseFont = true;
-            this.btnStart2.Location = new System.Drawing.Point(10, 86);
-            this.btnStart2.Name = "btnStart2";
-            this.btnStart2.Size = new System.Drawing.Size(139, 39);
-            this.btnStart2.TabIndex = 1;
-            this.btnStart2.Text = "[2]Bắt đầu";
-            this.btnStart2.Click += new System.EventHandler(this.btnStart2_Click);
+            this.labelControl5.Location = new System.Drawing.Point(13, 181);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(40, 13);
+            this.labelControl5.TabIndex = 0;
+            this.labelControl5.Text = "Mở tab: ";
+            // 
+            // numTab
+            // 
+            this.numTab.Location = new System.Drawing.Point(59, 179);
+            this.numTab.Maximum = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.numTab.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numTab.Name = "numTab";
+            this.numTab.Size = new System.Drawing.Size(44, 21);
+            this.numTab.TabIndex = 3;
+            this.numTab.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // UC_Main
             // 
@@ -458,10 +497,12 @@
             this.groupControl4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
             this.groupControl3.ResumeLayout(false);
+            this.groupControl3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoCloseForm.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoEnterData.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckClearCache.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ckAutoClickSubmit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTab)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -499,5 +540,7 @@
         private DevExpress.XtraEditors.SimpleButton btnInfomation;
         private DevExpress.XtraEditors.SimpleButton btnAcctive;
         private DevExpress.XtraEditors.SimpleButton btnStart2;
+        private DevExpress.XtraEditors.LabelControl labelControl5;
+        private System.Windows.Forms.NumericUpDown numTab;
     }
 }

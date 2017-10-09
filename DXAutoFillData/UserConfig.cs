@@ -54,6 +54,15 @@ namespace DXAutoFillData
             Properties.Settings.Default.IsActive = b;
             Properties.Settings.Default.Save();
         }
+        public static void setSActiveTab(int b)
+        {
+            Properties.Settings.Default.SActiveTab = b;
+            Properties.Settings.Default.Save();
+        }
+        public static int getSActiveTab()
+        {
+            return Properties.Settings.Default.SActiveTab;
+        }
         public static bool getSAutoSubmit()
         {
             return Properties.Settings.Default.SAutoSubmit;

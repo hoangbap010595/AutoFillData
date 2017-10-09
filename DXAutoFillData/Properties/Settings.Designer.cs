@@ -130,5 +130,17 @@ namespace DXAutoFillData.Properties {
                 this["IsActive"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int SActiveTab {
+            get {
+                return ((int)(this["SActiveTab"]));
+            }
+            set {
+                this["SActiveTab"] = value;
+            }
+        }
     }
 }
