@@ -15,7 +15,7 @@ namespace DXAutoFillData
     {
 
         Timer t = new Timer();
-        private string title = "Auto Fill Data 1.0.0";
+        public static string title = "Auto Fill Data 1.0.0";
         public frmMain()
         {
             InitializeComponent();

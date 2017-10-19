@@ -27,8 +27,8 @@ namespace DXAutoFillData.UControls
         private void loadConfig()
         {
             //UserConfig.setTimeLeft(600);//XmI5L3-G3ig93-102017
-            UserConfig.setIsActive(false);
-            btnUpdateHeThong.Enabled = btnUpdateSystem.Enabled = false;
+            //UserConfig.setIsActive(false);
+            //btnUpdateHeThong.Enabled = btnUpdateSystem.Enabled = false;
             if (UserConfig.getIsActive())
             {
                 btnUpdateHeThong.Enabled = btnUpdateSystem.Enabled = true;
@@ -423,6 +423,7 @@ namespace DXAutoFillData.UControls
         private void btnAcctive_Click(object sender, EventArgs e)
         {
             frmActive frmActive = new frmActive();
+            frmActive.isActive = new frmActive.ActiveOK(isActive);
             frmActive.ShowDialog();
         }
 
@@ -466,6 +467,17 @@ namespace DXAutoFillData.UControls
             {
                 XtraMessageBox.Show("" + ex.Message, "Lỗi");
             }
+        }
+
+        private void isActive(bool active)
+        {
+            if (active)
+                if (this.Controls.Count > 0)
+                    this.Controls[0].Enabled = true;
+            loadConfig();
+            Form f = Application.OpenForms["frmMain"];
+            f.Text = frmMain.title;
+            f.ControlBox = false;
         }
     }
 }

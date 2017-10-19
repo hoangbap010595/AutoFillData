@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="UURLTarget" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://laodongkynghi.info/mau-dang-ky-thu-gioi-thieu/</Value>
+      <Value Profile="(Default)">http://laodongkynghi.dolab.gov.vn/bizsoft/softdolab/html/formregister</Value>
     </Setting>
     <Setting Name="UPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">CMXNrczjIJelgcv*)2%zZjGs</Value>

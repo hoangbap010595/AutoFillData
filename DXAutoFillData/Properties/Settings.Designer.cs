@@ -25,7 +25,7 @@ namespace DXAutoFillData.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://laodongkynghi.info/mau-dang-ky-thu-gioi-thieu/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://laodongkynghi.dolab.gov.vn/bizsoft/softdolab/html/formregister")]
         public string UURLTarget {
             get {
                 return ((string)(this["UURLTarget"]));
