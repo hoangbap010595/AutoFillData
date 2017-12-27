@@ -994,9 +994,9 @@ namespace DXAutoFillData.UControls
                 {
                     if (el.InnerText != null)
                     {
-                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
-                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
-                        if (x1 == x2)
+                       // var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
+                        //var x2 = data["Formal"].ToString().Trim().Equals("Có");
+                        if (el.InnerText.Contains("Có") || el.InnerText.Contains("có"))
                         {
                             el.SetAttribute("selected", "selected");
                             break;
@@ -1185,9 +1185,9 @@ namespace DXAutoFillData.UControls
                 {
                     if (el.InnerText != null)
                     {
-                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
-                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
-                        if (x1 == x2)
+                        //var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
+                        //var x2 = data["Formal"].ToString().Trim().Equals("Có");
+                        if (el.InnerText.Contains("Có") || el.InnerText.Contains("có"))
                         {
                             el.SetAttribute("selected", "selected");
                             break;
@@ -1376,9 +1376,9 @@ namespace DXAutoFillData.UControls
                 {
                     if (el.InnerText != null)
                     {
-                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
-                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
-                        if (x1 == x2)
+                        //var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
+                        //var x2 = data["Formal"].ToString().Trim().Equals("Có");
+                        if (el.InnerText.Contains("Có") || el.InnerText.Contains("có"))
                         {
                             el.SetAttribute("selected", "selected");
                             break;
@@ -1567,9 +1567,9 @@ namespace DXAutoFillData.UControls
                 {
                     if (el.InnerText != null)
                     {
-                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
-                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
-                        if (x1 == x2)
+                        //var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
+                        //var x2 = data["Formal"].ToString().Trim().Equals("Có");
+                        if (el.InnerText.Contains("Có") || el.InnerText.Contains("có"))
                         {
                             el.SetAttribute("selected", "selected");
                             break;
@@ -1759,9 +1759,9 @@ namespace DXAutoFillData.UControls
                 {
                     if (el.InnerText != null)
                     {
-                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
-                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
-                        if (x1 == x2)
+                        //var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
+                        //var x2 = data["Formal"].ToString().Trim().Equals("Có");
+                        if (el.InnerText.Contains("Có") || el.InnerText.Contains("có"))
                         {
                             el.SetAttribute("selected", "selected");
                             break;
@@ -1950,9 +1950,9 @@ namespace DXAutoFillData.UControls
                 {
                     if (el.InnerText != null)
                     {
-                        var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
-                        var x2 = data["Formal"].ToString().Trim().Equals("Có");
-                        if (x1 == x2)
+                        //var x1 = el.InnerText.Remove(1, el.InnerText.Length - 1).Equals("C");
+                        //var x2 = data["Formal"].ToString().Trim().Equals("Có");
+                        if (el.InnerText.Contains("Có") || el.InnerText.Contains("có"))
                         {
                             el.SetAttribute("selected", "selected");
                             break;
